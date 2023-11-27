@@ -1,0 +1,108 @@
+import { Callout } from 'nextra/components'
+
+# Lecture-8: Boolean Algebra
+
+## Boolean Operations
+
+Remember, boolean is just a set of $\{0, 1\}$. The three operations in boolean algebra are:
+
+| Operation | Symbol | Name | Symbol in Algebra | Example |
+| --- | --- | --- | --- | --- |
+| AND | $\land$ | Conjunction | $\cdot$ | $1 \cdot 1 = 1$ |
+| OR | $\lor$ | Disjunction | $+$ | $1 + 0 = 1$ |
+| NOT | $\lnot$ | Negation | $\overline{a}$ | $\overline{1} = 0$ |
+
+### Example
+
+Find the value of the following expression:
+
+$$
+1 \cdot 0 + \overline{(0 + 1)} 
+$$
+
+Solution: Using the definitions of the operations, we get:
+
+$$
+\begin{align*}
+1 \cdot 0 + \overline{(0 + 1)} &= 0 + \overline{1} \\
+&= 0 + 0 \\
+&= 0
+\end{align*}
+$$
+
+## Boolean Expressions
+
+A boolean expression is a combination of boolean variables and boolean operations. For example, $x \cdot y + \overline{z}$ is a boolean expression.
+
+## Boolean Functions
+
+Let $B = \{0, 1\}$ be the set of boolean values. Then, a boolean function $f: B^n \rightarrow B$ is a function that takes in $n$ boolean variables and returns a boolean value. $B$ is also denoted as $B^n = \{ (x_1, x_2, \dots, x_n) \mid x_i \in B$ for $1 \leq i \leq n \}$. A function $f: B^n \rightarrow B$ is called a **boolean function of degree $n$.**
+
+#### Example
+
+Find the values of the following boolean functions:
+
+$$
+
+F(x, y, z) = xy + \overline{z}
+
+$$
+
+Solution: We can find the values of the function by plugging in all possible values of $x, y, z$ into a table represented below:
+
+<div class="centering">
+| $x$ | $y$ | $z$ | $xy$ | $\overline{z}$ | $xy + \overline{z}$ |
+| --- | --- | --- | --- | --- | --- |
+| $0$ | $0$ | $0$ | $0$ | $1$ | $1$ |
+| $0$ | $0$ | $1$ | $0$ | $0$ | $0$ |
+| $0$ | $1$ | $0$ | $0$ | $1$ | $1$ |
+| $0$ | $1$ | $1$ | $0$ | $0$ | $0$ |
+| $1$ | $0$ | $0$ | $0$ | $1$ | $1$ |
+| $1$ | $0$ | $1$ | $0$ | $0$ | $0$ |
+| $1$ | $1$ | $0$ | $1$ | $1$ | $1$ |
+| $1$ | $1$ | $1$ | $1$ | $0$ | $1$ |
+</div>
+
+### n-cube representation
+
+We can represent a boolean function of degree $n$ as an $n$-cube. For example, the boolean function $f(x, y, z) = xy + \overline{z}$ can be represented as a cube with $n^3$ vertices 
+
+$$
+(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)
+$$
+
+The vertices that correspond to $f(x, y, z) = 1$ are 
+
+$$
+(0, 0, 0), (0, 1, 0), (1, 0, 0), (1, 1, 0), (1, 1, 1)
+$$
+
+### Number of Boolean Functions
+
+Suppose that we have $n$ different boolean variables. Each of these variables can take on two values, $0$ or $1$. Therefore, there are $2^n$ possible combinations of values for the $n$ variables. For each of these combinations, we can assign a value of $0$ or $1$. Therefore, there are $2^{2^n}$ possible boolean functions of degree $n$.
+
+Table below shows the number of boolean functions for different values of $n$:
+
+<div class="centering">
+| $n$ | Number of boolean functions |
+| --- | --- |
+| $1$ | $4$ |
+| $2$ | $16$ |
+| $3$ | $256$ |
+| $4$ | $65536$ |
+| $5$ | $4294967296$ |
+</div>
+
+## Identities of Boolean Algebra
+
+<Callout type="info" emoji="i">
+The identity of boolean algebra operation is just other forms of truth values operation and set operations.
+</Callout>
+
+## Duality
+
+The **dual** of a boolean function $f$ is the function $f^*$ obtained by interchanging the operations $\cdot$ and $+$ and the constants $0$ and $1$ in $f$. For example, the dual of $f(x, y, z) = xy + \overline{z}$ is $f^*(x, y, z) = x + \overline{y}z$.
+
+## Exercises
+
+1. Find the sum-of-products expansion of the boolean function $F(x_1, x_2, x_3, x_4, x_5)$ that has the value $1$ if and only if three or more of the variables $x_1, x_2, x_3, x_4, x_5$ have the value $1$. <input type="text" name="q1" placeholder="Answer" />
