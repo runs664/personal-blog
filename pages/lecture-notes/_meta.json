@@ -1,0 +1,11 @@
+{
+    "index" : {
+        "title" : "Lecture Notes"
+    },
+    "classical-mechanics": {
+        "title" : "Classical Mechanics"
+    },
+    "discrete-math": {
+        "title" : "Discrete Mathematics"
+    }
+}
