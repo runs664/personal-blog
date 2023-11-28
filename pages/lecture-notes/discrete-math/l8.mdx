@@ -4,6 +4,7 @@ import { Callout } from 'nextra/components'
 
 ## Boolean Operations
 
+<div class="roman">
 Remember, boolean is just a set of $\{0, 1\}$. The three operations in boolean algebra are:
 
 | Operation | Symbol | Name | Symbol in Algebra | Example |
@@ -11,6 +12,7 @@ Remember, boolean is just a set of $\{0, 1\}$. The three operations in boolean a
 | AND | $\land$ | Conjunction | $\cdot$ | $1 \cdot 1 = 1$ |
 | OR | $\lor$ | Disjunction | $+$ | $1 + 0 = 1$ |
 | NOT | $\lnot$ | Negation | $\overline{a}$ | $\overline{1} = 0$ |
+</div>
 
 ### Example
 
@@ -106,3 +108,56 @@ The **dual** of a boolean function $f$ is the function $f^*$ obtained by interch
 ## Exercises
 
 1. Find the sum-of-products expansion of the boolean function $F(x_1, x_2, x_3, x_4, x_5)$ that has the value $1$ if and only if three or more of the variables $x_1, x_2, x_3, x_4, x_5$ have the value $1$. <input type="text" name="q1" placeholder="Answer" />
+
+## Representing Boolean Functions
+
+### Sum-of-products Expansions
+
+#### Example
+
+Find boolean expressions that represent the function $F(x, y, z)$ and $G(x, y, z)$ defined by the following tables:
+
+<div class="centering">
+| $x$ | $y$ | $z$ | $F(x, y, z)$ | $G(x, y, z)$ |
+| --- | --- | --- | --- | --- |
+| $0$ | $0$ | $0$ | $1$ | $0$ |
+| $0$ | $0$ | $1$ | $0$ | $1$ |
+| $0$ | $1$ | $0$ | $1$ | $0$ |
+| $0$ | $1$ | $1$ | $0$ | $1$ |
+| $1$ | $0$ | $0$ | $1$ | $0$ |
+| $1$ | $0$ | $1$ | $0$ | $1$ |
+| $1$ | $1$ | $0$ | $1$ | $0$ |
+| $1$ | $1$ | $1$ | $0$ | $1$ |
+</div>
+
+Solution: We can find the boolean expressions by looking at the rows where the function is $1$ and then taking the product of the variables in the row. For example, for $F(x, y, z)$, we have:
+
+$$
+F(x, y, z) = \overline{x} \cdot \overline{y} \cdot \overline{z} + \overline{x} \cdot y \cdot \overline{z} + x \cdot \overline{y} \cdot \overline{z} + x \cdot y \cdot \overline{z}
+$$
+
+Similarly, for $G(x, y, z)$, we have:
+
+$$
+G(x, y, z) = \overline{x} \cdot \overline{y} \cdot z + \overline{x} \cdot y \cdot z + x \cdot \overline{y} \cdot z + x \cdot y \cdot z
+$$
+
+Actually, the $F(x, y, z)$ is a function that determine whether the number of $1$ in the input is even or odd. If the number of $1$ is even, then the function is $1$. Otherwise, the function is $0$. The $G(x, y, z)$ is a function that determine whether the number of $1$ in the input is odd. If the number of $1$ is odd, then the function is $1$. Otherwise, the function is $0$.
+
+#### Minterm
+
+<Callout type="info">
+A **minterm** is a product of literals in which each variable appears exactly once in either its complemented or uncomplemented form. For example, $\overline{x} \cdot y \cdot \overline{z}$ is a minterm. The minterm is also called **standard product term**.
+</Callout>
+
+##### Example
+
+Find the minterm of the boolean function that takes 5 variables that return true if and only if the first, second, and fifth term are true.
+
+Solution: The minterm is $\overline{x_1} \cdot \overline{x_2} \cdot x_3 \cdot x_4 \cdot \overline{x_5}$.
+
+## Logic Gates
+
+<Callout type="info">
+Boolean algebra is used to model the circuitry of electronic devices.
+</Callout>

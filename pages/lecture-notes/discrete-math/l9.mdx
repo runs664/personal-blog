@@ -1,0 +1,81 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 9: Relations
+
+Based on [Discrete Mathematics and Its Applications](https://www.amazon.com/Discrete-Mathematics-Applications-Kenneth-Rosen/dp/0072899050) by Kenneth H. Rosen, 7th Edition.
+
+---
+
+Hubungan antara dua objek dapat direpresentasikan secara langsung dengan menggunakan pasangan berurutan (ordered pair).
+
+<Callout type="info">
+Anggap $A$ dan $B$ adalah dua himpunan. Hubungan biner $R$ dari $A$ ke $B$ adalah himpunan bagian dari $A \times B$.
+</Callout>
+
+Dalam kata lain, hubungan biner $A \rightarrow B$ didefinisikan dengan
+
+$$
+(\underbrace{a}_{\text{dari $A$}}, \underbrace{b}_{\text{dari $B$}}) \in R \iff aRb
+$$
+
+> **Contoh:**
+> - Misalkan $A = \{1, 2, 3\}$ dan $B = \{a, b\}$. 
+> - $A \times B = \{(1, a), (1, b), (2, a), (2, b), (3, a), (3, b)\}$.
+> - Misalkan $C = \{(1, a), (2, a), (3, b)\}$
+> - Karena $C \in (A \times B)$, maka $C$ adalah hubungan biner dari $A$ ke $B$.
+
+Himpunan $C$ dapat direpresentasikan dengan tabel berikut:
+
+<div class="centering">
+| $C$ | $a$ | $b$ |
+| --- | --- | --- |
+| $1$ | $\checkmark$ | |
+| $2$ | $\checkmark$ | |
+| $3$ | | $\checkmark$ |
+</div>
+
+## Relasi Fungsi
+
+Bila kita mengingat definisi fungsi, maka fungsi adalah suatu yang memetakan tepat sekali antara domain ke range. Namun, relasi dapat memetakan domain ke banyak range.
+
+$$
+(a, f(a)) \text{ for } a \in A
+$$
+
+## Relasi dalam Himpunan
+
+<Callout type="info">
+Relasi dalam himpunan $A$ adalah relasi dari $A$ ke $A$
+</Callout>
+
+dalam kata lain, relasi dalam set $A$ adalah subset $A \times A$
+
+> **Berapakah relasi yang mungkin terjadi dalam himpunan dengan $n$ elemen?**
+
+Relasi dalam set $A$ adalah relasi terhadap dirinya sendiri. Jika $A$ memiliki $n$ elemen, maka elemen $A \times A$ adalah $n^2$. Subset dari suatu himpunan adalah $2^m$ untuk $m$ jumlah elemen. Sehingga terdapat $2^{(n^2)}$ relasi berbeda untuk $n$ elemen.
+
+## Properti Relasi
+
+Misalkan ada beberapa relasi dari himpunan $A = \{1, 2, 3, 4 \}$:
+
+$$
+\begin{align}
+R_1 &= \{(1, 1), (1, 2), (2, 1), (2, 2), (3, 4), (4, 1), (4, 4)\} \\
+R_2 &= \{(1, 1), (1, 2), (2, 1)\} \\
+R_3 &= \{(1, 1), (1, 2), (1, 4), (2, 1), (2, 2), (3, 3), (4, 1), (4, 4)\}\\
+R_4 &= \{(2, 1), (3, 1), (3, 2), (4, 1), (4, 2), (4, 3)\}
+\end{align}
+$$
+
+### Refleksif
+
+<Callout type="info">
+Relasi $R$ pada himpunan $A$ dikatakan refleksif jika $(a, a) \in R$ untuk setiap $a \in A$.
+</Callout>
+
+Dalam kata lain, setiap elemen $a$ dari himpunan $A$ berhubungan dengan dirinya sendiri.
+
+$$
+\forall a ((a, a) \in R)
+$$
+

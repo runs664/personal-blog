@@ -4,7 +4,11 @@ const withNextra = require('nextra') (
   {
     theme: 'nextra-theme-docs',
     themeConfig: './theme.config.js',
-    latex: true
+    latex: true,
+    i18n: {
+      locales: ['en-US', 'id-ID'],
+      defaultLocale: 'en-US',
+    },
   }
 )
 

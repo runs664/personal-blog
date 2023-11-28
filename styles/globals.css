@@ -2,8 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+} */
+
 body {
   text-align: justify;
+}
+
+.roman {
+  font-family: var(--cmu-roman);
 }
 
 .centering {
