@@ -1,0 +1,217 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 14: Equilibrium and Elasticity
+
+|Name:|Harun|
+|----|-----|
+|NIM:|23/514148/TK/56466|
+
+## Course Outline
+
+- Center of Gravity
+- Equilibrium and Stability
+- Elasticity - Hooke's Law
+
+For a rigid body to be in equilibrium, **two conditions** must be satisfied:
+
+1. The vector sum of all forces acting on the body must be zero. $\sum \vec{F_d} = 0$
+
+2. The vector sum of all torques acting on the body about any axis must be zero. $\sum \vec{\tau} = 0$
+
+## Center of Gravity
+
+<Callout type="info">
+**Average location** of the weight of an object. Same as the **center of mass** for a uniform gravitational field.
+</Callout>
+
+$$
+\begin{equation}
+\vec{r}_{cm} = \frac{m_1\vec{r}_1 + m_2\vec{r}_2 + \cdots + m_n\vec{r}_n}{m_1 + m_2 + \cdots + m_n} = \frac{\sum m_i\vec{r}_i}{\sum m_i}
+\end{equation}
+$$
+
+### Example
+
+A uniform plank of length $L = 6.0\text{m}$ and mass $M = 90\text{kg}$ is supported by two sawhorses separated by $D = 1.5\text{m}$ and equidistant from the center of the plank
+
+A person wants to stand on the right-hand end of the plank. If the plank is to remain in equilibrium, what is the maximum mass of the person?
+
+<Callout type="warning">
+**Hint:** The person's weight acts at the center of gravity of the person-plank system.
+</Callout>
+
+Answer:
+
+The center of gravity equation gives us:
+
+$$
+x_{cg} = \frac{M(0) + m\left(\frac{L}{2}\right)}{M + m} = \frac{m}{M + m}\frac{L}{2}
+$$
+
+we set $x_{cg} = x_S$ and solve for $m$:
+
+$$
+\begin{align*}
+\frac{m}{M + m}\frac{L}{2} &= \frac{D}{2}\\
+mL &= (M + m)D\\
+m &= \frac{MD}{L - D} = \frac{90\text{kg}\times 1.5\text{m}}{6.0\text{m} - 1.5\text{m}} = 30\text{ kg}
+\end{align*}
+$$
+
+## Elasticity
+
+### Spring Elasticity
+
+- A force $\rightarrow$ equilibrium $=$ **restoring force**
+- Object that exert a restoring force are **elastic**
+- **Hooke's Law:** $F = -kx$ $\rightarrow$ displaced by $x$ from equilibrium (linear slope)
+- $k$ is the **spring constant** (or **force constant**) $\rightarrow$ stiffness of the spring.
+- Minus sign indicates that the force is **opposite** to the displacement $\rightarrow$ **restoring force**
+
+#### Example
+
+A spring is attached to a $2.0 \text{ kg}$ block. The other end of the spring is pulled by a motorized toy train that moves forward at $5.0 \text{cm/s}$.
+
+The spring constant is $50 \text{ N/m}$ and the coefficient of static friction between the block and the surface is $0.60$.
+
+The spring is at equilibrium length at $t = 0 \text{ s}$. How far does the spring stretch before the block starts to move? And what the time it takes for the block to start moving?
+
+Answer: 
+
+The force of the spring when the toy moves as far as $x$:
+
+$$
+F_s = kx
+$$
+
+When the block almost moves, this spring force is same as the static friction between the block and the floor: $(F_s = F_f)$
+
+$$
+\begin{align*}
+F_f = F_s = \mu_s F_N &= \mu_s mg\\
+kx &= \mu_s mg\\
+x &= \frac{\mu_s mg}{k} = \frac{(0.60)(2.0\text{ kg})(9.8\text{ m/s}^2)}{50\text{ N/m}} = 0.235\text{ m}
+\end{align*}
+$$
+
+Then to calculate the time it takes for the block to start moving, we use the equation of motion:
+
+$$
+t = \frac{x}{v} = \frac{0.235\text{ m}}{0.050\text{ m/s}} = 4.7\text{ s}
+$$
+
+### Work Done by a Spring
+
+- **Work** done by a spring is the **area** under the force-displacement curve.
+
+$$
+\begin{align}
+W &= \int F ds\nonumber\\
+W &= -\int_{s_i}^{s_f} k(s-s_{eq})^2 ds\nonumber\\
+W &= -\frac{1}{2}k(s_f^2 - s_i^2) \Big\rvert_{s_i}^{s_f}\nonumber\\
+W &= \frac{1}{2}k\Delta s_{i}^2 - \frac{1}{2}k\Delta s^2_{f}
+\end{align}
+$$
+
+#### Example
+
+A block with mass $m$ is pushed to a spring until a displacement of $\Delta x$ then released. What is the speed of the block when it passes through the equilibrium position?
+
+```mermaid
+graph LR
+A[m] --> B[train]
+```
+
+Answer:
+
+Using conservation of energy:
+
+$$
+\begin{align}
+\underbrace{\frac{1}{2}k\Delta x^2}_{\text{spring}} + 0 &=  0 + \underbrace{\frac{1}{2}mv^2}_{\text{kinetic}}\nonumber\\
+v &= \sqrt{\frac{k}{m}}\Delta x
+\end{align}
+$$
+
+What if the mass is hanging from the spring at equilibrium $y$ and spring constant $k$?
+
+using equation above we can use static equilibrium formula:
+
+$$
+\begin{align}
+F_s = F_g &= k\Delta y = mg\nonumber\\
+k &= \frac{mg}{\Delta y}
+\end{align}
+$$
+
+<Callout type="warning">
+**Elasticity is not the sole property of a spring!**
+</Callout>
+
+### Medium Elasticity
+
+- Any solid will be **deformed** by a force
+- The graph of force vs. displacement is **not** linear
+    - **Elastic limit:** the point beyond which the material is permanently deformed
+    - *As long as the strech is **less** than the elastic limit, the material will return to its original shape when the force is removed.*
+- A strech beyond the elastic limit is called **plastic deformation** and it is **permanent**.
+- For most materials, the force is **proportional** to the displacement **up to** the elastic limit.
+
+$$
+\begin{equation}
+F = k\Delta L
+\end{equation}
+$$
+
+### Tensile Stress and Young Modulus
+
+- The elasticity is directly related to the spring constant.
+- The force pulling each bond is related to the strech:
+
+$$
+\begin{equation}
+\frac{F}{A} = \frac{k\Delta L}{A} = \frac{Y\Delta L}{L} \rightarrow Y = \frac{\text{tensile stress}}{\text{tensile strain}}
+\end{equation}
+$$
+
+### Volume Stress and Bulk Modulus
+
+- The force per unit area $F/A$ is applied to all surfaces.
+- The volume strain is defined as the change in volume divided by the original volume: $\Delta V/V$
+- The bulk modulus is defined as the ratio of the volume stress to the volume strain:
+
+$$
+\begin{equation}
+B = \frac{F/A}{\Delta V/V}
+\end{equation}
+$$
+
+### Shear Stress
+
+- The shear strain is defined as the change in angle $\theta$ divided by the original angle: $\Delta \theta$
+
+$$
+S = \frac{F_{||}/A}{x/h}
+$$
+
+#### Example
+
+A $2.0 \text{ m}$ long, $1.0 \text{ mm}$ diameter steel wire is suspended from the ceiling. Hanging a $4.5 \text{ kg}$ mass from the wire causes it to stretch by $1.0 \text{ mm}$.
+
+What is the Young's modulus of the wire? Can you identify the material?
+
+Answer:
+
+The force pulling on the wire is the weight of the mass:
+
+$$
+\frac{F}{A} = \frac{mg}{A} = \frac{(4.5\text{ kg})(9.8\text{ m/s}^2)}{\pi(0.0005\text{ m})^2} = 5.6\times 10^7\text{ N/m}^2
+$$
+
+The resulting strech of $1.0 \text{ mm}$ is the change in length divided by the original length:
+
+$$
+Y = \frac{F/A}{\Delta L/L} = \frac{5.6\times 10^7\text{ N/m}^2}{(1.0\times 10^{-3}\text{ m})/(2.0\text{ m})} = 11\times 10^{10}\text{ N/m}^2
+$$
+
+This is the Young's modulus of the medium $\rightarrow$ the wire is made of copper.
