@@ -1,0 +1,39 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 13: Finite-State Machine
+
+Based on [Discrete Mathematics and Its Applications](https://www.amazon.com/Discrete-Mathematics-Applications-Kenneth-Rosen/dp/0072899050) by Kenneth H. Rosen, 7th Edition.
+
+---
+
+## Finite-State Machine with Output
+
+<Callout type="info">
+Finite-State Machine $M = (S, I, O, f, g, s_0)$ tersusun atas himpunan state $S$, himpunan masukan $I$, himpunan keluaran $O$, fungsi transisi $f$, fungsi keluaran $g$, dan keadaan awal $s_0$.
+</Callout>
+
+FSM dapat direpresentasikan dengan *state table* sebagai berikut:
+
+<div className="centering">
+| State | Input | Output | Next State |
+| ----- | ----- | ------ | ---------- |
+| $s_0$ | $i_0$ | $o_0$  | $s_1$      |
+| $s_0$ | $i_1$ | $o_1$  | $s_2$      |
+| $s_1$ | $i_0$ | $o_2$  | $s_0$      |
+| $s_1$ | $i_1$ | $o_3$  | $s_2$      |
+</div>
+
+Tabel diatas dapat dibuat lebih *compact* dengan memasukkan *state* dan *input* ke dalam satu kolom:
+
+<div className="centering">
+|  | $f$ | $g$ |
+| ----- | ----- | ------ |
+| | Input | Output |
+| State | $0 \  \ 1$ | $0 \  \ 1 $|
+| $s_0$ | $s_1$ $s_2$ | $o_0$ $o_1$ |
+| $s_1$ | $s_0$ $s_2$ | $o_2$ $o_3$ |
+</div>
+
+Baris pertama dapat dibaca sebagai berikut:
+
+> Jika saat ini berada di state $s_0$ dan input $i_0$ diberikan, maka FSM akan berpindah ke state $s_1$ dan mengeluarkan output $o_0$. Jika input $i_1$ diberikan, maka FSM akan berpindah ke state $s_2$ dan mengeluarkan output $o_1$.
