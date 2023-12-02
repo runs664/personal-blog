@@ -37,3 +37,169 @@ Tabel diatas dapat dibuat lebih *compact* dengan memasukkan *state* dan *input* 
 Baris pertama dapat dibaca sebagai berikut:
 
 > Jika saat ini berada di state $s_0$ dan input $i_0$ diberikan, maka FSM akan berpindah ke state $s_1$ dan mengeluarkan output $o_0$. Jika input $i_1$ diberikan, maka FSM akan berpindah ke state $s_2$ dan mengeluarkan output $o_1$.
+
+Misalkan ada sebuah FSM yang memiliki *state table* sebagai berikut:
+
+<div className="centering">
+|       | $f$           | $g$ |
+| ----- | -----         | ------ |
+|       | Input         | Output |
+| State | $0$ $1$       | $0$ $1$|
+| $s_0$ | $s_1$ $s_3$   | $0$ $1$|
+| $s_1$ | $s_1$ $s_2$   | $1$ $1$|
+| $s_2$ | $s_3$ $s_4$   | $0$ $0$|
+| $s_3$ | $s_1$ $s_0$   | $0$ $0$|
+| $s_4$ | $s_3$ $s_4$   | $0$ $0$|
+</div>
+
+Apakah string outputnya bila string inputnya berupa 
+
+```
+101011
+```
+
+Berikut adalah tabel transisi FSM tersebut:
+
+<div className="centering">
+| Input | State | Output | Next State |
+| ----- | ----- | ------ | ---------- |
+| $1$   | $s_0$ | $0$    | $s_3$      |
+| $0$   | $s_3$ | $0$    | $s_1$      |
+| $1$   | $s_1$ | $1$    | $s_2$      |
+| $0$   | $s_2$ | $0$    | $s_3$      |
+| $1$   | $s_3$ | $0$    | $s_0$      |
+| $1$   | $s_0$ | $0$    | $s_3$      |
+</div>
+
+Maka string outputnya adalah
+
+```
+001000
+```
+
+### Unit-Delay Machine
+
+Unit-delay machine adalah FSM yang mengeluarkan output yang sama dengan inputnya ditambah delay beberapa waktu. Bagaimana FSM yang mengeluarkan output yang sama dengan inputnya ditambah delay satu waktu, yaitu output $0x_1x_2\dots x_{n-1}$ untuk input $x_0x_1x_2\dots x_{n-1}$?
+
+Untuk menyelesaikan masalah ini, kita dapat merancang FSM yang mengingat apa input pertamanya. Pertama-tama $S_0$ dirancang untuk selalu mengeluarkan output $0$ untuk setiap input yang diberikan. Jika input pertama adalah $1$, maka FSM akan berpindah ke $S_1$ yang akan mengeluarkan output $1$ untuk setiap input yang diberikan dan berpindah ke $S_2$ jika input $0$ diberikan yang akan selalu mengeluarkan output $0$.
+
+<div className="centering">
+|       | $f$           | $g$    |
+| ----- | -----         | ------ |
+|       | Input         | Output |
+| State | $0$ $1$       | $0$ $1$|
+| $s_0$ | $s_2$ $s_1$   | $0$ $0$|
+| $s_1$ | $s_2$ $s_1$   | $1$ $1$|
+| $s_2$ | $s_2$ $s_1$   | $0$ $0$|
+</div>
+
+Bagaimana dengan delay sebanyak 2 bit? 
+
+Untuk menyelesaikan masalah ini, FSM perlu untuk mengingat 2 bit input sebelumnya. Secara intuisi, FSM memerlukan 4 state yaitu segala kemungkinan 2 bit sebelumnya $\{00, 01, 10, 11\}$. State $S_1$ akan menampung input $00$, $S_2$ akan menampung input $01$, $S_3$ akan menampung input $10$, dan $S_4$ akan menampung input $11$.
+
+<div className="centering">
+|       | $f$           | $g$    |
+| ----- | -----         | ------ |
+|       | Input         | Output |
+| State | $0$ $1$       | $0$ $1$|
+| $s_0$ | $s_1$ $s_2$   | $0$ $0$|
+| $s_1$ | $s_1$ $s_2$   | $0$ $0$|
+| $s_2$ | $s_3$ $s_4$   | $0$ $0$|
+| $s_3$ | $s_1$ $s_2$   | $1$ $1$|
+| $s_4$ | $s_3$ $s_4$   | $1$ $1$|
+</div>
+
+<Callout type="warning">
+Bila diperhatikan, state $S_0$ dan $S_1$ memiliki fungsi transisi yang sama. Hal ini dapat dipersingkat dengan membuang state $S_0$ dan memulai FSM dari $S_1$ sebagai *initial state*.
+</Callout>
+
+<Callout type="info">
+Secara intuisi, jumlah state yang dibutuhkan untuk mengingat $n$ bit input sebelumnya adalah $2^n$.
+</Callout>
+
+#### Example
+Dalam suatu transmisi informasi, bila ada tiga atau lebih string `1` berurutan menandakan terjadi galat. Buatlah FSM yang dapat mengenali string-string yang mengandung galat tersebut!
+
+Untuk menjawabnya, kita perlu memikirkan apa transisi bila diberikan sebuah input `1`. Untuk memeriksa apakah string tersebut berisi `111` maka perlu ada 2 state tambahan, state kedua berfungsi untuk mengingat bahwa input sebelumnya adalah `1`. Apabila mesin masih mendapati input `1` setelah itu, maka mesin ditransisikan ke state ketiga sebagai *final state*. Bila input selanjutnya adalah `0`, maka mesin kembali ke state awal. Namun, bila input selanjutnya adalah `1`, maka mesin akan mengenali string tersebut sebagai string yang mengandung galat.
+
+<div className="centering">
+|       | $f$           | $g$    |
+| ----- | -----         | ------ |
+|       | Input         | Output |
+| State | $0$ $1$       | $0$ $1$|
+| $s_0$ | $s_0$ $s_1$   | $0$ $0$|
+| $s_1$ | $s_0$ $s_2$   | $0$ $0$|
+| $s_2$ | $s_0$ $s_2$   | $0$ $1$|
+</div>
+
+<Callout type="warning">
+Perhatikan! FSM akan mengeluarkan output `1` hanya jika string yang diberikan mengandung galat `...111...`
+</Callout>
+
+## Finite-State Machine without Output
+
+<Callout type="info">
+Finite-State Automaton $M = (S, I, f, s_0, F)$ tersusun atas himpunan state $S$, himpunan masukan $I$, fungsi transisi $f$, keadaan awal $s_0$, dan himpunan state akhir $F$.
+</Callout>
+
+### Deterministic
+
+Dinamakan deterministic karena untuk setiap state $s$ dan input $i$, hanya ada satu state $f(s, i)$ yang mungkin dihasilkan.
+
+#### Language Recognition
+
+<Callout type="info">
+Diberikan sebuah $\text{FSM}$ $M = (S, I, f, s_0, F)$, FSM tersebut dapat mengenali bahasa $L(M)$ yang terdiri dari string-string yang dapat diterima oleh FSM tersebut yaitu $f(s_0, x) \in F$. Dua buah finite-state automata dikatakan setara jika $L(M_1) = L(M_2)$.
+</Callout>
+
+##### Example
+
+Sebuah finite-state automata $M = (S, I, f, s_0, F)$ memiliki himpunan state $S = \{s_0, s_1\}$, himpunan masukan $I = \{0, 1\}$, fungsi transisi $f$ sebagai berikut:
+
+<div className="centering">
+|       | $f$           |
+| ----- | -----         |
+|       | Input         |
+| State | $0$ $1$       |
+| $s_0$ | $s_1$ $s_0$   |
+| $s_1$ | $s_1$ $s_1$   |
+</div>
+
+dan himpunan state akhir $F = \{s_0\}$. Apakah bahasa $L(M)$ yang diterima oleh $M$?
+
+Bahasa $L(M)$ yang diterima oleh $M$ adalah himpunan string-string yang hanya mengandung `1` saja atau $L(M) = \{1^n \mid n \geq 0\}$.
+
+### Nondeterministic
+
+Dinamakan nondeterministic karena untuk setiap state $s$ dan input $i$, tidak hanya satu state $f(s, i)$ yang mungkin dihasilkan.
+
+#### Example
+
+Sebuah finite-state automata $M = (S, I, f, s_0, F)$ memiliki himpunan state $S = \{s_0, s_1, s_2, s_3, s_4\}$, himpunan masukan $I = \{0, 1\}$, fungsi transisi $f$ sebagai berikut:
+
+<div className="centering">
+|       | $f$           | $f$           |
+| ----- | -----         | -----         |
+|       | Input         | Input         |
+| State | $0$     | $1$    |
+| $s_0$ | $s_0, s_2$| $s_1$   |
+| $s_1$ | $s_3$| $s_4$   |
+| $s_2$ | | $s_4$   |
+| $s_3$ | $s_3$ |  |
+| $s_4$ | $s_3$ |$s_3$   |
+</div>
+
+dan himpunan state akhir $F = \{s_0, s_4\}$. Apakah bahasa $L(M)$ yang diterima oleh $M$?
+
+Jika di *trace* dari himpunan state akhir $F$, didapatkan beberapa poin:
+
+1. $s_0$ hanya dapat dicapai dalam input $\{0^n\}$ untuk $n$ sejumlah bilangan bulat positif.
+2. $s_4$ dapat dicapai dari 
+    - $s_1(1) \leftarrow s_0(1) \leftarrow s_0(0^n)$
+    - $s_2(1) \leftarrow s_0(0) \leftarrow s_0(0^n)$
+
+Maka, bahasa $L(M) = \{0^n, 0^n11, 0^n01 \mid n \geq 1\}$.
+
+<Callout type="warning">
+Jika suatu bahasa $L$ dapat diterima oleh suatu nondeterministic finite-state automata, maka $L$ juga dapat diterima oleh suatu deterministic finite-state automata.
+</Callout>
