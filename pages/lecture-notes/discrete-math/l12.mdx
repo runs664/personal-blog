@@ -5,3 +5,152 @@ import { Callout } from 'nextra/components'
 Based on [Discrete Mathematics and Its Applications](https://www.amazon.com/Discrete-Mathematics-Applications-Kenneth-Rosen/dp/0072899050) by Kenneth H. Rosen, 7th Edition.
 
 ---
+
+## Tree
+
+<Callout type="info">
+Sebuah <b>tree</b> adalah sebuah <b>graph</b> yang tidak memiliki <b>sirkuit</b>.
+</Callout>
+
+Sebuah graf tak berarah adalah tree jika dan hanya jika terdapat satu path unik antara setiap dua vertex.
+
+### Properti
+
+- Sebuah tree dengan $n$ vertex memiliki $n-1$ edge.
+- Full m-ary tree dengan $i$ internal vertex memiliki $n = mi + 1$ vertex dan $e = (m-1)i + 1$ edge.
+- Sebuah full m-ary tree dengan
+    - $n$ vertex memiliki $i = \frac{n-1}{m}$ internal vertex dan $l = \frac{(m-1)(n-1)}{m}$ leaf.
+    - $i$ internal vertex memiliki $n = mi + 1$ vertex dan $e = (m-1)i + 1$ edge.
+    - $l$ leaf memiliki $n = \frac{ml+1}{m-1}$ vertex dan $e = \frac{ml}{m-1}$ edge.
+- Sebuah m-ary tree dengan tinggi $h$ memiliki maksimal $m^h$ leaves.
+
+## Tree Traversal
+
+<Callout type="info">
+<b>Traversal</b> adalah proses mengunjungi setiap vertex pada sebuah tree.
+</Callout>
+
+### Preorder Traversal
+
+<Callout type="info">
+<b>Preorder traversal</b> adalah mengunjungi akar, kemudian mengunjungi subtree dari kiri ke kanan.
+</Callout>
+
+Intinya, kunjungi hingga ke daun terdalam lalu ke saudaranya lalu jika sudah tidak ada, kembali ke parentnya.
+
+### Inorder Traversal
+
+<Callout type="info">
+<b>Inorder traversal</b> adalah mengunjungi subtree kiri terdalam, kemudian mengunjungi akar, kemudian mengunjungi subtree kanan.
+</Callout>
+
+Intinya, kunjungi hingga ke daun terdalam lalu ke parentnya lalu ke saudaranya.
+
+### Postorder Traversal
+
+<Callout type="info">
+<b>Postorder traversal</b> adalah mengunjungi subtree dari kiri ke kanan, kemudian mengunjungi akar.
+</Callout>
+
+Intinya, kunjungi hingga ke daun terdalam lalu kembali ke parentnya lalu ke saudaranya.
+
+### Infix, Prefix, Postfix
+
+- Infix: $a + b$
+- Prefix: $+ab$
+- Postfix: $ab+$
+
+<Callout type="info">
+<b>Infix</b> adalah <b>inorder traversal</b>, <b>prefix</b> adalah <b>preorder traversal</b>, dan <b>postfix</b> adalah <b>postorder traversal</b>.
+</Callout>
+
+## Spanning Tree
+
+<Callout type="info">
+Sebuah <b>spanning tree</b> dari sebuah graph $G$ adalah sebuah subgraph dari $G$ yang merupakan tree yang mengandung semua vertex dari $G$.
+</Callout>
+
+Sebuah graf itu terhubung jika dan hanya jika memiliki spanning tree.
+
+### Depth First Search
+
+DFS procedure:
+
+```
+DFS(G, v)
+    visited[v] = true
+    for each w adjacent to v do
+        if not visited[w] then
+            DFS(G, w)
+```
+
+<Callout type="info">
+<b>Depth first search</b> adalah proses mengunjungi vertex secara rekursif hingga tidak ada vertex yang belum dikunjungi.
+</Callout>
+
+### Breadth First Search
+
+BFS procedure:
+
+```
+BFS(G, v)
+    visited[v] = true
+    Q.enqueue(v)
+    while Q is not empty do
+        x = Q.dequeue()
+        for each w adjacent to x do
+            if not visited[w] then
+                visited[w] = true
+                Q.enqueue(w)
+```
+
+<Callout type="info">
+<b>Breadth first search</b> adalah proses mengunjungi vertex secara berurutan dari vertex yang memiliki jarak terdekat hingga tidak ada vertex yang belum dikunjungi.
+</Callout>
+
+## Minimum Spanning Tree
+
+<Callout type="info">
+Sebuah <b>minimum spanning tree</b> dari sebuah graph $G$ adalah sebuah spanning tree dari $G$ yang memiliki bobot minimum.
+</Callout>
+
+### Prim's Algorithm
+
+```
+Prim(G, r)
+    for each u in V do
+        key[u] = infinity
+        parent[u] = null
+    key[r] = 0
+    Q = V
+    while Q is not empty do
+        u = extractMin(Q)
+        for each v adjacent to u do
+            if v in Q and w(u, v) < key[v] then
+                parent[v] = u
+                key[v] = w(u, v)
+```
+
+<Callout type="info">
+<b>Prim's algorithm</b> adalah proses membangun minimum spanning tree dengan memilih vertex yang memiliki bobot terkecil lalu menghubungkannya dengan vertex tetangga dengan bobot terkecil sembari mencegah terbentuknya sirkuit.
+</Callout>
+
+### Kruskal's Algorithm
+
+```
+Kruskal(G)
+    for each u in V do
+        parent[u] = u
+    sort E by weight
+    for each (u, v) in E do
+        if find(u) != find(v) then
+            union(u, v)
+```
+
+<Callout type="info">
+<b>Kruskal's algorithm</b> adalah proses membangun minimum spanning tree dengan menyortir edge dari terkecil lalu menyusunnya sesuai urutan dalam tree sembari mencegah terbentuknya sirkuit.
+</Callout>
+
+<Callout type="error">
+**THIS LECTURE NOTE IS STILL INCOMPLETE.**
+</Callout>
