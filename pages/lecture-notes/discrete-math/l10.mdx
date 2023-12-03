@@ -1,0 +1,323 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 10: Graph Theory pt. 1
+
+Based on [Discrete Mathematics and Its Applications](https://www.amazon.com/Discrete-Mathematics-Applications-Kenneth-Rosen/dp/0072899050) by Kenneth H. Rosen, 7th Edition.
+
+---
+
+<Callout type="info">
+Sebuah graf $G = (V, E)$ terdiri dari $V$, yaitu himpunan non kosong dari suatu titik (vertice or node) dan $E$, yaitu himpunan dari pasangan tak terurut dari elemen-elemen $V$ yang disebut sisi (edge atau arc).
+</Callout>
+
+<div className="centering">
+![graf](/assets/dm/l10_1.png)
+</div>
+
+## Graf Tak Berarah
+
+### Tetangga dan Insiden
+
+<Callout type="info">
+Dua titik $u$ dan $v$ dikatakan bertetanggaan (adjacent) di $G$ jika $(u, v) \in E$. Sisi $e$ dikatakan insiden dengan titik $u$ dan $v$ jika $e = (u, v)$ atau $e = (v, u)$.
+</Callout>
+
+
+
+### Derajat
+
+<Callout type="info">
+Derajat dari sebuah titik dalam graf tak berarah adalah jumlah sisi yang insiden dengan titik tersebut yang dinotasikan dengan $\text{deg}(v)$.
+</Callout>
+
+<Callout type="warning">
+Jika terdapat loop pada titik $v$, maka loop tersebut dihitung dua kali.
+</Callout>
+
+### Handshaking Theorem
+
+<Callout type="info">
+Jumlah derajat dari semua titik dalam graf tak berarah adalah dua kali jumlah sisi.
+
+$$
+\begin{align*}
+\displaystyle\sum_{v \in V} \text{deg}(v) &= 2|E|\\
+2|E| &= \sum_{v \in V} \text{deg}(v)
+\end{align*}
+$$
+
+\*bahkan ini berlaku jika terdapat beberapa sisi dan loop dalam graf.
+</Callout>
+
+Handshaking theorem menyebabkan terdefinisinya teorem berikutnya:
+
+<Callout type="info">
+Graf tak berarah memiliki [**titik berderajat ganjil**] yang [**berjumlah genap**].
+</Callout>
+
+## Graf Berarah
+
+### Tetangga dan Terminal
+
+<Callout type="info">
+Ketika $(u, v)$ adalah sisi berarah dari graf $G$, $u$ dikatakan bertetangga dengan $v$. Titik $u$ adalah titik mula-mula dan titik $v$ dikatakan sebagai titik terminal. Titik permulaan dan terminal dalam loop adalah sama.
+</Callout>
+
+### Derajat Masuk dan Keluar
+
+<Callout type="info">
+Dalam sebuah graf berarah, terdapat derajat masuk yang dinotasikan dengan $\text{deg}^-(v)$, adalah jumlah sisi dengan $v$ sebagai titik terminal. Lalu derajat keluar dinotasikan dengan $\text{deg}^+(v)$ adalah jumlah sisi dengan $v$ sebagai titik mula-mula. 
+
+Loop memiliki 1 derajat masuk dan 1 derajat keluar.
+</Callout>
+
+<Callout type="info">
+Dalam sebuah graf berarah, jumlah derajat masuk sama dengan jumlah derajat keluar.
+
+$$
+\displaystyle\sum_{v \in V} \text{deg}^-(v) = \displaystyle\sum_{v \in V} \text{deg}^+(v) = |E|
+$$
+</Callout>
+
+## Graf Spesial
+
+### Graf Lengkap
+
+<Callout type="info">
+Sebuah graf lengkap dengan $n$ titik yang dinotasikan dengan $K_n$ adalah sebuah graf tak berarah dengan $n$ titik yang setiap pasangan titiknya bertetanggaan atau setiap pasangan titiknya memiliki tepat satu sisi yang menghubungkan keduanya.
+</Callout>
+
+![graf lengkap](/assets/dm/l10_2.png)
+
+<Callout type="info">
+Sebuah graf lengkap dengan $n$ titik memiliki $\displaystyle\frac{n(n-1)}{2}$ sisi.
+</Callout>
+
+### Graf Siklik
+
+<Callout type="info">
+Sebuah graf siklik dengan $n$ titik yang dinotasikan dengan $C_n$ adalah sebuah graf berarah dengan $n$ titik yang memiliki himpunan sisi $E = \{(v_1, v_2), (v_2, v_3), \dots, (v_{n-1}, v_n), (v_n, v_1)\}$.
+</Callout>
+
+![graf siklik](/assets/dm/l10_3.png)
+
+<Callout type="info">
+Sebuah graf siklik dengan $n$ titik memiliki $n$ sisi.
+</Callout>
+
+### Wheels
+
+<Callout type="info">
+Sebuah graf roda dengan $n$ titik yang dinotasikan dengan $W_n$ adalah sebuah graf siklik dengan $n-1$ titik yang memiliki satu titik tambahan yang bertetanggaan dengan semua titik lainnya.
+</Callout>
+
+![graf roda](/assets/dm/l10_4.png)
+
+<Callout type="info">
+Sebuah graf roda dengan $n$ titik memiliki $2(n-1)$ sisi.
+</Callout>
+
+### n-dimensional Hypercube
+
+<Callout type="info">
+Sebuah n-dimensional hypercube dengan $2^n$ titik yang dinotasikan dengan $Q_n$ adalah sebuah graf berarah dengan $2^n$ titik yang memiliki $n$ himpunan sisi $E_1, E_2, \dots, E_n$ dengan $E_i$ adalah himpunan sisi yang terdiri dari sisi-sisi yang menghubungkan titik-titik yang berbeda pada dimensi ke-$i$.
+</Callout>
+
+![hypercube](/assets/dm/l10_5.png)
+
+<Callout type="info">
+Sebuah n-dimensional hypercube dengan $2^n$ titik memiliki $n2^{n-1}$ sisi.
+</Callout>
+
+## Graf Bipartite
+
+<Callout type="info">
+Sebuah graf bipartite $G = (V, E)$ adalah sebuah graf tak berarah yang dapat dipartisi menjadi dua himpunan titik $V_1$ dan $V_2$ sehingga setiap sisi dalam $E$ menghubungkan titik dari $V_1$ dan $V_2$.
+</Callout>
+
+<Callout type="warning">
+Cara mudah menentukan apakah sebuah graf bipartite adalah dengan mewarnai graf tersebut dengan dua warna sehingga setiap titik berwarna berbeda dengan tetangganya.
+</Callout>
+
+Secara umum, graf dapat diwarnai dengan $k$ **minimum** warna sehingga setiap titik berwarna berbeda dengan tetangganya. Graf yang dapat diwarnai dengan $k$ warna dapat dipartisi dalam $k$ himpunan $V_k$.
+
+<Callout type="info">
+Graf bipartite lengkap dengan $n$ titik yang dinotasikan dengan $K_{m, n}$ adalah sebuah graf bipartite dengan dua himpunan titik $V_1$ dan $V_2$ yang masing-masing memiliki $m$ dan $n$ titik sehingga setiap titik di $V_1$ bertetangga dengan setiap titik di $V_2$.
+</Callout>
+
+### Hall's Marriage Theorem
+
+<Callout type="info">
+Sebuah graf bipartite $G = (V, E)$ dengan dua himpunan titik $V_1$ dan $V_2$ memiliki matching yang sempurna jika dan hanya jika untuk setiap himpunan titik $S \subseteq V_1$, $|N(S)| \geq |S|$.
+</Callout>
+
+## Representasi Graf
+
+### Representasi Adjacency Matrix
+
+<Callout type="info">
+Sebuah graf $G = (V, E)$ dengan $n$ titik dapat direpresentasikan dengan matriks $n \times n$ yang dinotasikan dengan $A$ dengan $A_{ij} = 1$ jika $(i, j) \in E$ dan $A_{ij} = 0$ jika $(i, j) \notin E$.
+</Callout>
+
+$$
+A_{ij} =
+\begin{cases}
+1 & \text{jika } (i, j) \in E\\
+0 & \text{jika } (i, j) \notin E
+\end{cases}
+$$
+
+
+#### Example
+
+Graf $W_6$ dapat direpresentasikan dengan matriks $6 \times 6$ sebagai berikut:
+
+$$
+\begin{bmatrix}
+0 & 1 & 0 & 0 & 1 & 1\\
+1 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 0 & 1 & 0 & 1\\
+0 & 0 & 1 & 0 & 1 & 1\\
+1 & 0 & 0 & 1 & 0 & 1\\
+1 & 1 & 1 & 1 & 1 & 1
+\end{bmatrix}
+$$
+
+### Representasi Adjacency List
+
+<Callout type="info">
+Sebuah graf $G = (V, E)$ dengan $n$ titik dapat direpresentasikan dengan array $n$ elemen yang dinotasikan dengan $A$ dengan $A[i]$ adalah himpunan titik yang bertetanggaan dengan titik $i$.
+</Callout>
+
+#### Example
+
+Graf $W_6$ dapat direpresentasikan dengan array sebagai berikut:
+
+$$
+\begin{bmatrix}
+\{2, 5, 6\}\\
+\{1, 2, 6\}\\
+\{2, 4, 6\}\\
+\{3, 5, 6\}\\
+\{1, 4, 6\}\\
+\{1, 2, 3, 4, 5\}
+\end{bmatrix}
+$$
+
+### Representasi Incidence Matrix
+
+<Callout type="info">
+Sebuah graf $G = (V,E)$ tak berarah dapat direpresentasikan dalam matriks insiden dengan mengurutkan $V$ dan $E$ untuk $n\times m$ matriks $M = m_{ij}$.
+
+$$
+m_{ij} =
+\begin{cases}
+1 & \text{jika } v_i \text{ insiden dengan } e_j\\
+0 & \text{jika } v_i \text{ tidak insiden dengan } e_j
+\end{cases}
+$$
+</Callout>
+
+#### Example
+
+Graf $W_6$ dapat direpresentasikan dengan matriks $6 \times 10$ sebagai berikut:
+
+$$
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 1 & 0\\
+1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1\\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+$$
+
+## Isomorphism
+
+<Callout type="info">
+Dua graf $G_1 = (V_1, E_1)$ dan $G_2 = (V_2, E_2)$ dikatakan isomorfik jika terdapat bijeksi $f: V_1 \rightarrow V_2$ sehingga $(u, v) \in E_1$ jika dan hanya jika $(f(u), f(v)) \in E_2$.
+</Callout>
+
+<Callout type="warning">
+Graph isomorphism is considered as NP-complete problem.
+</Callout>
+
+Bagaimana mencari isomorfisme antara dua graf?
+
+Isomorfisme dapat diperkirakan dengan menghitung:
+1. Kesamaan jumlah vertices
+2. Kesamaan jumlah edges
+3. Kesamaan derajat vertices
+4. Kesamaan jumlah subgraf
+
+Namun, hal ini tidak cukup untuk menentukan isomorfisme.
+
+### Adjacency Matrix
+
+<Callout type="info">
+Dua graf $G_1 = (V_1, E_1)$ dan $G_2 = (V_2, E_2)$ isomorfik jika dan hanya jika terdapat permutasi $\pi$ dari $V_2$ sehingga $A_1 = \pi A_2 \pi^{-1}$.
+</Callout>
+
+#### Example
+
+Apakah kedua graf dibawah isomorfik?
+
+![graf isomorfik](/assets/dm/l10_6.png)
+
+Menggunakan adjacency matrix, kita dapat memperoleh:
+
+{/* 
+010101
+101001
+010110
+101010
+001101
+110010
+*/}
+
+$$
+A_1 =
+\begin{bmatrix}
+0 & 1 & 0 & 1 & 0 & 1\\
+1 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 0 & 1 & 1 & 0\\
+1 & 0 & 1 & 0 & 1 & 0\\
+0 & 0 & 1 & 1 & 0 & 1\\
+1 & 1 & 0 & 0 & 1 & 0
+\end{bmatrix}
+$$
+
+{/* 
+010110
+101010
+010101
+101001
+110001
+001110
+*/}
+
+$$
+A_2 =
+\begin{bmatrix}
+0 & 1 & 0 & 1 & 1 & 0\\
+1 & 0 & 1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1 & 0 & 1\\
+1 & 0 & 1 & 0 & 0 & 1\\
+1 & 1 & 0 & 0 & 0 & 1\\
+0 & 0 & 1 & 1 & 1 & 0
+\end{bmatrix}
+$$
+
+Jika kita "geser" $u_1$ ke $v_5$ dan $u_4$ ke $v_6$, kita dapatkan fungsi bijeksi
+
+$$
+f(u_1) = v_5\\
+f(u_2) = v_2\\
+f(u_3) = v_3\\
+f(u_4) = v_6\\
+f(u_5) = v_4\\
+f(u_6) = v_1
+$$
+
+Karena terdapat fungsi bijeksi yang memenuhi, maka kedua graf tersebut isomorfik.

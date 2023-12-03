@@ -81,7 +81,7 @@ Maka string outputnya adalah
 
 Unit-delay machine adalah FSM yang mengeluarkan output yang sama dengan inputnya ditambah delay beberapa waktu. Bagaimana FSM yang mengeluarkan output yang sama dengan inputnya ditambah delay satu waktu, yaitu output $0x_1x_2\dots x_{n-1}$ untuk input $x_0x_1x_2\dots x_{n-1}$?
 
-Untuk menyelesaikan masalah ini, kita dapat merancang FSM yang mengingat apa input pertamanya. Pertama-tama $S_0$ dirancang untuk selalu mengeluarkan output $0$ untuk setiap input yang diberikan. Jika input pertama adalah $1$, maka FSM akan berpindah ke $S_1$ yang akan mengeluarkan output $1$ untuk setiap input yang diberikan dan berpindah ke $S_2$ jika input $0$ diberikan yang akan selalu mengeluarkan output $0$.
+Untuk menyelesaikan masalah ini, kita dapat merancang FSM yang mengingat satu input sebelumnya. Pertama-tama $S_0$ dirancang untuk selalu mengeluarkan output $0$ untuk setiap input yang diberikan. Jika input pertama adalah $1$, maka FSM akan berpindah ke $S_1$ yang akan mengeluarkan output $1$ untuk setiap input yang diberikan dan berpindah ke $S_2$ jika input $0$ diberikan yang akan selalu mengeluarkan output $0$.
 
 <div className="centering">
 |       | $f$           | $g$    |
