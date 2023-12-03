@@ -1,0 +1,124 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 11: Graph Theory pt. 2
+
+Based on [Discrete Mathematics and Its Applications](https://www.amazon.com/Discrete-Mathematics-Applications-Kenneth-Rosen/dp/0072899050) by Kenneth H. Rosen, 7th Edition.
+
+---
+
+## Konektivitas
+
+### Path
+
+<Callout type="info">
+Anggap $n$ adalah bilangan bulat positif dan $G$ adalah graf tak berarah. Suatu <b>path</b> dari panjang $n$ dalam $G$ adalah urutan $n$ simpul $v_0, v_1, \dots, v_n$ sehingga $v_i$ dan $v_{i+1}$ berdekatan untuk $i = 0, 1, \dots, n-1$. Path disebut <b>simple</b> jika semua simpulnya berbeda dan disebut **circuit** jika $v_0 = v_n$.
+</Callout>
+
+<Callout type="error">
+**MANY SECTION OF THE LECTURE IS SKIPPED**
+</Callout>
+
+## Euler Path
+
+<Callout type="info">
+Suatu <b>Euler path</b> adalah path yang melalui setiap sisi tepat sekali. Suatu <b>Euler circuit</b> adalah Euler path yang merupakan circuit.
+</Callout>
+
+<Callout type="info">
+Suatu graf tak berarah $G$ memiliki Euler circuit jika dan hanya jika setiap simpulnya memiliki derajat genap.
+</Callout>
+
+## Hamilton Path
+
+<Callout type="info">
+Suatu <b>Hamilton path</b> adalah path yang melalui setiap simpul tepat sekali. Suatu <b>Hamilton circuit</b> adalah Hamilton path yang merupakan circuit.
+</Callout>
+
+<Callout type="info">
+Suatu graf tak berarah $G$ memiliki Hamilton circuit jika dan hanya jika untuk setiap pasangan simpul $u$ dan $v$ yang berbeda, $G$ memiliki $u-v$ path.
+</Callout>
+
+<Callout type="info">
+Dirac's Theorem: Jika $G$ adalah graf tak berarah dengan $n$ simpul, $n \geq 3$, dan setiap simpulnya memiliki derajat sekurang-kurangnya $n/2$, maka $G$ memiliki Hamilton circuit.
+</Callout>
+
+<Callout type="info">
+Ore's Theorem: Jika $G$ adalah graf tak berarah dengan $n$ simpul, $n \geq 3$, dan untuk setiap pasangan simpul $u$ dan $v$ yang tidak berdekatan, $d(u) + d(v) \geq n$, maka $G$ memiliki Hamilton circuit.
+</Callout>
+
+## Shortest Path
+
+<Callout type="info">
+Suatu <b>shortest path</b> dari simpul $u$ ke simpul $v$ adalah path dari $u$ ke $v$ dengan panjang terkecil.
+</Callout>
+
+### Dijkstra's Algorithm
+
+Secara pseudocode, algoritma Dijkstra adalah sebagai berikut:
+
+```
+Dijkstra(G, w, s)
+    for each vertex v in V[G] do
+        d[v] := infinity
+        pi[v] := nil
+    d[s] := 0
+    S := empty set
+    Q := set of all vertices
+    while Q is not an empty set do
+        u := Extract-Min(Q)
+        S := S union {u}
+        for each vertex v in Adj[u] do
+            if d[v] > d[u] + w(u, v) then
+                d[v] := d[u] + w(u, v)
+                pi[v] := u
+```
+
+Penjelasan:
+
+- `d[v]` adalah jarak terpendek dari `s` ke `v`
+- `pi[v]` adalah simpul sebelum `v` dalam shortest path dari `s` ke `v`
+- `S` adalah simpul yang sudah dikunjungi
+- `Q` adalah simpul yang belum dikunjungi
+
+Apa itu `Extract-Min`? `Extract-Min` adalah operasi yang mengambil simpul dengan jarak terpendek dari `Q` dan menghapusnya dari `Q`.
+
+<Callout type="info">
+Algoritma Dijkstra bekerja dengan memilih simpul yang memiliki jarak terpendek dari `s` dan memperbarui jarak terpendek dari simpul-simpul yang berdekatan dengan simpul tersebut.
+</Callout>
+
+## Graf Planar
+
+<Callout type="info">
+Graf disebut planar bila dapat digambar dalam suatu bidang tanpa ada sisi yang saling berseberangan.
+</Callout>
+
+### Euler's Formula
+
+<Callout type="info">
+Jika $G$ adalah graf planar sederhana dengan $n$ simpul dan $m$ sisi, maka $n - m + f = 2$, di mana $f$ adalah jumlah daerah yang dibatasi oleh sisi-sisi $G$.
+</Callout>
+
+### Corollaries
+
+<Callout type="info">
+Jika $G$ adalah graf tak berarah sederhana dengan $n$ simpul dan $m$ sisi, maka $m \leq 3n - 6$.
+</Callout>
+
+<Callout type="info">
+Jika $G$ adalah graf planar sederhana, maka $G$ memiliki simpul dengan derajat tidak melebihi 5.
+</Callout>
+
+<Callout type="info">
+Jika graf planar sedernahana yang memiliki $e$ sisi, $v$ simpul, dan tidak ada sirkuit segitiga, maka $e \leq 2v - 4$.
+</Callout>
+
+### Kuratowski's Theorem
+
+<Callout type="info">
+Suatu graf tak berarah adalah planar jika dan hanya jika tidak mengandung subgraf yang homeomorfik dengan $K_5$ atau $K_{3,3}$.
+</Callout>
+
+To do list for this lecture:
+
+- [ ] graph connectedness and isomorphism
+- [ ] graph coloring
