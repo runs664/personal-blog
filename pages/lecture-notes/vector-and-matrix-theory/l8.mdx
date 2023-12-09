@@ -1,0 +1,157 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 8: Vector Spaces and Subspaces
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Vector Spaces
+
+<Callout type="info">
+1. $n$-dimensional ruang $\mathbb{R}^n$ mengandung seluruh kolom vektor dengan $n$ komponen.
+2. Jika $v$ dan $w$ ada di ruang vektor $S$, seluruh **kombinasi linear** $cv + dw$ juga harus ada di $S$.
+3. Vektor dalam $S$ dapat tersusun dari matriks maupun sebuah fungsi. $\mathbb{Z}$ adalah ruang vektor terdiri dari 1 komponen saja yang bernilai nol.
+4. Subspace $\mathbb{R}^n$ adalah ruang vektor didalam $\mathbb{R}^n$. Contoh: $y = 3x$ ada didalam $\mathbb{R}^2$.
+5. Column space dari $A$ mengandung semua kombinasi linear dari kolom-kolom $A$ : yaitu subspace dari $\mathbb{R}^m$.
+6. Column space mengandung seluruh vektor $A\vec{x}$. Jika $b$ ada di column space $C(A)$, maka solusi $A\vec{x} = b$ ada.
+</Callout>
+
+Seluruh space dari bilangan real dinotasikan dengan $\mathbb{R}$ dengan pangkat $n$ menunjukkan jumlah komponen dari vektor. Sehingga $\mathbb{R}^n$ adalah ruang vektor yang terdiri dari $n$ komponen. Contoh: $\mathbb{R}^2$ adalah ruang vektor 2 dimensi dari bilangan real.
+
+Contoh lain: $\mathbb{C}$ untuk ruang vektor bilangan kompleks.
+
+$$
+\mathbb{R}^n = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}
+$$
+
+Seluruh vector space haruslah memenuhi 8 syarat berikut:
+
+1. $x + y = y + x$
+2. $(x + y) + z = x + (y + z)$
+3. Ada vektor nol $0$ sehingga $x + 0 = x$ untuk setiap $x$.
+4. Untuk setiap $x$ ada vektor $-x$ sehingga $x + (-x) = 0$.
+5. $1x = x$ untuk setiap $x$.
+6. $c_1(c_2x) = (c_1c_2)x$.
+7. $c(x + y) = cx + cy$.
+8. $(c_1 + c_2)x = c_1x + c_2x$.
+
+Aturan 1 sampai 4 adalah aturan penjumlahan dan pengurangan, sedangkan aturan 5 sampai 6 adalah aturan perkalian skalar dan 7, 8 adalah hubungan keduanya.
+
+## Subspace
+
+<Callout type="info">
+Sebuah subspace dari sebuah vector space adalah himpunan dari vektor-vektor (termasuk nol) yang memenuhi 2 syarat:
+1. Jika $v$ dan $w$ ada di subspace, maka $v + w$ juga ada di subspace.
+2. Jika $v$ ada di subspace, maka $cv$ juga ada di subspace.
+</Callout>
+
+Dalam artian lain, vektor tersebut "tertutup" terhadap operasi penjumlahan dan perkalian skalar.
+
+<Callout type="warning">
+Ingat: $v - w = v + (-w)$, serta $\frac{v}{c} = \frac{1}{c}v$.
+</Callout>
+
+Setiap subspace pasti mengandung vektor nol, yaitu suatu ruang vektor yang melalui origin $(0, 0, \dots, 0)$.
+
+Contoh: Kombinasi subspace yang mungkin di $\mathbb{R}^3$ adalah:
+
+- $(\mathbb{R}^3)$ Semua vektor di $\mathbb{R}^3$
+- $(L)$ Garis lurus melalui origin
+- $(P)$ Bidang melalui origin
+- $(Z)$ Hanya origin $(0, 0 ,0)$
+
+### Column Space of $A$
+
+<Callout type="info">
+Column space terdiri dari seluruh **KOMBINASI LINEAR** dari kolom-kolom $A$. Kombinasi dari seluruh vektor $Ax$ yang mengisi column space $C(A)$.
+</Callout>
+
+Pemahaman kolom space ini sangat penting untuk keseluruhan pembahasan.
+
+Contoh: $A\vec{x} = b$ breakdown
+
+$$
+\underbrace{\begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}}_{A} \underbrace{\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}}_{\vec{x}} = \underbrace{\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}}_{b}\\
+$$
+
+$A\vec{x}=b$ terdapat solusi jika $b$ dapat dibentuk dari kombinasi linear kolom-kolom $A$:
+
+$$
+b = x_1 \underbrace{\begin{bmatrix} a \\ d \\ g \end{bmatrix}}_{C_1} + x_2 \underbrace{\begin{bmatrix} b \\ e \\ h \end{bmatrix}}_{C_2} + x_3 \underbrace{\begin{bmatrix} c \\ f \\ i \end{bmatrix}}_{C_3}
+$$
+
+untuk $x_1, x_2, x_3 \in \mathbb{R}$.
+
+<Callout type="info">
+Sistem persamaan $A\vec{x} = b$ memiliki solusi jika $b$ ada di column space $C(A)$.
+</Callout>
+
+Contoh:
+
+Misalkan ada sebuah matriks $A$:
+
+$$
+A = \begin{bmatrix} 1 & 0 \\ 4 & 3 \\ 2 & 3 \end{bmatrix}
+$$
+
+Maka subspace yang dibentuk dari $A$ adalah sebuah bidang dalam $\mathbb{R}^3$. Sehingga, sistem persamaan $A\vec{x} = b$ memiliki solusi jika $b$ ada di bidang tersebut.
+
+Note: sebuah bidang adalah span dari 2 basis vektor (pembahasan mendatang).
+
+Subspace $SS = c_1v_1 + c_2v_2 + \cdots + c_Nv_N$ adalah subspace dari $V$ yang dispan oleh $S$.
+
+Contoh:
+
+Deskripsikan kolom space dari matrix $I, A, B$ berikut:
+
+$$
+I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, A = \begin{bmatrix} 1 & 2 \\ 3 & 6 \end{bmatrix}, B = \begin{bmatrix} 1 & 2 & 7 \\ 3 & 5 & 4\end{bmatrix}
+$$
+
+Jawab:
+
+- Matriks $I$ memiliki column space yaitu seluruh $\mathbb{R}^2$, karena kedua kolomnya adalah basis dari $\mathbb{R}^2$.
+- Matriks $A$ memiliki column space yaitu garis lurus melalui origin, karena kolom kedua merupakan kombinasi linear dari kolom pertama $A_2 = 2A_1$.
+- Matriks $B$ dapat ditinjau dari bentuk **reduced row echelon form**-nya, yaitu:
+
+$$
+\text{rref}(B) = \begin{bmatrix} 1 & 0 & -27 \\ 0 & 1 & 17 \end{bmatrix}
+$$
+
+terlihat bahwa kolom ketiga adalah kombinasi linear kolom pertama dan kedua yaitu $B_3 = -27B_1 + 17B_2$. Sehingga column space dari $B$ adalah bidang $\mathbb{R}^2$ yang di span dari 2 basis.
+
+Problem:
+
+Diberikan tiga vektor $b_1, b_2, b_3$ berbeda. Buatlah sebuah matriks sehingga $Ax = b_1, Ax = b_2$ memiliki solusi namun $Ax = b_3$ tidak memiliki solusi.
+
+Jawab:
+
+Key Idea: Buatlah matriks $A$ sedemikian sehingga $b_1, b_2$ ada di column space-nya, dan $b_3$ tidak ada di column space-nya.
+
+Solusi paling sederhana adalah menjadikan matriks yang terdiri dari dua kolom yaitu $b_1$ dan $b_2$ itu sendiri, dimana $b_3$ tentu bukan kombinasi linear dari $b_1$ dan $b_2$.
+
+$$
+Ax = \begin{bmatrix} b_1 & b_2 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}
+$$
+
+Contoh: Deskripsikan subspace $S$ untuk setiap vektor space $V$:
+
+1. $V_4$ adalah solusi dari persamaan $\displaystyle\frac{d^4y}{dx^4} = 0$.
+
+Jawab:
+
+1. $V_4$ adalah ruang vektor dari fungsi $y = ax^3 + bx^2 + cx + d$ yang memenuhi $\displaystyle\frac{d^4y}{dx^4} = 0$. $V_4$ adalah seluruh kombinasi dari $1, x, x^2, x^3$.
+
+### Challenge Problems
+
+1. Misalkan $S$ dan $T$ adalah dua subspace dari vector space $V$.
+    - Penjumlahan $S + T$ mengandung seluruh jumlahan $s + t$ dimana $s \in S$ dan $t \in T$. Tunjukkan bahwa $S + T$ memenuhi syarat 1 dan 2 dari subspace.
+    - Jika $S$ dan $T$ adalah garis subspace dari $\mathbb{R}^3$, apakah perbedaan dari $S + T$ dan $S \cup T$? Jelaskan juga pernyataan "span dari $S \cup T$ adalah $S + T$".
+
+Jawab:
+
+1.  - Jika $u$ dan $v$ berada dalam $S + T$, maka $u = s_1 + t_1$ dan $v = s_2 + t_2$ dimana $s_1, s_2 \in S$ dan $t_1, t_2 \in T$. Maka $u + v = (s_1 + s_2) + (t_1 + t_2)$, dimana $s_1 + s_2 \in S$ dan $t_1 + t_2 \in T$. Sehingga $u + v \in S + T$. Begitu pula dengan $cu = c(s_1 + t_1) = cs_1 + ct_1 \in S + T$.
+    - Jika $S$ dan $T$ adalah garis yang berbeda, maka $S \cup T$ hanyalah dua garis (bukan subspace) tetapi $S + T$ adalah bidang (subspace). Span dari $S \cup T$ adalah seluruh garis yang melalui kedua garis tersebut, sedangkan span dari $S + T$ adalah seluruh bidang yang melalui kedua garis tersebut.
+
+## Null Space of $A$
