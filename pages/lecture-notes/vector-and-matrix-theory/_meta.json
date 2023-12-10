@@ -1,5 +1,12 @@
 {
+    
+    "rref": {
+        "title": "[PRE] rref Interpretation"
+    },
     "l8": {
         "title": "Lecture 8: Vector Spaces and Subspaces"
+    },
+    "l9": {
+        "title": "Lecture 9: The Nullspace of A"
     }
 }

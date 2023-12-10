@@ -148,10 +148,12 @@ Jawab:
 1. Misalkan $S$ dan $T$ adalah dua subspace dari vector space $V$.
     - Penjumlahan $S + T$ mengandung seluruh jumlahan $s + t$ dimana $s \in S$ dan $t \in T$. Tunjukkan bahwa $S + T$ memenuhi syarat 1 dan 2 dari subspace.
     - Jika $S$ dan $T$ adalah garis subspace dari $\mathbb{R}^3$, apakah perbedaan dari $S + T$ dan $S \cup T$? Jelaskan juga pernyataan "span dari $S \cup T$ adalah $S + T$".
+2. Tunjukkan bahwa matriks $A$ dan $\begin{bmatrix}A & AB\end{bmatrix}$ memiliki column space yang sama.
+3. Sebuah matriks $n \times n$ memiliki column space yang sama dengan $\mathbb{R}^n$ jika dan hanya jika matriks tersebut _____.
 
 Jawab:
 
 1.  - Jika $u$ dan $v$ berada dalam $S + T$, maka $u = s_1 + t_1$ dan $v = s_2 + t_2$ dimana $s_1, s_2 \in S$ dan $t_1, t_2 \in T$. Maka $u + v = (s_1 + s_2) + (t_1 + t_2)$, dimana $s_1 + s_2 \in S$ dan $t_1 + t_2 \in T$. Sehingga $u + v \in S + T$. Begitu pula dengan $cu = c(s_1 + t_1) = cs_1 + ct_1 \in S + T$.
     - Jika $S$ dan $T$ adalah garis yang berbeda, maka $S \cup T$ hanyalah dua garis (bukan subspace) tetapi $S + T$ adalah bidang (subspace). Span dari $S \cup T$ adalah seluruh garis yang melalui kedua garis tersebut, sedangkan span dari $S + T$ adalah seluruh bidang yang melalui kedua garis tersebut.
-
-## Null Space of $A$
+2. Kolom $AB$ adalah kombinasi linear dari kolom $A$, sehingga column space $\begin{bmatrix}A & AB\end{bmatrix}$ telah ada di $C(A)$.
+3. Invertible.

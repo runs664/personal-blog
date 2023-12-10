@@ -1,0 +1,184 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 9: The Nullspace of $A$: Solving $Ax = 0$ and $Rx = 0$
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Nullspace of $A$
+
+<Callout type="info">
+1. Nullspace $N(A)$ dalam $\mathbb{R}^n$ adalah himpunan semua solusi dari $Ax = 0$ termasuk $x=0$.
+2. Eliminasi dari $A$ ke $U$ ke $R$ tidak mengubah nullspacenya. $N(A) = N(U) = N(R)$.
+3. Reduced row echelon form $R = \text{rref}(A)$ memiliki pivot bernilai 1 dengan nol di baris atas serta bawahnya:
+
+$$
+R = \begin{bmatrix}
+1 & * & 0 & * & 0 & * & * \\
+0 & 0 & 1 & * & 0 & * & * \\
+0 & 0 & 0 & 0 & 1 & * & * \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix}
+$$
+
+4. Jika kolom $j$ dari $R$ tidak berisi pivot, maka ada *"special solution"* untuk $Ax=0$ dengan $x_j = 1$ dan $x_i = 0$ untuk $i \neq j$.
+5. Banyak pivot = banyak baris non-nol di $R = \text{rank}(r)$. Terdapat $n - \text{rank}(r)$ *free column* di $R$.
+6. Setiap matriks lebar ($m < n$) memiliki solusi $Ax = 0$ dengan $x \neq 0$ dalam nullspacenya.
+</Callout>
+
+## Apakah nullspace termasuk subspace?
+
+Misalkan $x$ dan $y$ adalah solusi dari $Ax = 0$ dan $Ay = 0$. Aturan perkalian memberikan $A(x+y) = Ax + Ay = 0 + 0 = 0$. Aturan tersebut juga membuktikan $A(cx) = c0$. Sehingga $x + y$ dan $cx$ berada di nullspace $N(A)$.
+
+<Callout type="info">
+Vektor solusi $x$ memiliki $n$ komponen, sehingga mereka adalah vektor dalam $\mathbb{R}^n$. Nullspace $N(A)$ adalah subspace dalam $\mathbb{R}^n$. Berbeda dengan columnspace $C(A)$ yang merupakan subspace dalam $\mathbb{R}^m$.
+</Callout>
+
+## Special Solutions for $Ax = 0$
+
+Deskripsikan nullspace dari $A = \begin{bmatrix} 1 & 3 \\ 2 & 6 \end{bmatrix}$!
+
+Dengan eliminasi, kita dapatkan:
+
+$$
+R = \begin{bmatrix} 1 & 3 & | & 0\\ 0 & 0 & | & 0 \end{bmatrix}
+$$
+
+Jika dijabarkan, kita dapatkan:
+
+$$
+A\begin{cases}
+x_1 + 3x_2 = 0 \\
+0 = 0
+\end{cases}
+$$
+
+Dengan $x_2$ sebagai *free variable*, kita dapatkan:
+
+$$
+A\begin{cases}
+x_1 = -3x_2 \\
+x_2 = x_2
+\end{cases}
+$$
+
+Sehingga, solusi dari $Ax = 0$ adalah:
+
+$$
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} -3x_2 \\ x_2 \end{bmatrix} = x_2 \begin{bmatrix} -3 \\ 1 \end{bmatrix}
+$$
+
+Contoh berikutnya: 
+
+$x + 2y + 3z = 0$ datang dari $1 \times 3$ matrix $A = \begin{bmatrix} 1 & 2 & 3 \end{bmatrix}$. Kemudian $Ax = 0$ menghasilkan sebuah bidang. Seluruh vektor dalam bidang tersebut **tegak lurus** terhadap vektor $[1, 2, 3]^T$. Bidang ini adalah **nullspace** dari $A$. 
+
+Ada dua *free variables* $y$ dan $z$. Sehingga, solusi dari $Ax = 0$ adalah:
+
+$$
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} -2y - 3z \\ y \\ z \end{bmatrix} = y \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} + z \begin{bmatrix} -3 \\ 0 \\ 1 \end{bmatrix}
+$$
+
+Cara lain dalam menentukan solusi nullspace adalah dengan mengatur setiap *free variable* menjadi 1 dan yang lainnya menjadi 0 secara bergantian:
+
+$$
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix} \text{ for } y = 1, z = 0
+$$
+
+$$
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} -3 \\ 0 \\ 1 \end{bmatrix} \text{ for } y = 0, z = 1
+$$
+
+<Callout type="info">
+Langkah utama menentukan solusi spesial adalah:
+1. Eliminasi $A$ menjadi $R$.
+2. Setiap kolom tanpa pivot di $R$ adalah *free variable* dan tentukan $Ax = 0$.
+3. Setiap *free variable* menjadi 1 dan yang lainnya menjadi 0 secara bergantian.
+</Callout>
+
+## Pivot Variables and Free Variables in $R$
+
+<Callout type="info">
+$$
+A = \begin{bmatrix} p & p & f & p & f \\ \mid & \mid & \mid & \mid & \mid \\  \mid & \mid & \mid & \mid & \mid  \\ \mid & \mid & \mid & \mid & \mid \end{bmatrix}
+\begin{cases}
+3 \text{ pivot variables } p\\
+2 \text{ free variables } f\\
+\text{to be revealed by } R
+\end{cases}
+$$
+
+$$
+R = \begin{bmatrix} 1 & 0 & a & 0 & c \\  0 & 1 & b & 0 & d  \\ 0 & 0 & 0 & 1 & e \\ 0&0&0&0&0 \end{bmatrix}
+\begin{cases}
+3 \text{ pivots: rank } r = 3\\
+\end{cases}
+$$
+
+$$
+s_1 = \begin{bmatrix} -a \\ -b \\ 1 \\ 0 \\ 0 \end{bmatrix}, s_2 = \begin{bmatrix} -c \\ -d \\ 0 \\ -e \\ 1 \end{bmatrix}
+\begin{cases}
+2 \text{ special solutions } s_1, s_2\\
+\text{formed by alternating 1 and 0}
+\end{cases}
+$$
+</Callout>
+
+Menghitung jumlah pivot mengantarkan pada teorema penting:
+
+<Callout type="info">
+**Theorem**: Jika $Ax=0$ memiliki lebih banyak *unknowns* daripada *equations*, **maka $Ax=0$ memiliki solusi non-zero**.
+</Callout>
+
+## Rank of Matrix
+
+<Callout type="info">
+Rank dari matriks $A$ adalah **jumlah dari pivotnya**. Dinotasikan dengan $r$
+</Callout>
+
+Contoh:
+
+$$
+A = \begin{bmatrix}
+1 & 1 & 2 & 4 & 4\\
+2 & 1 & 3 & 5 & 6\\
+3 & 1 & 4 & 6 & 8
+\end{bmatrix}
+$$
+
+Dengan eliminasi, kita dapatkan:
+
+$$
+R = \begin{bmatrix}
+1 & 0 & 0 & 0 & 1\\
+0 & 1 & 0 & 2 & 1\\
+0 & 0 & 1 & 1 & 1
+\end{bmatrix}
+$$
+
+Matriks $A$ memiliki 3 pivot, sehingga $\text{rank}(A) = 3$.
+
+> Setiap *free column* adalah kombinasi dari kolom pivot **sebelumnya**. Special solution memberitahu proporsi kombinasinya:
+
+$$
+\begin{align*}
+\text{Kolom 4} &= \fbox{0} \text{ (kolom 1)} + \fbox{2} \text{ (kolom 2)} + \fbox{1} \text{ (kolom 3)}, &s_1 = \begin{bmatrix} \fbox{0} \\ \fbox{-2} \\ \fbox{-1} \\ 1 \\ 0 \end{bmatrix}\\
+\text{Kolom 5} &= \fbox{1} \text{ (kolom 1)} + \fbox{1} \text{ (kolom 2)} + \fbox{1} \text{ (kolom 3)}, &s_2 = \begin{bmatrix} \fbox{-1} \\ \fbox{-1} \\ \fbox{-1} \\ 0 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+Koefisien dari *free column* adalah solusi dari $Ax = 0$ dengan membalik tandanya. Perhatikan pula bahwa baris free variablenya tersusun dari 0 dan 1 secara bergantian.
+
+<Callout type="info">
+Dimensi dari Nullspace $N(A)$ adalah $n - \text{rank}(A)$.
+</Callout>
+
+## Review of the Key Ideas
+
+<Callout type="info">
+1. Nullspace $N(A)$ adalah himpunan semua solusi dari $Ax = 0$ termasuk $x=0$.
+2. Eliminasi dari $A$ menghasilkan $R$ dengan kolom pivot dan free column.
+3. Setiap *free column* menghasilkan satu *special solution*. *free variable* menjadi 1 dan yang lainnya menjadi 0 secara bergantian.
+4. Solusi komplit dari $Ax = 0$ adalah kombinasi dari *special solution*.
+5. Rank dari $A$ adalah jumlah dari pivotnya. $\text{rank}(A) = r$.
+</Callout>

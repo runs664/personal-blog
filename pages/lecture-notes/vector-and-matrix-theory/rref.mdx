@@ -1,0 +1,293 @@
+import { Callout } from 'nextra/components'
+
+# Prerequisites: Reduced Row Echelon Form Interpretation
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Reduced Row Echelon Form
+
+### Solving $EA = U$
+
+Suatu matriks $A$ dapat dieliminasi barisnya menjadi matriks *upper triangular* $U$ dengan matriks eliminasi $E$.
+
+$$
+EA = U
+$$
+
+Contoh:
+
+Terdapat matriks $A$ berikut:
+
+$$
+A = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+2 & 4 & 1 & 0 & 8 \\
+3 & 6 & 2 & 2 & 13
+\end{bmatrix}
+$$
+
+Kita dapat mengeliminasi baris pertama dengan mengalikan $A$ dengan matriks eliminasi $E_1$ berikut:
+
+$$
+E_1 = \begin{bmatrix}
+1 & 0 & 0 \\
+-2 & 1 & 0 \\
+-3 & 0 & 1
+\end{bmatrix}
+$$
+
+Sehingga:
+
+$$
+E_1A = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+0 & 0 & 1 & -4 & -6 \\
+0 & 0 & 2 & -4 & -8
+\end{bmatrix}
+$$
+
+Kita dapat mengeliminasi baris kedua dengan mengalikan $E_1A$ dengan matriks eliminasi $E_2$ berikut:
+
+$$
+E_2 = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -2 & 1
+\end{bmatrix}
+$$
+
+Sehingga:
+
+$$
+E_2E_1A = U = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+0 & 0 & 1 & -4 & -6 \\
+0 & 0 & 0 & 4 & 4
+\end{bmatrix}
+$$
+
+Bentuk matriks $E_2E_1A$ di atas sudah merupakan bentuk *upper triangular*.
+
+### Solving $FU = R$
+
+Suatu matriks *upper triangular* $U$ dapat dieliminasi kolomnya menjadi matriks *reduced row echelon* $R$ dengan matriks eliminasi $F$.
+
+Melanjutkan contoh sebelumnya, kita dapat membuat baris ketiga menjadi baris pivot dengan membaginya dengan nilai pivot seperti ditunjukkan oleh matriks eliminasi $F_3$ berikut:
+
+$$
+F_3 = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & \frac{1}{4}
+\end{bmatrix}
+$$
+
+Sehingga:
+
+$$
+F_3U = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+0 & 0 & 1 & -4 & -6 \\
+0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+$$
+
+Lalu pada baris kedua, kita dapat membuat nilai yang berada tepat diatas pivot baris ketiga menjadi nol dengan mengalikan $F_3U$ dengan matriks eliminasi $F_2$ berikut:
+
+$$
+F_2 = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 4 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+Sehingga:
+
+$$
+F_2F_3U = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+0 & 0 & 1 & 0 & -2 \\
+0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+$$
+
+Lalu pada baris pertama, kita dapat membuat nilai yang berada tepat diatas pivot baris ketiga menjadi nol dengan mengalikan $F_2F_3U$ dengan matriks eliminasi $F_1$ berikut:
+
+$$
+F_1 = \begin{bmatrix}
+1 & 0 & -2 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+Sehingga:
+
+$$
+F_1F_2F_3U = R = \begin{bmatrix}
+1 & 2 & 0 & 0 & 5 \\
+0 & 0 & 1 & 0 & -2 \\
+0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+$$
+
+Bentuk matriks $F_1F_2F_3U$ di atas sudah merupakan bentuk *reduced row echelon*.
+
+### RREF Interpretation
+
+Kita sudah mendapatkan dua jenis matriks dari $A$ yaitu $U$ dan $R$.
+
+$$
+A = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+2 & 4 & 1 & 0 & 8 \\
+3 & 6 & 2 & 2 & 13
+\end{bmatrix}
+$$
+
+$$
+U = \begin{bmatrix}
+1 & 2 & 0 & 2 & 7 \\
+0 & 0 & 1 & -4 & -6 \\
+0 & 0 & 0 & 4 & 4
+\end{bmatrix}
+$$
+
+$$
+R = \begin{bmatrix}
+1 & 2 & 0 & 0 & 5 \\
+0 & 0 & 1 & 0 & -2 \\
+0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+$$
+
+Matriks $R$ merupakan bentuk "identitas" penyusun matriks $A$. Pivot kolom (dalam contoh: kolom 1, 3, dan 4) pada matriks $R$ menunjukkan kolom utama penyusun matriks $A$.
+
+Kolom non pivot dapat diinterpretasikan sebagai kombinasi linear dari kolom pivot. Misalnya, kolom 2 pada matriks $A$ dapat diinterpretasikan sebagai kombinasi linear dari pivot-kolom matriks $A$:
+
+$$
+\begin{bmatrix}
+2 \\
+4 \\
+6
+\end{bmatrix} = 2 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} + 0 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 0 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
+
+dimana koefisien $2$, $0$, dan $0$ merupakan nilai kolom non pivot pada matriks $R$.
+
+Sehingga seluruh kolom pada matriks $A$ dapat di-*breakdown* menjadi kombinasi linear dari pivot-kolom matriks $A$ dengan koefisien yang sesuai dengan nilai kolom non pivot pada matriks $R$:
+
+$$
+\begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} = 1 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} + 0 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 0 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+2 \\
+4 \\
+6
+\end{bmatrix} = 2 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} + 0 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 0 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} = 0 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} + 1 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 0 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix} = 0 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} + 0 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 1 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+7 \\
+8 \\
+13
+\end{bmatrix} = 5 \begin{bmatrix}
+1 \\
+2 \\
+3
+\end{bmatrix} - 2 \begin{bmatrix}
+0 \\
+1 \\
+2
+\end{bmatrix} + 1 \begin{bmatrix}
+2 \\
+0 \\
+2
+\end{bmatrix}
+$$
