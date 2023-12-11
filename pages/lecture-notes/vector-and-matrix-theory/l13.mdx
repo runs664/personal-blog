@@ -1,0 +1,48 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 13: Orthogonality and Projections
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Orthogonality of Four Subspaces
+
+<Callout type="info">
+1. Vektor Ortogonal memiliki dot-product bernilai nol $v^Tw = 0$. Maka $||v||^2 + ||w||^2 = ||v+w||^2 = ||v-w||^2$.
+2. Subspace $V$ dan $W$ ortogonal jika $\forall_{v \in V}\forall_{w \in W} (v^Tw=0)$.
+3. Row space dari $A$ ortogonal dengan nullspacenya. Column space ortogonal dengan left-nullspacenya.
+4. Pasangan dimensi memenuhi persamaan $r + (n - r) = n$ sementara pasangan lainnya memenuhi $r + (m - r) = m$.
+5. Row space dan nullspace adalah **komplemen** ortogonal, dalam artian setiap $x \in \mathbb{R}^n$ terpecah menjadi $x_{row} + x_{null}$.
+</Callout>
+
+<Callout>
+$$
+\text{Orthogonal Subspaces: } \forall_{v \in V}\forall_{w \in W} (v^Tw=0)
+$$
+</Callout>
+
+Dalam kehidupan nyata, misalkan dinding dan lantai. Mereka terlihat saling tegak lurus (orthogonal), namun sebenarnya TIDAK.
+
+<Callout type="warning">
+Tidak mungkin tegak lurus dua hal apabila $\texttt{dim}(V) + \texttt{dim}(W) > \texttt{dim(space)}$.
+</Callout>
+
+## Fundamental Theorem of Linear Algebra pt. 2
+
+<Callout type="info">
+$N(A)$ adalah komplemen ortogonal dari $C(A^T)$ dalam $\mathbb{R}^n$.
+
+$N(A^T)$ adalah komplemen ortogonal dari $C(A)$ dalam $\mathbb{R}^m$.
+</Callout>
+
+Setiap matriks dengan rank $r$ pasti memiliki $r \times r$ submatriks yang dapat diinvers.
+
+Sebuah baris dalam $A$ tidak bisa menjadi nullspace dari $A$. Vektor satu-satunya yang menjadi subspace di 2 ortogonal adalah vektor nol.
+
+<Callout>
+Jika sebuah vektor $v$ ortogonal terhadap dirinya sendiri, maka $v$ adalah vektor nol.
+</Callout>
+
+## Combining Bases from Subspaces
+

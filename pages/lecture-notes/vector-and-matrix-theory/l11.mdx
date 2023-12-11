@@ -1,0 +1,202 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 11: Independence, Basis, and Dimension
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Core Concepts
+
+<Callout type="info">
+1. **Independent Columns** dari $A$: Solusi satu-satunya $Ax = 0$ hanyalah jika $x = 0$. Nullspace nya $Z$ atau vektor nol.
+2. Independent vectors: Kombinasi yang membuat $c_1v_1 + \cdots + c_kv_k = 0$ hanya jika $c_1 = \cdots = c_k = 0$.
+3. Matriks dengan $m < n$ memiliki kolom yang dependen: Setidaknya terdapat $n - m$ kolom yang dependen $\rightarrow$ $n - m$ pivot, $m$ free variable.
+4. Vektor $v_1, \cdots, v_k$ span space $S$ jika $S = $ seluruh kombinasi yang mungkin dari $v$.
+5. Vektor $v_1, \cdots, v_k$ adalah basis dari $S$ jika mereka independent dan span $S$.
+6. Dimensi dari $S$ adalah jumlah vektor pada basisnya.
+    - Jika $A$ adalah matriks $4 \times 4$ dan dapat diinvers, maka kolomnya adalah basis untuk $\mathbb{R}^4$. Dimensi dari $\mathbb{R}^4$ adalah 4.
+
+Note: **SPAN** $\approx$ melingkupi
+</Callout>
+
+<Callout>
+$$
+\text{Setiap vektor dalam space adalah kombinasi unik dari basis vektor.}
+$$
+</Callout>
+
+<div className="centering">
+| no | essential ideas | meaning |
+| --- | --- | --- |
+| 1 | independent vectors | tidak ada vektor tambahan |
+| 2 | spanning a space | vektor paling sedikit yang cukup untuk menghasilkan vektor lain |
+| 3 | basis | tidak lebih dan tidak kurang |
+| 4 | dimension | jumlah vektor pada basis |
+</div>
+
+## Linear Independence
+
+<Callout type="info">
+**DEFINITION** Kolom dari $A$ adalah *linearly independent* jika solusi satu-satunya untuk $Ax = 0$ adalah $x = 0$. **Tidak ada kombinasi lain dari $Ax$ yang memberikan vektor nol**.
+</Callout>
+
+<Callout>
+**Pigeon Hole Principle**
+
+Jika terdapat lebih dari $n$ vektor pada $\mathbb{R}^n$, maka pasti ada vektor yang dependent.
+</Callout>
+
+Misalkan terdapat matriks 7 kolom yang masing-masing nya memiliki 5 komponen. Kolom-kolom matriks tersebut pasti ada yang dependent, 2 atau lebih. Rank dari $A$ tidak akan melebihi 5. $Ax = 0$ paling tidak memiliki $7-5=2$ free variables. Sehingga memiliki non-trivial (zero) solusi.
+
+## Vector that Span a Subspace
+
+<Callout type="info">
+**DEFINITION** Vektor $v_1, \cdots, v_k$ *span* space $S$ jika setiap vektor $b$ pada $S$ dapat ditulis sebagai kombinasi linear dari $v_1, \cdots, v_k$.
+</Callout>
+
+Contoh:
+
+1. $v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ dan $v_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ span dua-dimensi secara utuh $\mathbb{R}^2$.
+2. $v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ dan $v_2 = \begin{bmatrix} 2 \\ 0 \end{bmatrix}$ span garis lurus pada $\mathbb{R}^2$.
+3. $v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$, $v_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$, dan $v_3 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ span seluruh $\mathbb{R}^2$.
+
+<Callout>
+Kombinasi dari **baris** menghasilkan **row space**
+</Callout>
+
+<Callout type="info">
+**DEFINITION** Row space dari matriks, adalah subspace dari $\mathbb{R}^n$ yang dihasilkan oleh baris-baris dari matriks tersebut.
+<Callout>
+Row space dari $A$ adalah kolom space dari $A^T = C(A^T)$
+</Callout>
+</Callout>
+
+Contoh:
+
+Deskripsikan column space dan row space dari matriks $A$ berikut.
+
+$$
+A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 7 & 5 \end{bmatrix}
+$$
+
+Transpose dari $A$ adalah
+
+$$
+A^T = \begin{bmatrix} 1 & 4 \\ 2 & 7 \\ 3 & 5 \end{bmatrix}
+$$
+
+Column space dari $A$ adalah sebuah bidang pada $\mathbb{R}^2$ yang dihasilkan oleh kolom-kolom dari $A$. Row space dari $A$ adalah sebuah bidang pada $\mathbb{R}^3$ yang dihasilkan oleh baris-baris dari $A$.
+
+**Same numbers, different vectors, different spaces**
+
+## A Basis for a Vector space
+
+Dua vektor tidak akan dapat span $\mathbb{R}^3$, meskipun mereka independen. Empat vektor tidak akan independen pada $\mathbb{R}^3$, meskipun mereka span $\mathbb{R}^3$. Basis adalah "nilai yang tepat".
+
+<Callout type="info">
+**DEFINITION** Basis dari vector space adalah urutan vektor yang memenuhi dua properti:
+<Callout>
+1. Vektor-vektor tersebut **linearly independent**.
+2. Vektor-vektor tersebut **span space**.
+</Callout>
+</Callout>
+
+Pivot kolom dari $A$ adalah basis dari kolom space dari $A$. Begitu pula pivot dalam bentuk $\texttt{rref}$ dari $A$.
+
+Contoh
+
+Tentukan basis dari matriks berikut:
+
+$$
+R = \begin{bmatrix}
+1 & 2 & 0 & 3\\
+0 & 0 & 1 & 4\\
+0 & 0 & 0 & 0
+\end{bmatrix}
+$$
+
+Kolom 1 dan 3 adalah pivot, mereka adalah basis untuk column space $R$. Jika dalam bentuk persamaan $Rx = b$, bentuk $b$ adalah $\begin{bmatrix} x & y & 0 \end{bmatrix}$. Sehingga $C(R)$ adalah bidang $xy$ didalam bidang tiga dimensional $xyz$. 
+
+Row space dari $R$ adalah subspace dari $\mathbb{R}^4$!
+
+Bila diperhatikan, kolom 1 dan 3 memang basis. Namun benar pula jika kolom 2 dan 3 adalah basis. Mengapa hal tersebut bisa terjadi?
+
+## Dimension of a Vector space
+
+<Callout type="info">
+Jika $v_1, \cdots, v_m$ dan $w_1, \cdots, w_n$ adalah basis untuk space $S$, maka $m = n$
+</Callout>
+
+<Callout type="info">
+**DEFINITION** Dimensi dari space $S$ adalah jumlah vektor pada basisnya. Dimensi dari $\mathbb{R}^n$ adalah $n$.
+</Callout>
+
+### Bases for Matrix Spaces and Function Spaces
+
+<Callout type="info">
+**Matrix Spaces** Vector space $M$ yang berisi seluruh kemungkinan $2 \times 2$ matriks. Basis dari $M$ adalah matriks-matriks berikut:
+
+$$
+A_{1}, A_{2}, A_{3}, A_{4} = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+Kombinasi dari 4 matriks tersebut dapat membentuk matriks apapun pada $M$.
+
+$$
+c_1A_1 + c_2A_2 + c_3A_3 + c_4A_4 = \begin{bmatrix} c_1 & c_2 \\ c_3 & c_4 \end{bmatrix} = A
+$$
+</Callout>
+
+- Dimensi dari seluruh $n \times n$ matriks adalah $n^2$.
+- Dimensi dari matriks upper triangular adalah $n(n+1)/2$.
+    Mengapa demikian? 
+
+    Upper triangular matriks membutuhkan nilai non zero pada seluruh diagonal atau di atasnya. 
+
+    Kunci: Perhatikan entri matriks tersebut!
+
+    Matriks triangular jika diperhatikan pola dari ujung ke diagonal, akan didapatkan:
+
+    $$
+    1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2} = \frac{1}{2}n^2 + \frac{1}{2}n
+    $$
+    
+    Dimensi dari matriks triangular adalah $n(n+1)/2$.
+- Dimensi dari matriks diagonal ataupun indentitas adalah $n$.
+- Dimensi dari matriks symmetric adalah $n(n+1)/2$.
+
+<Callout type="info">
+**Function Spaces** Vector space $F$ yang berisi seluruh kemungkinan fungsi.
+</Callout>
+
+Contoh dalam persamaan diferensial:
+
+| form | solution |
+| --- | --- |
+| $y'' + y = 0$ | $y = c_1 \cos x + c_2 \sin x$ |
+| $y'' = 0 $ | $y = c_1x + c_2$ |
+| $y'' = y $ | $y = c_1 e^x + c_2 e^{-x}$ |
+
+Solusi untuk $y'' = -y$ memiliki 2 basis fungsi: $\cos x$ dan $\sin x$. Solusi untuk $y'' = 0$ memiliki 2 basis fungsi: $x$ dan $1$. Solusi untuk $y'' = y$ memiliki 2 basis fungsi: $e^x$ dan $e^{-x}$. Itu adalah "Nullspace" dari turunan kedua! Dimensi masing-masingnya adalah 2 (second-order).
+
+Perhatikan bahwa solusi dari $y'' = 2$ tidak membentuk subspace, sisi kanan $b = 2$ tidak bernilai nol. Particular solutionnya adalah $y(x) = x^2$. Sementara complete solutionnya adalah $y(x) = x^2 + c_1x + c_2$. 
+
+<Callout type="info">
+Differential Equation bersifat **linear**!
+</Callout>
+
+Terakhir, $Z$ memiliki dimensi nol. **Empty set** adalah basis untuk $Z$. $Z$ tidak boleh dijadikan basis karena merusak *linear independence*.
+
+## Review of the Key ideas
+
+<Callout type="info">
+1. Kolom dari $A$ adalah *linearly independent* jika solusi satu-satunya untuk $Ax = 0$ adalah $x = 0$.
+2. Vektor $v_1, \cdots, v_k$ *span* space $S$ jika setiap vektor $b$ pada $S$ dapat ditulis sebagai kombinasi linear dari $v_1, \cdots, v_k$.
+3. Basis dari vector space adalah urutan vektor yang memenuhi dua properti:
+    1. Vektor-vektor tersebut **linearly independent**.
+    2. Vektor-vektor tersebut **span space**.
+4. Dimensi dari space $S$ adalah jumlah vektor pada basisnya. Dimensi dari $\mathbb{R}^n$ adalah $n$.
+5. Pivot columns adalah basis dari column space. The dimension is $r$.
+</Callout>
+

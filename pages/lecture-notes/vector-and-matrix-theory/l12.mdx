@@ -1,0 +1,38 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 12: Four Fundamental Subspaces
+
+Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/resources/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/)
+
+---
+
+## Dimensions of the Four Subspaces
+
+<Callout type="info">
+1. Column space $C(A)$ dan row space $C(A^T)$ memiliki dimensi yang sama (rank sama).
+2. Nullspace $N(A)$ memiliki dimensi $n - r$ sementara nullspace $N(A^T)$ memiliki dimensi $m - r$.
+3. Eliminasi menghasilkan basis untuk row space dan nullspace dari $A$: yang sama untuk $R$.
+4. Eliminasi seringkali mengganti column space dan left nullspace (dimensi tidak berubah).
+5. Rank dari matriks: $A = uv^T =$ kolom dikali baris : $C(A)$ memiliki basis $u$, $C(A^T)$ memiliki basis $v$.
+</Callout>
+
+## Four Fundamental Subspaces
+
+| no | subspace | subspace of | dimension |
+| -- | -------- | ----------- | --------- |
+| 1  | row space $C(A^T)$ | $\mathbb{R}^n$ | $r$ |
+| 2  | column space $C(A)$ | $\mathbb{R}^m$ | $r$ |
+| 3  | nullspace $N(A)$ | $\mathbb{R}^n$ | $n - r$ |
+| 4  | left nullspace $N(A^T)$ | $\mathbb{R}^m$ | $m - r$ |
+
+### The Big Picture
+
+![Four Fundamental Subspaces](/assets/tvm/l121.jpeg)
+
+## Fundamental Theorem of Linear Algebra
+
+<Callout type="info">
+Column space dan row space sama-sama memiliki dimensi $r$.
+
+Nullspace memiliki dimensi $n - r$ dan $m - r$.
+</Callout>

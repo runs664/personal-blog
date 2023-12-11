@@ -1,7 +1,7 @@
 {
     
     "rref": {
-        "title": "[PRE] rref Interpretation"
+        "title": "Reduced Row Echelon Form"
     },
     "l8": {
         "title": "Lecture 8: Vector Spaces and Subspaces"
@@ -11,5 +11,17 @@
     },
     "l10": {
         "title": "Lecture 10: The Complete Solution"
+    },
+    "l11": {
+        "title": "Lecture 11: Independence, Basis, and Dimension"
+    },
+    "l12": {
+        "title": "Lecture 12: The Four Fundamental Subspaces"
+    },
+    "l13": {
+        "title": "Lecture 13: Orthogonality and Projections"
+    },
+    "exam": {
+        "title": "Exam Problems"
     }
 }

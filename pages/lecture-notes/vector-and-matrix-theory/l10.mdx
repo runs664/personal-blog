@@ -41,18 +41,6 @@ $$
 
 Contoh 
 
-{/* 
-1293
-1161
-0132
-
-=
-
-5
-5
-0
-*/}
-
 Terdapat $Ax = b$:
 
 $$
@@ -161,171 +149,84 @@ x&= \underbrace{\begin{bmatrix}
 \end{align*}
 $$
 
-### Exam Problem
-
-$$
-\text{\textbf{The Complete Solution to $Ax = b$ (45 points)}}
-$$
-
-Suppose that we have a matrix $A$ given by:
-
-$$
-A = \begin{bmatrix}
-v_{1}^T & v_{2}^T & v_{3}^T & v_{4}^T & v_{5}^T
-\end{bmatrix}
-$$
-
-where $v_1, v_2, v_3, v_4, v_5$ are the columns of $A$ defined as follows:
-
-$$
-\begin{align*}
-v_1 &= \begin{bmatrix} 1\beta_5 & 3\beta_5 & 4\beta_5\end{bmatrix}\\
-v_2 &= \begin{bmatrix} 2\beta_4 & 6\beta_4 & 8\beta_4\end{bmatrix}\\
-v_3 &= \begin{bmatrix} 3\beta_3 & 9\beta_3 & 1\beta_3\end{bmatrix}\\
-v_4 &= \begin{bmatrix} 1\beta_2 & 2\beta_2 & 3\beta_2\end{bmatrix}\\
-v_5 &= \begin{bmatrix} 2\beta_1 & 5\beta_1 & 7\beta_1\end{bmatrix}
-\end{align*}
-$$
-
-where $\beta_1, \beta_2, \beta_3, \beta_4, \beta_5$ are arbitrary natural numbers from Nomor Induk Universitas.
-
-1. Determine the Reduced Row Echelon Form of $A$.
-2. Determine the basis of $C(A)$ from the columns of $A$ and what is the dimension of $C(A)$?
-3. Determine the Nullspace $N(A)$ from the columns of $A$ and what is the dimension of $N(A)$?
-4. Suppose that you are given the following vector $b_i$:
-    - $b_1 = \begin{bmatrix} 1\beta_2 & 4\beta_2 & 5\beta_2 \end{bmatrix}$
-    - $b_2 = \begin{bmatrix} 2\beta_1 & 4\beta_1 & 5\beta_1 \end{bmatrix}$
-
-    Which $b_i$ leads to solvable $Ax = b_i$? and why?
-5. Determine the complete solution $x = x_p + x_n$ for $Ax = b$ using the correct $b_i$ from the previous question.
-
-Answer:
-
-<Callout type="error">
-**Konstanta $\beta_i$ irrelevan dengan solusi soal!**
-
-Perhatikan contoh berikut:
-
-$$
-\begin{align*}
-\text{Column}_a &= u(\beta_i)\text{column}_b + v(\beta_i)\text{column}_c\\
-\text{Column}_a &= \beta_i (u\ \text{column}_b + v\ \text{column}_c)
-\end{align*}
-$$
+<Callout type="info">
+Setiap matriks $A$ dengan full column rank $r = n$ memiliki properti:
+1. Setiap kolom dari $A$ memiliki pivot.
+2. Tidak ada free variable sehingga tidak ada special solution.
+3. Nullspace $N(A)$ hanya memiliki satu vektor nol.
+4. Jika $Ax = b$ memiliki solusi, maka hanya itulah solusinya.
+5. Matriks persegi $A$ dapat diinvers jika dan hanya jika $A$ memiliki full column rank $r = n$.
 </Callout>
 
-1. Bentuk matriks $A$ adalah sebagai berikut:
+<Callout type="info">
+Setiap matriks $A$ dengan full row rank $r = m$ memiliki properti:
+1. Setiap baris dari $A$ memiliki pivot. $R$ tidak memiliki baris nol.
+2. Setiap $Ax = b$ **memiliki solusi untuk setiap $b$.**
+3. Column space $C(A)$ adalah $\mathbb{R}^m$.
+4. Ada $n - r = n - m$ special solution dalam nullspace $N(A)$.
+5. Nullspace dari $A^T$ adalah vektor nol.
+</Callout>
+
+## Possibilites for Linear Equations
+
+<div className="centering">
+| Parameter 1 | Parameter 2 | Type | Solution |
+| ----------- | ----------- | ---- | -------- |
+| $r = m$ | $r = n$ | Persegi, dapat diinvers | Memiliki 1 solusi |
+| $r = m$ | $r < n$ | Pendek, lebar | Memiliki $\infty$ solusi |
+| $r < m$ | $r = n$ | Tinggi, tipis | Memiliki 0 atau 1 solusi |
+| $r < m$ | $r < n$ | Tidak full rank | Memiliki 0 atau $\infty$ solusi |
+</div>
+
+## Review of the Key Ideas
+
+<Callout type="info">
+1. Rank $r$ adalah jumlah pivot di $R$. Matriks $R$ memiliki $m-r$ baris nol.
+2. $Ax = b$ dapat diselesaikan jika dan hanya jika $m - r$ baris terakhir menghasilkan $0 = 0$.
+3. Particulas solution $x_p$ memiliki seluruh free variable bernilai nol.
+4. Pivot variable ditentukan setelah memilih free variable.
+5. Full column rank $r = n$ berarti tidak ada variabel bebas: 1 atau tidak ada solusi.
+6. Full row rank $r = m$ berarti 1 solusi jika $m = n$ dan $\infty$ solusi jika $m < n$.
+</Callout>
+
+## Worked Examples
+
+Misalkan $3 \times 4$ matriks $A$ memiliki vektor $s = \begin{bmatrix} 2 & 3 & 1 & 0 \end{bmatrix}^T$ sebagai satu-satunya special solution untuk $Ax = 0$.
+1. Apakah rank dari $A$ dan solusi lengkap $Ax = 0$?
+2. Bagaimana bentuk $\text{rref}(A)$?
+3. Apakah $Ax = b$ memiliki solusi untuk setiap $b$?
+
+**Jawab**:
+
+1. $n - r = 3 \implies 4 - r = 1 \implies r = 3$. $A$ memiliki full row rank.
+2. Perhatikan vektor $s$: [lihat pembahasan](/lecture-notes/vector-and-matrix-theory/l9#pivot-variables-and-free-variables-in-r)
     $$
-    A = \begin{bmatrix}
-    1 & 2 & 3 & 1 & 2\\
-    3 & 6 & 9 & 2 & 5\\
-    4 & 8 & 1 & 3 & 7
+    \begin{bmatrix}
+    2 \\
+    3 \\
+    1 \\
+    0
     \end{bmatrix}
+    \begin{matrix}
+    \text{A}_{13} = -2 \\
+    \text{A}_{23} = -3 \\
+    \text{letak free variable} \\
+    \text{A}_{33} = 0
+    \end{matrix}
+    $$
+    Maka $\text{rref}(A)$ adalah
+
+    $$
     \begin{bmatrix}
-    \beta_5\\ \beta_4 \\ \beta_3 \\ \beta_2 \\ \beta_1
+    1 & 0 & -2 & 0 \\
+    0 & 1 & -3 & 0 \\
+    0 & 0 & 0 & 1
     \end{bmatrix}
     $$
+3. $Ax = b$ memiliki solusi untuk setiap $b$ karena $A$ memiliki full row rank dan $m < n$.
 
-    Bentuk rref nya adalah:
+Jika $Ax = b$ dan $Cx = b$ memiliki solusi lengkap yang sama, apakah berarti $A = C$?
 
-    $$
-    \text{rref}(A) = 
-    \begin{bmatrix}
-    1 & 2 & 0 & 0 & 1\\
-    0 & 0 & 1 & 0 & 0\\
-    0 & 0 & 0 & 1 & 1
-    \end{bmatrix}
-    $$
+**Jawab**: 
 
-    dengan matriks $E$:
-
-    $$
-    E = 
-    \begin{bmatrix}
-    8/11 & -3/11 & 3/11 \\
-    1/11 & 1/11 & -1/11 \\
-    3 & -1 & 0 
-    \end{bmatrix}
-    $$
-2. Basis dari $C(A)$ adalah kolom-kolom dari $A$ yang memiliki pivot, yaitu kolom 1, 3, dan 4. Sehingga basisnya adalah:
-
-    $$
-    \beta_5
-    \begin{bmatrix}
-    1\\ 3\\ 4
-    \end{bmatrix},
-    \beta_3
-    \begin{bmatrix}
-    3\\ 9\\ 1
-    \end{bmatrix},
-    \beta_2
-    \begin{bmatrix}
-    1\\ 2\\ 3
-    \end{bmatrix}
-    $$
-
-    Dimensi dari $C(A)$ adalah 3.
-3. Nullspace $N(A)$ adalah kolom-kolom dari $A$ yang tidak memiliki pivot, yaitu kolom 2 dan 5. Sehingga basisnya adalah:
-
-    $$
-    \beta_4
-    \begin{bmatrix}
-    2\\ 6\\ 8
-    \end{bmatrix},
-    \beta_1
-    \begin{bmatrix}
-    2\\ 5\\ 7
-    \end{bmatrix}
-    $$
-
-    Dimensi dari $N(A)$ adalah 2.
-4. Perhatikan bahwa $\text{rref}(A)$ memiliki 3 pivot, dan komponennya berdimensi tiga. Sehingga $Ax = b$ memiliki solusi unik untuk setiap kemungkinan $b$. Jadi, kedua $b_i$ dapat diselesaikan.
-5. Solusi lengkap dari $Ax = b$ adalah:
-    - Untuk $b_1$: $x = x_p + x_n$:
-
-        $$
-        \begin{align*}
-        [R \ b_1] = \begin{bmatrix}
-        1 & 2 & 0 & 0 & 1 & 2\\
-        0 & 0 & 1 & 0 & 0 & 0\\
-        0 & 0 & 0 & 1 & 1 & -1
-        \end{bmatrix}
-        \end{align*}
-        $$
-
-        $$
-        \begin{align*}
-        x &= x_p + x_n \\
-        x&= \underbrace{\begin{bmatrix}
-        2\\ 0\\ 0\\ -1\\ 0
-        \end{bmatrix}}_{x_p} + \underbrace{\beta_2\begin{bmatrix}
-        -2\\ 1\\ 0\\ 0\\ 0
-        \end{bmatrix} + \beta_1\begin{bmatrix}
-        -1\\ 0\\ 0\\ -1\\ 1
-        \end{bmatrix}}_{x_n}
-        \end{align*}
-        $$
-
-    - Untuk $b_2$: $x = x_p + x_n$:
-        $$
-        \begin{align*}
-        [R \ b_2] = \begin{bmatrix}
-        1 & 2 & 0 & 0 & 1 & -3/11\\
-        0 & 0 & 1 & 0 & 0 & 1/11\\
-        0 & 0 & 0 & 1 & 1 & 2
-        \end{bmatrix}
-        \end{align*}
-        $$
-
-        $$
-        \begin{align*}
-        x &= x_p + x_n \\
-        x&= \underbrace{\begin{bmatrix}
-        -3/11\\ 0\\ 1/11\\ 2\\ 0
-        \end{bmatrix}}_{x_p} + \underbrace{\beta_2\begin{bmatrix}
-        -2\\ 1\\ 0\\ 0\\ 0
-        \end{bmatrix} + \beta_1\begin{bmatrix}
-        -1\\ 0\\ 0\\ -1\\ 1
-        \end{bmatrix}}_{x_n}
-        \end{align*}
-        $$
+Jika $Ax = b$ dan $Cx = b$ memiliki solusi yang sama, maka $A$ dan $C$ memiliki bentuk yang sama dan nullspace yang sama. Jika kolom 1 dari $A$, $x = [1 \ 0 \dots \ 0]$ menyelesaikan $Ax = b$ lalu menyelesaikan $Cx = b$ pula, maka $A$ dan $C$ memiliki kolom 1 yang sama. Begitu pula kolom lainnya. $A = C$.
