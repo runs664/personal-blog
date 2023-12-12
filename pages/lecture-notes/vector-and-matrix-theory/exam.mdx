@@ -43,6 +43,8 @@ where $\beta_1, \beta_2, \beta_3, \beta_4, \beta_5$ are arbitrary natural number
 
     Which $b_i$ leads to solvable $Ax = b_i$? and why?
 5. Determine the complete solution $x = x_p + x_n$ for $Ax = b$ using the correct $b_i$ from the previous question.
+6. Gunakan hasil dari soal nomor 2 untuk mencari matriks proyeksi $P$ ke $C(A)$.
+7. Tentukan vektor proyeksi dari $b_i$ ke $C(A)$, yaitu $Pb_i$.
 
 Answer:
 
@@ -174,3 +176,233 @@ $$
         \end{bmatrix}}_{x_n}
         \end{align*}
         $$
+
+## Least Squares Approximation and Gram-Schmidt Process
+
+<Callout>
+$$
+\text{\textbf{Least Squares Approximation and Gram-Schmidt Process (40 points)}}
+$$
+</Callout>
+
+Consider a simple heating system consisting of a voltage source, a coil, and cooling liquid.
+
+**Basic principle**: The coil is connected to the voltage source $v(t)$ which delivers electric power to heat the coil to temperature $y(t)$. The coil submerged in the cooling liquid with temperature $r(t)$. The electric energy is proportional to $v^2(t)$.
+
+You want to model the heating system in the following form:
+
+$$
+y(t) = av^2(t) + by(t - 1) + cr(t - 1)
+$$
+
+where $a, b, c$ are unknown constants.
+
+1. [8 points] Consider you have taken the following measurements for every 0.5 second for 2 seconds:
+
+    | $t$ (second) | $v(t)$ (volt) | $y(t)$ (degree Celcius) | $r(t)$ (degree Celcius) |
+    |:------------:|:-------------:|:-----------------------:|:-----------------------:|
+    | $0$ | $v(0)$ | $y(0)$ | $r(0)$ |
+    | $0.5$ | $v(0.5)$ | $y(0.5)$ | $r(0.5)$ |
+    | $1$ | $v(1)$ | $y(1)$ | $r(1)$ |
+    | $1.5$ | $v(1.5)$ | $y(1.5)$ | $r(1.5)$ |
+    | $2$ | $v(2)$ | $y(2)$ | $r(2)$ |
+
+    Show that this problem can be written in the form of $Y = Ax$ where $Y$ is the vector of $y(t)$, $A$ is the matrix of $v^2(t)$, $y(t - 1)$, and $r(t - 1)$, and $x$ is the vector of $a$, $b$, and $c$.
+
+2. [6 points] Consider you are now given numerical data as follows.
+
+    Determine the matrix $A$ in equation $Y = Ax$ and calculate the approximation of $x$ using the least squares method!
+
+    | $t$ (second) | $v(t)$ (volt) | $y(t)$ (degree Celcius) | $r(t)$ (degree Celcius) |
+    |:------------:|:-------------:|:-----------------------:|:-----------------------:|
+    | $0$ | $20\beta_1$ | $30\beta_2$ | $30\beta_3$ |
+    | $0.5$ | $20.5\beta_1$ | $32\beta_2$ | $30.1\beta_3$ |
+    | $1$ | $19.5\beta_1$ | $31.5\beta_2$ | $30.5\beta_3$ |
+    | $1.5$ | $18.5\beta_1$ | $31\beta_2$ | $31.2\beta_3$ |
+    | $2$ | $19\beta_1$ | $30.5\beta_2$ | $31.3\beta_3$ |
+
+3. [6 points] Determine the projection $Y$ onto $C(A)$ and what is the projection matrix $P$ in this case?
+
+4. [5 points] What is the squared error incurred by the approximate solution $x$?
+
+5. [8 points] Perform $QR$ decomposition using Gram-Schmidt process for the matrix $A$ above.
+
+6. [7 points] Repeat the last square appproximation using the $QR$ decomposition instead of $A$ to determine $x$. What is the projection matrix in this case?
+
+Answer:
+
+1. Bentuk matriks $A$ adalah sebagai berikut:
+
+    $$
+    A = \begin{bmatrix}
+    v^2(t) & y(t - 1) & r(t - 1)
+    \end{bmatrix}
+    $$
+
+    Bentuk vektor $Y$ adalah sebagai berikut:
+
+    $$
+    Y = \begin{bmatrix}
+    y(t)
+    \end{bmatrix}
+    $$
+
+    Bentuk vektor $x$ adalah sebagai berikut:
+
+    $$
+    x = \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    $$
+
+    Sehingga, $Y = Ax$:
+
+    $$
+    \begin{bmatrix}
+    y(t)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    v^2(t) & y(t - 1) & r(t - 1)
+    \end{bmatrix}
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    $$
+
+2. Bentuk matriks $A$ adalah sebagai berikut:
+
+    $$
+    A = \begin{bmatrix}
+    420.25\beta_1^2 & 30\beta_2 & 30\beta_3\\
+    380.25\beta_1^2 & 32\beta_2 & 30.1\beta_3\\
+    342.25\beta_1^2 & 31.5\beta_2 & 30.5\beta_3\\
+    361\beta_1^2 & 31\beta_2 & 31.2\beta_3\\
+    \end{bmatrix}
+    $$
+
+    Bentuk vektor $Y$ adalah sebagai berikut:
+
+    $$
+    Y = \begin{bmatrix}
+    32\beta_2\\
+    31.5\beta_2\\
+    31\beta_2\\
+    30.5\beta_2
+    \end{bmatrix}
+    $$
+
+    Bentuk vektor $x$ adalah sebagai berikut:
+
+    $$
+    x = \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    $$
+
+    Sehingga, $Y = Ax$:
+
+    $$
+    \begin{bmatrix}
+    32\beta_2\\
+    31.5\beta_2\\
+    31\beta_2\\
+    30.5\beta_2
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    420.25\beta_1^2 & 30\beta_2 & 30\beta_3\\
+    380.25\beta_1^2 & 32\beta_2 & 30.1\beta_3\\
+    342.25\beta_1^2 & 31.5\beta_2 & 30.5\beta_3\\
+    361\beta_1^2 & 31\beta_2 & 31.2\beta_3\\
+    \end{bmatrix}
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    $$
+
+    Kita dapat faktorkan dulu nilai $\beta_i$ karena tidak relevan
+
+    $$
+    \begin{bmatrix}
+    32\\
+    31.5\\
+    31\\
+    30.5
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    420.25 & 30 & 30\\
+    380.25 & 32 & 30.1\\
+    342.25 & 31.5 & 30.5\\
+    361 & 31 & 31.2
+    \end{bmatrix}
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    $$
+
+    Persamaan $Y = Ax$ jelas tidak dapat diselesaikan, oleh karena itu kedua sisi persamaan dikalikan dengan $A^T$.
+
+    $$
+    \begin{bmatrix}
+    420.25 & 380.25 & 342.25 & 361\\
+    30 & 32 & 31.5 & 31\\
+    30 & 30.1 & 30.5 & 31.2
+    \end{bmatrix}
+    \begin{bmatrix}
+    420.25 & 30 & 30\\
+    380.25 & 32 & 30.1\\
+    342.25 & 31.5 & 30.5\\
+    361 & 31 & 31.2
+    \end{bmatrix}
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    420.25 & 380.25 & 342.25 & 361\\
+    30 & 32 & 31.5 & 31\\
+    30 & 30.1 & 30.5 & 31.2
+    \end{bmatrix}
+    \begin{bmatrix}
+    32\\
+    31.5\\
+    31\\
+    30.5
+    \end{bmatrix}
+    $$
+
+    Sehingga, kita dapatkan:
+
+    $$
+    \begin{bmatrix}
+    568656.1875 & 46747.375 & 45754.85\\
+    46747.375 & 3877.25 & 3791.15\\
+    45754.85 & 3791.15 & 3709.7
+    \end{bmatrix}
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    47046.125\\
+    3890\\
+    3805.25
+    \end{bmatrix}
+    $$
+
+    Dengan menggunakan metode eliminasi Gauss, kita dapatkan:
+
+    $$
+    \hat{x} = 
+    \begin{bmatrix}
+    a\\ b\\ c
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    -9.88285\\
+    -41.25113\\
+    165.07612
+    \end{bmatrix}
+    $$
