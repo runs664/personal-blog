@@ -6,3 +6,422 @@ Based on [Introduction to Linear Algebra by Gilbert Strang](https://ocw.mit.edu/
 
 ---
 
+## Least Squares Approximations
+
+<Callout type="info">
+1. $$\fbox{$A^TA\hat{x} = A^Tb$}$$ memberikan proyeksi $p = A\hat{x}$ dari $b$ ke column space $A$.
+2. Jika $Ax = b$ tidak memiliki solusi, maka $\hat{x}$ memberikan solusi terbaik: $||b - A\hat{x}||$ minimal.
+3. Mengatur turunan parsial dari $E = ||b - A\hat{x}||^2$ menjadi nol $\left ( \displaystyle\frac{\partial E}{\partial x_i} = 0 \right )$ memberikan $$\fbox{$A^TA\hat{x} = A^Tb$}$$
+4. Untuk mencocokkan poin $(t_1, b_1), (t_2, b_2), \dots, (t_m, b_m)$ dengan garis lurus, $A$ harus memiliki kolom $(1, \cdots, 1)$ dan $(t_1, \cdots, t_m)$.
+5. Jika $A^TA$ merupakan $2 \times 2$ matriks $$\begin{bmatrix} m & \sum t_i \\ \sum t_i & \sum t_i^2 \end{bmatrix}$$ maka $$\fbox{$\hat{x} = \displaystyle\frac{1}{m\sum t_i^2 - (\sum t_i)^2} \begin{bmatrix} \sum t_i^2 & -\sum t_i \\ -\sum t_i & m \end{bmatrix} \begin{bmatrix} \sum b_i \\ \sum t_ib_i \end{bmatrix}$}$$
+</Callout>
+
+Dalam kasus tertentu, definisi tak resmi oleh Strang dapat membantu kita memahami konsep ini.
+
+<Callout>
+Jika $Ax = b$ tidak memilik solusi, **kalikan dengan $A^T$** dan **selesaikan $A^TA\hat{x} = A^Tb$**!
+</Callout>
+
+Contoh
+
+Tentukan garis terdekat dari titik-titik $(0, 6), (1, 0), (2, 0)$.
+
+Jawab
+
+Tidak ada garis lurus $y = cx + d$ yang melewati ketiga titik tersebut. Kita berusaha mendekatinya dengan error terkecil.
+
+Pertama, matriks dapat dirancang terlebih dahulu, persamaan $y = cx + d$ memiliki $c\cdot x$ sebagai kolom pertama dan $d \cdot 1$ sebagai kolom kedua.
+
+$$
+A = \begin{bmatrix} 0 & 1 \\ 1 & 1 \\ 2 & 1 \end{bmatrix},
+
+x = \begin{bmatrix} c \\ d \end{bmatrix},
+
+b = \begin{bmatrix} 6 \\ 0 \\ 0 \end{bmatrix}
+$$
+
+Dilihat dari matriks $A$ dan $b$, jelas tidak ada column space dari $A$ yang memberikan $b$. Kita akan mencari proyeksi $p$ dari $b$ ke column space $A$.
+
+$$
+A^TA = \begin{bmatrix} 5 & 3 \\ 3 & 3 \end{bmatrix},
+
+A^Tb = \begin{bmatrix} 0 \\ 6 \end{bmatrix}
+$$
+
+$$
+A^TA\hat{x} = A^Tb \implies \begin{bmatrix} 5 & 3 \\ 3 & 3 \end{bmatrix} \begin{bmatrix} c \\ d \end{bmatrix} = \begin{bmatrix} 0 \\ 6 \end{bmatrix}
+$$
+
+$$
+\text{sistem}\begin{cases}
+5c + 3d = 0 \\
+3c + 3d = 6
+\end{cases}
+$$
+
+Didapatkanlah nilai $\hat{x}$ yang merupakan proyeksi dari $b$ ke column space $A$.
+
+$$
+\hat{x} = \begin{bmatrix} c \\ d \end{bmatrix} = \begin{bmatrix} -3 \\ 5 \end{bmatrix}
+$$
+
+Persamaan $y = cx + d$ yang paling mendekati ketiga titik tersebut adalah $y = -3x + 5$.
+
+## Orthonormal Bases and Gram-Schmidt
+
+<Callout type="info">
+1. Kolom $q_1, q_2, \cdots, q_n$ orthonormal jika $q_i^Tqj = \begin{cases} 1 & i = j \\ 0 & i \neq j \end{cases}$. Maka $Q^TQ = I$.
+2. Jika $Q$ persegi, maka $QQ^T = I$ dan $Q^{-1} = Q^T$. $Q$ adalah matriks ortogonal.
+3. Least square solution untuk $Qx = b$ adalah $\hat{x} = Q^Tb$. Proyeksi dari $b$: $p = QQ^Tb = Pb$.
+4. Gram-Schmidt process mengubah kolom independen $a_i$ menjadi orthonormal $q_i$. Dioperasikan dengan $q_1 = a_1 / ||a_1||$.
+5. $q_i$ adalah $(a - \text{proyeksi } a \text{ ke } q_1, \cdots, q_{i-1})$ dibagi dengan panjangnya. $p_i = (a_i^Tq_1)q_1 + \cdots + (a_i^Tq_{i-1})q_{i-1}$.
+6. Setiap $a_i$ adalah kombinasi dari $q_1$ hingga $q_i$. Maka $A = QR$: ortogonal $Q$ dan upper triangular $R$.
+</Callout>
+
+$Q$ tidak harus berbentuk persegi.
+
+<Callout>
+$$
+Q^TQ = \begin{bmatrix} \vdots & \vdots & & \vdots \\ q_1 & q_2 & \cdots & q_n \\ \vdots & \vdots & & \vdots \end{bmatrix} \begin{bmatrix} \cdots & q_1^T & \cdots \\ \cdots & q_2^T & \cdots \\ & \vdots & \\ \cdots & q_n^T & \cdots \end{bmatrix} = \begin{bmatrix} 1 & 0 & \cdots & 0 \\ 0 & 1 & \cdots & 0 \\ \vdots & \vdots & & \vdots \\ 0 & 0 & \cdots & 1 \end{bmatrix}
+$$
+</Callout>
+
+**Jika $Q$ persegi, maka $Q^{-1} = Q^T$.**
+
+### Rotasi
+
+$$
+Q = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}
+$$
+
+$$
+Q^TQ = \begin{bmatrix} \cos \theta & \sin \theta \\ -\sin \theta & \cos \theta \end{bmatrix} \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+$$
+Q^{-1} = Q^T = \begin{bmatrix} \cos \theta & \sin \theta \\ -\sin \theta & \cos \theta \end{bmatrix}
+$$
+
+### Permutasi
+
+Matriks berikut mengganti urutan kolom.
+
+$$
+Q = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix}
+
+\begin{bmatrix} x \\ y \\ z \end{bmatrix}
+
+= \begin{bmatrix} y \\ z \\ x \end{bmatrix}
+$$
+
+$$
+Q^TQ = \begin{bmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+$$
+Q^{-1} = Q^T = \begin{bmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}
+$$
+
+<Callout>
+**Setiap matriks permutasi adalah matriks orthogonal (persegi yang orthonormal).**
+</Callout>
+
+### Refleksi
+
+Jika $u$ adalah unit vektor apapun, set $Q = I - 2uu^T$. Perhatikan bahwa $uu^T$ adalah matriks namun $u^Tu$ adalah skalar sebesar $||u||^2 = 1$. Maka $Q^T$ dan $Q^{-1}$ sama dengan $Q$:
+
+$$
+Q^T = (I - 2uu^T)^T = I - 2(uu^T)^T = I - 2uu^T = Q
+$$
+
+dan
+
+$$
+\begin{align*}
+Q^TQ &= (I - 2uu^T)(I - 2uu^T) \\
+&= I - 2uu^T - 2uu^T + 4uu^Tuu^T \\
+&= I - 4uu^T + 4(u^Tu)uu^T \\
+&= I - 4uu^T + 4uu^T \\
+&= I
+\end{align*}
+$$
+
+Matriks tersebut simetris dan ortogonal, jika dikuadratkan maka akan menghasilkan identitas $I$. Dicerminkan dua kali akan kembali ke posisi semula.
+
+Rotasi, refleksi, dan permutasi menjaga panjang vektor. Sehingga perkalian apapun dengan matriks ortogonal $Q$ tidak akan mengubah panjang vektor dan sudut antar vektor.
+
+Proof:
+
+$$
+\begin{align*}
+||Qx||^2 &= (Qx)^T(Qx) \\
+&= x^TQ^TQx \\
+&= x^Tx \\
+&= ||x||^2
+\end{align*}
+$$
+
+### Projections Using Orthonormal Bases
+
+Solusi Least Square untuk $Qx = b$ adalah $\hat{x} = Q^Tb$. Proyeksi dari $b$: $p = QQ^Tb = Pb$.
+
+<Callout type="info">
+$b = q_1(q_1^Tb) + q_2(q_2^Tb) + \cdots + q_n(q_n^Tb)$
+</Callout>
+
+Transformasi: $QQ^T = I$ adalah pondasi untuk fourier series dan bentuk transformasi lainnya!
+
+Contoh
+
+Kolom dari matriks orthogonal $Q$ adalah orthonormal vektor $q_1, q_2, q_3$:
+
+$$
+Q = \frac{1}{3} \begin{bmatrix} -1 & 2 & 2 \\ 2 & -1 & 2 \\ 2 & 2 & -1 \end{bmatrix}
+$$
+
+Proyeksi terpisah dari $b = (0, 0, 1)$ ke $q_1, q_2, q_3$ adalah:
+
+$$
+\begin{align*}
+p_1 &= q_1(q_1^Tb) \\&= \frac{1}{3} \begin{bmatrix} -1 \\ 2 \\ 2 \end{bmatrix} \left ( \frac{1}{3} \begin{bmatrix} -1 & 2 & 2 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right ) \\&= \frac{1}{3} \begin{bmatrix} -1 \\ 2 \\ 2 \end{bmatrix} \left ( \frac{2}{3} \right ) = \frac{1}{9} \begin{bmatrix} -2 \\ 4 \\ 4 \end{bmatrix} \\
+p_2 &= q_2(q_2^Tb) \\&= \frac{1}{3} \begin{bmatrix} 2 \\ -1 \\ 2 \end{bmatrix} \left ( \frac{1}{3} \begin{bmatrix} 2 & -1 & 2 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right ) \\&= \frac{1}{3} \begin{bmatrix} 2 \\ -1 \\ 2 \end{bmatrix} \left ( \frac{2}{3} \right ) = \frac{1}{9} \begin{bmatrix} 4 \\ -2 \\ 4 \end{bmatrix} \\
+p_3 &= q_3(q_3^Tb) \\&= \frac{1}{3} \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix} \left ( \frac{1}{3} \begin{bmatrix} 2 & 2 & -1 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \right ) \\&= \frac{1}{3} \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix} \left ( \frac{-1}{3} \right ) = \frac{1}{9} \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+Ingat bahwa $b = \sum p_i$.
+
+$$
+\begin{align*}
+b &= p_1 + p_2 + p_3 \\
+&= \frac{1}{9} \begin{bmatrix} -2 \\ 4 \\ 4 \end{bmatrix} + \frac{1}{9} \begin{bmatrix} 4 \\ -2 \\ 4 \end{bmatrix} + \frac{1}{9} \begin{bmatrix} -2 \\ -2 \\ 1 \end{bmatrix} \\
+&= \frac{1}{9} \begin{bmatrix} 0 \\ 0 \\ 9 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+## The Gram-Schmidt Process
+
+Dimulai dengan memilih independen vektor $v_i$ dan mengubahnya menjadi orthonormal $q_i$. Caranya adalah dengan menguranginya dengan proyeksinya lalu dibagi dengan panjangnya.
+
+Ambil contoh untuk 3 vektor independen $a, b, c$.
+
+### Gram-Schmidt Process
+
+1. Anggap vektor $a$ sebagai entri pertama yang sudah ortogonal, namun belum dinormalisasi. Anggap sebagai $A$.
+
+2. Pilih $b$ sebagai vektor berikutnya dan kurangi proyeksi $b$ ke $a$ dari $b$ itu sendiri.
+    $$
+    \begin{align*}
+    B &= b - \text{proyeksi } b \text{ ke } a \\
+    &= b - \frac{a^Tb}{a^Ta}a
+    \end{align*}
+    $$
+
+3. Pilih $c$ sebagai vektor berikutnya dan kurangi proyeksi $c$ ke $a$ dan $b$ dari $c$ itu sendiri.
+    $$
+    \begin{align*}
+    C &= c - \text{proyeksi } c \text{ ke } a \text{ dan } b \\
+    &= c - \frac{a^Tc}{a^Ta}a - \frac{b^Tc}{b^Tb}b
+    \end{align*}
+    $$
+
+4. Normalisasi $A, B, C$ menjadi $Q$.
+    $$
+    \begin{align*}
+    q_1 &= \frac{A}{||A||} \\
+    q_2 &= \frac{B}{||B||} \\
+    q_3 &= \frac{C}{||C||}
+    \end{align*}
+    $$
+
+Contoh
+
+Ada non-orthogonal vektor $a, b, c$ sebagai berikut:
+
+$$
+a = \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}, b = \begin{bmatrix} 2 \\ 0 \\ -2 \end{bmatrix}, c = \begin{bmatrix} 3 \\ -3 \\ 3 \end{bmatrix}
+$$
+
+1. $A = a = \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix}$
+
+2. Ambil nilai $B$ dengan mengurangi proyeksi $b$ ke $a$ dari $b$ itu sendiri.
+
+    nilai $A^TB$ adalah:
+    $$
+    \begin{bmatrix}
+    1 & -1 & 0
+    \end{bmatrix} \begin{bmatrix}
+    2 \\ 0 \\ -2
+    \end{bmatrix} = 2
+    $$
+
+    nilai $A^TA$ adalah:
+    $$
+    \begin{bmatrix}
+    1 & -1 & 0
+    \end{bmatrix} \begin{bmatrix}
+    1 \\ -1 \\ 0
+    \end{bmatrix} = 2
+    $$
+
+    Maka $B$ adalah:
+    $$
+    \begin{align*}
+    B &= b - \text{proyeksi } b \text{ ke } a \\
+    &= b - \frac{A^Tb}{A^TA}A \\
+    &= \begin{bmatrix} 2 \\ 0 \\ -2 \end{bmatrix} - \frac{2}{2} \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} \\
+    &= \begin{bmatrix} 1 \\ 1 \\ -2 \end{bmatrix}
+    \end{align*}
+    $$
+
+3. Ambil nilai $C$ dengan mengurangi proyeksi $c$ ke $a$ dan $b$ dari $c$ itu sendiri.
+
+    nilai $A^TC$ adalah:
+    $$
+    \begin{bmatrix}
+    1 & -1 & 0
+    \end{bmatrix} \begin{bmatrix}
+    3 \\ -3 \\ 3
+    \end{bmatrix} = 6
+    $$
+
+    nilai $B^TC$ adalah:
+    $$
+    \begin{bmatrix}
+    1 & 1 & -2
+    \end{bmatrix} \begin{bmatrix}
+    3 \\ -3 \\ 3
+    \end{bmatrix} = -6
+    $$
+
+    nilai $B^TB$ adalah:
+    $$
+    \begin{bmatrix}
+    1 & 1 & -2
+    \end{bmatrix} \begin{bmatrix}
+    1 \\ 1 \\ -2
+    \end{bmatrix} = 6
+    $$
+
+    Maka $C$ adalah:
+    $$
+    \begin{align*}
+    C &= c - \text{proyeksi } c \text{ ke } a \text{ dan } b \\
+    &= c - \frac{A^Tc}{A^TA}A - \frac{B^Tc}{B^TB}B \\
+    &= \begin{bmatrix} 3 \\ -3 \\ 3 \end{bmatrix} - \frac{6}{2} \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} + \frac{6}{6} \begin{bmatrix} 1 \\ 1 \\ -2 \end{bmatrix} \\
+    &= \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}
+    \end{align*}
+    $$
+
+    Cek: $A^TC = 0$, $B^TC = 0$, $A^TB = 0$.
+
+4. Normalisasi $A, B, C$ menjadi $Q$.
+    
+    $$
+    \begin{align*}
+    q_1 &= \frac{A}{||A||} = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} \\
+    q_2 &= \frac{B}{||B||} = \frac{1}{\sqrt{6}} \begin{bmatrix} 1 \\ 1 \\ -2 \end{bmatrix} \\
+    q_3 &= \frac{C}{||C||} = \frac{1}{\sqrt{3}} \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}
+    \end{align*}
+    $$
+
+    Cek: $q_1^Tq_2 = 0$, $q_1^Tq_3 = 0$, $q_2^Tq_3 = 0$.
+
+    Cek: $||q_1|| = 1$, $||q_2|| = 1$, $||q_3|| = 1$.
+
+    Cek: $Q^TQ = I$.
+
+    $$
+    \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{3}} \\
+    -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{3}} \\
+    0 & -\frac{2}{\sqrt{6}} & \frac{1}{\sqrt{3}}
+    \end{bmatrix} \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\
+    \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{6}} & -\frac{2}{\sqrt{6}} \\
+    \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}}
+    \end{bmatrix} = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+
+    Cek: $Q^{-1} = Q^T$.
+
+    $$
+    \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{3}} \\
+    -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{3}} \\
+    0 & -\frac{2}{\sqrt{6}} & \frac{1}{\sqrt{3}}
+    \end{bmatrix} = \begin{bmatrix}
+    \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\
+    \frac{1}{\sqrt{6}} & \frac{1}{\sqrt{6}} & -\frac{2}{\sqrt{6}} \\
+    \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}} & \frac{1}{\sqrt{3}}
+    \end{bmatrix}
+    $$
+
+## Factorization $A = QR$
+
+Pendahuluan dari Gram-Schmidt Process:
+
+1. Vektor $a, A, q_1$ terletak dalam suatu garis yang sama.
+2. Vektor $b, B, q_2$ terletak dalam bidang yang sama.
+3. Vektor $c, C, q_3$ terletak dalam ruang yang sama (dimensi 3).
+
+Dalam setiap langkah, $a_1, \cdots, a_k$ adalah kombinasi dari $q_1, \cdots, q_k$. Jika $Q$ dihubungkan dengan hubungan diatas tadi dalam wujud matriks, akan didapatkan matriks upper triangular $R$.
+
+<Callout type="info">
+$$
+\underbrace{
+\begin{bmatrix}
+&  &  \\
+a & b  & c \\
+ &  & 
+\end{bmatrix}}_A = \underbrace{\begin{bmatrix}
+ &  &  \\
+q_1 & q_2 & q_3 \\
+ &  & 
+\end{bmatrix}}_Q \underbrace{\begin{bmatrix}
+q_1^Ta & q_1^Tb & q_1^Tc \\
+ & q_2^Tb & q_2^Tc \\
+ &  & q_3^Tc
+\end{bmatrix}}_R
+$$
+</Callout>
+
+$A = QR$ adalah Gram-Schmidt *in nutshell*. Kalikan dengan $Q^T$ untuk mendapatkan $R = Q^TA$.
+
+Contoh
+
+Jika matriks pada problem sebelumnya:
+
+$$
+A = \begin{bmatrix} 1 & 2 & 3 \\ -1 & 0 & -3 \\ 0 & -2 & 3 \end{bmatrix}
+$$
+
+maka $Q$ dan $R$ adalah:
+
+$$
+Q = \begin{bmatrix}
+1/\sqrt{2} & 1/\sqrt{6} & 1/\sqrt{3} \\
+-1/\sqrt{2} & 1/\sqrt{6} & 1/\sqrt{3} \\
+0 & -2/\sqrt{6} & 1/\sqrt{3}
+\end{bmatrix},
+
+R = \begin{bmatrix}
+\sqrt{2} & \sqrt{2} & \sqrt{18} \\
+0 & \sqrt{6} & -\sqrt{6} \\
+0 & 0 & \sqrt{3}
+\end{bmatrix}
+$$
+
+Lihatlah bahwa panjang $A, B, C$ adalah $\sqrt{2}, \sqrt{6}, \sqrt{3}$ dalam diagonal $R$. Jika merujuk pada persamaan sebelumnya, maka:
+
+$$
+A^TA = (QR)^T(QR) = R^TQ^TQR = R^TR
+$$
+
+<Callout type="info">
+Least Squares Solution untuk $Ax = b$ adalah $\hat{x} = R^{-1}Q^Tb$ atau $R\hat{x} = Q^Tb$.
+</Callout>
