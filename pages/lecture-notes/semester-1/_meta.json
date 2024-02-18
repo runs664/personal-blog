@@ -1,0 +1,11 @@
+{
+    "classical-mechanics": {
+        "title" : "Classical Mechanics"
+    },
+    "discrete-math": {
+        "title" : "Discrete Mathematics"
+    },
+    "vector-and-matrix-theory": {
+        "title" : "Vector and Matrix Theory"
+    }
+}

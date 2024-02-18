@@ -10,6 +10,18 @@
         }
     },
 
+    "portfolio": {
+        "title": "Portfolio",
+        "type": "page",
+        "theme": {
+            "breadcrumb": false,
+            "sidebar": false,
+            "toc": true,
+            "pagination": false,
+            "typesetting": "article"
+        }
+    },
+
     "lecture-notes": {
         "title": "Lecture Notes",
         "type": "page"

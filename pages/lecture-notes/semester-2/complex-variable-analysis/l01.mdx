@@ -1,0 +1,404 @@
+import { Callout } from "nextra/components"
+
+# Complex Number
+
+Bilangan kompleks adalah pasangan berurut $(x, y)$ bilangan real yang direpresentasikan dalam bidang kompleks. $x$ sebagai axis real dan $y$ sebagai axis imaginer.
+
+Bilangan kompleks dapat dinotasikan sebagai $z$ sehingga:
+
+$$
+\begin{equation}
+z = (x, y)
+\end{equation}
+$$
+
+$z$ terdiri dari 2 komponen:
+
+$$
+\begin{equation}
+x = \Re(z), \quad y = \Im (z)
+\end{equation}
+$$
+
+atau 
+
+$$
+\begin{equation}
+x = \operatorname{Re}(z), \quad y = \operatorname{Im}(z)
+\end{equation}
+$$
+
+<Callout type='info'>
+Dua bilangan kompleks $z_1$ dan $z_2$ bernilai sama apabila keduanya memiliki komponen real dan imajiner yang sama. Menandakan bahwa keduanya menunjukkan koordinat yang sama di bidang kompleks.
+</Callout>
+
+## Sums and Products
+
+Jumlahan dan perkalian dari dua bilangan kompleks $z_1 + z_2$ dan $z_1z_2$ didefinisikan sebagai:
+
+$$
+\begin{align}
+(x_1, y_1) + (x_2, y_2) &= (x_1 + x_2, y_1 + y_2)\\
+(x_1, y_1) (x_2, y_2) &= (x_1x_2-y_1y_2, y_1x_2 + x_1y_2)
+\end{align}
+$$
+
+Jika sebuah bilangan real adalah $x$ atau $(x,0)$ dan $j$ menotasikan komponen imajiner $(0, 1)$, bilangan kompleks dapat dinyatakan dengan
+
+<Callout type='info'>
+$$
+\begin{equation}
+z = x + jy
+\end{equation}
+$$
+</Callout>
+
+<Callout type='warning'>
+Teknik Elektro menggunakan notasi $j$ sebagai pengganti $i$
+</Callout>
+
+Dengan konvensi bahwa $z^2 = zz, \ z^3 = z^2z,\ $ dan lain-lain, kita mengetahui bahwa
+
+$$
+j = (0,1)(0,1) = (-1,0)
+$$
+
+atau 
+
+$$
+\begin{equation}
+(j^2)^n = -1
+\end{equation}
+$$
+
+bilangan kompleks murni jika dikuadratkan adalah bilangan real.
+
+## Basic Algebraic Properties
+
+1. Komutatif
+$$
+\begin{equation}
+z_1 + z_2 = z_2 + z_1, \quad z_1z_2 = z_2z_1
+\end{equation}
+$$
+
+2. Asosiatif
+$$
+\begin{equation}
+(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3), \quad (z_1z_2)z_3 = z_1(z_2z_3)
+\end{equation}
+$$
+
+3. Distributif
+$$
+\begin{equation}
+z(z_1 + z_2) = zz_1 + zz_2
+\end{equation}
+$$
+
+4. Identitas
+$$
+\begin{equation}
+z + 0 = z \quad \text{dan} \quad z\cdot 1 = z
+\end{equation}
+$$
+
+5. Invers penjumlahan
+$$
+\begin{equation}
+-z = (-x, -y)
+\end{equation}
+$$
+
+6. Invers perkalian
+$$
+\begin{equation}
+\frac{z_1}{z_2} = \frac{x_1x_2 + y_1y_2}{x_2^2 + y_2^2} + j\frac{y_1x_2 - x_1y_2}{x_2^2 + y_2^2} \quad (z_2 \neq 0)
+\end{equation}
+$$
+
+### Contoh
+
+$z_1 = -5 + 8j$
+
+$z_2 = 2 - 10j$
+
+Hitunglah
+
+1. $z_1 \cdot z_2$
+2. $z_1^{-1} + z_2^{-1}$
+3. $\displaystyle\frac{z_1}{z_2}$
+
+Jawaban:
+
+1. 
+$$
+\begin{align*}
+z_1 \cdot z_2 &= ((-5) \cdot 2 - 8 \cdot (-10), 2 \cdot 8 + (-5) \cdot (-10))\\
+&= ((-10) - (-80), 16j + 50j)\\
+&= (70, 66j) = 2(35, 33j)\\
+\end{align*}
+$$
+
+2.
+$$
+\begin{align*}
+z_1^{-1} &= \frac{-5}{(-5)^2 + 8^2} + \frac{8}{(-5)^2 + 8^2}\\
+&= \frac{-5}{89} + \frac{8}{89}\\
+z_2^{-1} &= \frac{2}{104} + \frac{-10}{104}\\
+\\
+z_1^{-1} + z_2^{-1} &= (\frac{-5}{89} + \frac{2}{104}, \frac{8}{89}j + \frac{-10}{104}j)
+&= \frac{-171 + 29j}{4628}
+\end{align*}
+$$
+
+3.
+$$
+\begin{align*}
+\frac{z_1}{z_2} &= \frac{(-5)\cdot 2 + 8\cdot (-10)}{2^2 + (-10)^2} + \frac{8\cdot 2 - (-5)\cdot (-10)}{2^2 + (-10)^2}j\\
+&= \frac{(-10) + (-80)}{4 + 100} + \frac{16 - 50}{4 + 104}j\\
+&= - \frac{1}{52}(45 + 17j)
+\end{align*}
+$$
+
+## Vectors and Moduli
+Bilangan kompleks $z = x + iy$ dapat diasosiasikan dengan vektor dalam suatu bidang. Penjumlahan dua vektor $z_1 + z_2$ dapat dilakukan sebagaimana penjumlahan 2 vektor pada umumnya.
+
+Modulus (nilai absolut) dari bilangan kompleks $z = x + iy$ didefinisikan sebagai bilangan asli positif $\sqrt{x^2 + y^2}$ yang dinotasikan sebagai $|z|$
+
+$$
+\begin{equation}
+|z| = \sqrt{x^2 + y^2}
+\end{equation}
+$$
+
+Modulus memiliki sifat:
+
+1. $|z| \geq 0$
+2. $|z| = 0$ jika dan hanya jika $z = 0$
+3. $|z_1z_2| = |z_1||z_2|$
+4. $|z_1 + z_2| \leq |z_1| + |z_2|$
+
+## Complex Conjugate
+
+Konjugasi dari bilangan kompleks $z = x + iy$ adalah bilangan kompleks $z^* = x - iy$. Konjugasi dari $z$ dinyatakan sebagai $z^*$ atau $\bar{z}$.
+
+$$
+\begin{equation}
+\bar{z} = x - iy
+\end{equation}
+$$
+
+Konjugasi adalah refleksi terhadap axis real. Perhatikan bahwa
+
+$$
+\bar{\bar{z}} = z \quad \text{dan} \quad |\bar{z}| = |z|
+$$
+
+Konjugasi juga memiliki sifat:
+
+1. $\overline{z_1 + z_2} = \bar{z_1} + \bar{z_2}$
+2. $\overline{z_1z_2} = \bar{z_1}\bar{z_2}$
+3. $\overline{z_1/z_2} = \bar{z_1}/\bar{z_2} \quad (z_2 \neq 0)$
+4. $\overline{z^n} = \bar{z}^n$
+5. $\displaystyle\operatorname{Re}(z) = \frac{z + \bar{z}}{2}\quad \text{dan} \quad\operatorname{Im}(z) = \frac{z - \bar{z}}{2j}$
+
+## Exponential and Polar Form
+
+Andaikan $r$ dan $\theta$ adalah panjang dan sudut yang terbentuk oleh bilangan kompleks $z = x + iy$. Karena $x = r\cos\theta$ serta $y = r\sin\theta$, bilangan kompleks dapat dinyatakan dalam bentuk polar sebagai
+
+$$
+\begin{equation}
+z = r(\cos \theta + j\sin \theta)
+\end{equation}
+$$
+
+dengan $r = |z|$ dan $\theta = \arctan(y/x)$.
+
+## Euler's Formula
+
+Euler's formula menyatakan bahwa
+
+$$
+\begin{equation}
+e^{j\theta} = \cos \theta + j\sin \theta
+\end{equation}
+$$
+
+sehingga
+
+$$
+\begin{equation}
+z = r(\cos \theta + j\sin \theta) = re^{j\theta}
+\end{equation}
+$$
+
+dimana $r = |z|$ dan $\theta = \arg z$.
+
+## Polar Properties
+
+1. $z_1z_2 = r_1r_2e^{j(\theta_1 + \theta_2)}$
+2. $\displaystyle\frac{z_1}{z_2} = \frac{r_1}{r_2}e^{j(\theta_1 - \theta_2)}$
+3. $\displaystyle z^n = r^ne^{jn\theta}, \quad n = 0, \pm 1, \pm 2, \pm 3, \ldots$
+4. $\displaystyle z^{-1} = \frac{1}{r}e^{-j\theta}$
+
+## De Moivre's Theorem
+
+De Moivre's menyatakan bahwa
+
+$$
+\begin{equation}
+(z^n)^m = z^{nm}
+\end{equation}
+$$
+
+sehingga
+
+$$
+\begin{equation}
+(r(\cos \theta + j\sin \theta))^n = r^n(\cos n\theta + j\sin n\theta)
+\end{equation}
+$$
+
+Contoh:
+
+Buktikan persamaan trigonometri berikut:
+
+$\cos 3\theta = 4\cos^3 \theta - 3\cos \theta$
+
+Jawab:
+
+Misalkan $z = \cos \theta + j\sin \theta$. Maka
+
+$$
+\begin{align*}
+z^3 &= (\cos \theta + j\sin \theta)^3\\
+&= \cos^3 \theta + 3j\cos^2 \theta \sin \theta - 3\cos \theta \sin^2 \theta - j\sin^3 \theta\\
+&= (\cos^3 \theta - 3\cos \theta \sin^2 \theta) + j(3\cos^2 \theta \sin \theta - \sin^3 \theta)\\
+&= (4 \cos^3 \theta - 3\cos \theta) + j(3\cos^2 \theta \sin \theta - \sin^3 \theta)\\
+\end{align*}
+$$
+
+## Principal Arguments
+
+Principal value dari $\arg z$ adalah $\text{Arg} z$ yang didefinisikan sebagai sudut antara vektor $z$ dan axis real. Principal value dari $\arg z$ adalah unik dalam interval $(-\pi, \pi]$.
+
+$$
+\begin{equation}
+\arg(z) = \text{Arg}(z) + 2\pi k, \quad k = 0, \pm 1, \pm 2, \pm 3, \ldots
+\end{equation}
+$$
+
+<Callout type='info'>
+$\arg z$ berupa himpunan tak hingga dari nilai sudut yang memenuhi $z = r(\cos \theta + j\sin \theta)$
+
+$\text{Arg} z$ adalah nilai tunggal dari $\arg z$ dalam interval $(-\pi, \pi]$
+</Callout>
+
+### Properties
+
+1. $\arg z_1z_2 = \arg z_1 + \arg z_2$
+2. $\arg \displaystyle\frac{z_1}{z_2} = \arg z_1 - \arg z_2$
+3. $\arg z^n = n\arg z$
+4. $\arg \displaystyle\frac{1}{z} = -\arg z$
+5. $\arg \bar{z} = -\arg z$
+
+Contoh:
+
+Hitunglah $\arg z$ dari bilangan kompleks $z = 1 - j\sqrt{3}$
+
+Jawab:
+
+Jika digambar dalam grafik, maka $z$ berada pada kuadran ke-4. Sehingga nilai $\theta$ adalah negatif.
+
+$$
+-\theta = -\arctan\left(\frac{\sqrt{3}}{1}\right) = -\frac{\pi}{3}
+$$
+
+Sehingga
+
+$$
+\arg(z) = -\frac{\pi}{3} + 2\pi k, \quad k = 0, \pm 1, \pm 2, \pm 3, \ldots
+$$
+
+dan
+
+$$
+\text{Arg}(z) = -\frac{\pi}{3}
+$$
+
+## Exercise
+
+1. Write the given number in the form $a + jb$
+
+$$
+3j + \frac{1}{2 - j}
+$$
+
+2. Represent in polar form
+
+$$
+\frac{-4+19i}{2+5i}
+$$
+
+3. Determine the principal value of the argument
+
+$$
+z = (i + 1)^{20}
+$$
+
+## Answers
+
+1. Sederhanakan term kedua,
+
+$$
+\frac{1}{2 - j} = \frac{2 + j}{(2 - j)(2 + j)} = \frac{2 + j}{5}
+$$
+
+Sehingga,
+
+$$
+3j + \frac{1}{2 - j} = 3j + \frac{2 + j}{5} = \frac{2}{5} + \frac{16}{5}j
+$$
+
+2. Sederhanakan terlebih dahulu
+
+$$
+\frac{-4 + 19j}{2 + 5j} \cdot \frac{2 - 5j}{2 - 5j} = \frac{-8 + 20j + 38j + 95}{4 + 25} = \frac{87 + 58j}{29} = 3 + j2
+$$
+
+Cari nilai $r$ dan $\theta$,
+
+$$
+r = \sqrt{3^2 + 2^2} = \sqrt{13}
+$$
+
+dan
+
+$$
+\theta = \arctan\left(\frac{2}{3}\right)
+$$
+
+Sehingga bentuk polarnya adalah
+
+$$
+\sqrt{13}e^{\displaystyle j\tan ^{-1}\left(\frac{2}{3}\right)}
+$$
+
+3. Jabarkan dalam bentuk polar
+
+$$
+i + 1 = \sqrt{2}e^{j\frac{\pi}{4}} = \sqrt{2}\left(\cos \frac{\pi}{4} + j\sin \frac{\pi}{4}\right)
+$$
+
+Gunakan De Moivre's Theorem,
+
+$$
+\begin{align*}
+z^{20} &= \left(\sqrt{2}\left(\cos \frac{\pi}{4} + j\sin \frac{\pi}{4}\right)\right)^{20}\\
+&= 2^{10}\left(\cos 5\pi + j\sin 5\pi\right) \\
+&= 2^{10}\left(\cos (4 + 1)\pi + j\sin (4 + 1)\pi\right)\\
+&= 2^{10}\left(\cos \pi + j\sin \pi\right)\\
+&= -1024 + 0j\\
+\end{align*}
+$$

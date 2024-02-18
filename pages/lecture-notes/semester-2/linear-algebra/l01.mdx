@@ -1,0 +1,75 @@
+import { Callout } from 'nextra/components'
+
+# Introduction and Determinant
+
+Sebelumnya kita telah menyelesaikan persamaan $Ax = b$. Saat ini, kita memelajari mengenai persamaan eigen $Ax = \lambda x$ dimana $\lambda$ berupa skalar (eigen value) dan $x$ berupa vektor (eigen vector).
+
+## Learning Outcomes for the Fisrt Term
+
+1. Menyelesaikan sistem persamaan linear.
+2. Mempelajari konsep eigenvalues dan eigenvectors dari matriks persegi.
+
+## Determinant
+
+### Properties of Determinant
+
+Biasa dinotasikan sebagai $\det{(A)}$.
+
+Tujuan utama mempelajari determinan:
+1. Membantu menyelesaikan $Ax=b$
+2. **Menghitung eigenvalues dari suatu matriks**
+
+Determinan bisa dibilang sebagai area dari suatu matriks setelah dioperasikan dengan matriks transformasi $A$.
+
+1. Determinan $n \times n$ dari $I$ adalah $1$.
+2. Tanda determinan berbalik apabila mengganti baris.
+3. Determinan adalah fungsi linear setiap baris secara terpisah.
+    - (Row addition) $(a + a')d - (b + b')c$
+    - (Scalar-row multiplication) $tad - tcd = t(ad - cd)$
+
+    <Callout type="warning">
+    Properti ini tidak melazimkan bahwa $|A + B| = |A| + |B|$ karena **seluruh row berubah**
+    </Callout>
+4. Jika terdapat baris dari $A$ yang sama, maka $|A| = 0$.
+5. Jika salah satu baris di $A$ dikurangi oleh kelipatan baris lain dari $A$, tidak mengubah determinannya.
+6. Sebuah matriks yang mengandung setidaknya 1 baris nol memiliki determinan nol.
+7. Jika $A$ berupa triangular matriks ($U$ atau $L$), maka determinanya adalah perkalian dari entri diagonalnya ($a_{1,1}, \cdots, a_{n,n}$).
+8. Jika $A$ singular, maka determinannya nol (vice versa).
+9. Determinan dari matriks $AB = \det(A) \times \det(B)$
+10. Transpose dari $A$ memiliki determinan yang sama dari $A$ pula. **Memiliki konsekuensi bahwa seluruh sifat yang menempel pada baris, juga menempel pada kolom.**
+
+### Calculating Determinants
+
+Terdapat 3 metode:
+1. Pivot formula
+2. Big formula
+3. Cofactors formula
+
+#### Pivot formula
+Determinan dari $A$ dicari menggunakan faktorisasi $LU$. Diketahui pula bahwa matriks $L$ memiliki determinan 1, maka $\det(A) = \det(U) = u_{1,1}\times \dots\times u_{n,n}$. Namun, jika terjadi row exchange, maka
+
+$$
+PA=LU \rightarrow |A| = \frac{|L||U|}{|P|}
+$$
+
+Dimana determinan $|P|$ adalah alternating sign dari $(-1)^n$ tergantung banyaknya penukaran baris.
+
+#### Big formula
+Men-split matriks $A$ per baris dengan bentuk penjumlahan nol, sehingga setiap barisnya memiliki $n$ terms. Jika di expand, maka akan menghasilkan $n$ terms lagi untuk tiap barisnya, sehingga dengan aturan perkalian memiliki $n^n$ terms dengan $n!$ non-zero untuk determinan.
+
+#### Cofactors formula
+Berikut adalah ekspansi kofaktor:
+
+$$
+|A| = \sum_{j=1}^n a_{ij}C_{ij}
+$$
+
+Dimana $C_{ij}$ adalah kofaktor dari $a_{ij}$, yaitu determinan dari matriks $A$ setelah menghilangkan baris ke-$i$ dan kolom ke-$j$. Dimana positif negatifnya bergantung pada $(-1)^{i+j}$.
+
+### Cramer's Rule   
+Jika $A$ berupa matriks persegi dan $A$ memiliki determinan yang tidak nol, maka solusi dari $Ax = b$ adalah:
+
+$$
+|A||X_i| = |B_i| \quad \text{dimana} \quad |X_i| = x_i
+$$  
+
