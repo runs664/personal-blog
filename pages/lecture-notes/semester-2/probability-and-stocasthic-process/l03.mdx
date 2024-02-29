@@ -1,0 +1,136 @@
+import { Callout } from 'nextra/components'
+
+# Lecture 03: Conditional Probability and Discete Random Variables
+
+## Conditional Probability
+
+Peluang bersyarat adalah peluang bahwa suatu peristiwa terjadi, diberikan bahwa peristiwa lain telah terjadi (dependent). Yaitu peristiwa yang memenuhi $P(A \cap B) \neq p(A)$.
+
+Misalnya, kita memiliki dua peristiwa A dan B. Peluang bahwa peristiwa A terjadi, diberikan bahwa peristiwa B telah terjadi, dinyatakan sebagai $P(A|B)$.
+
+<Callout type='info'>
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+</Callout>
+
+Dengan catatan $P(A \cap B) + P(\bar{A} \cap B) = P(B)$.
+
+### Study Case: On Time Arrival
+
+Misalkan kejadian $A$ adalah kondisi dimana pesawat datang tepat waktu. Sedangkan kejadian $B$ adalah kondisi dimana landasan terkena hujan. Jika diketahui bahwa hujan memengaruhi kondusivitas area landasan, maka peluang pesawat datang tepat waktu jika landasan terkena hujan adalah $P(A|B)$ dimana $P(A|B) \neq P(A)$.
+
+## Independent Events
+
+Dua kejadian $A, B$ dikatakan independen jika $P(A|B) = P(A)$ atau $P(B|A) = P(B)$. Dengan kata lain, kejadian $A$ tidak memengaruhi kejadian $B$ dan sebaliknya.
+
+### Study Case: A Dice Roll
+
+Jika didefinisikan dua buah kejadian berikut:
+- $A$: hasil lemparan dadu adalah genap
+- $B$: hasil lemparan dadu adalah lebih kecil sama dengan 4
+
+Jika kejadian $B$ diketahui telah terjadi, apakah kejadian $A$ dan $B$ dikatakan independent?
+
+<Callout type='info'>
+Syarat independen adalah
+
+$$
+\begin{align*}
+P(A|B) &= P(A) \\
+P(B|A) &= P(B)
+\end{align*}
+
+\quad
+
+\begin{align*}
+P(\bar{A}|B) &= P(\bar{A}) \\
+P(\bar{B}|A) &= P(\bar{B})
+\end{align*}
+$$
+</Callout>
+
+Sehingga tinjau ruang sampel dari $A$ dan $B$:
+
+$A = \{2, 4, 6\}$ dan $B = \{1, 2, 3, 4\}$
+
+Dimana $\bar{A} = \{1, 3, 5\}$ dan $\bar{B} = \{5, 6\}$.
+
+Dari ruang sampel tersebut, kita dapatkan bahwa 
+
+$$
+\begin{align*}
+P(\bar{A}|B) &= \frac{P(\bar{A} \cap B)}{P(B)} = \frac{1/3}{2/3} = \frac{1}{2} \\
+P(\bar{B}|A) &= \frac{P(\bar{B} \cap A)}{P(A)} = \frac{1/6}{1/2} = \frac{1}{3}
+\end{align*}
+$$
+
+Diketahui pula bahwa $P(\bar{A}) = 1/2$ dan $P(\bar{B}) = 1/3$. Sehingga kejadian $A$ dan $B$ dikatakan independent.
+
+## Multiplicative Rule (Bayes' Theorem)
+
+Derivasi dari conditional probability, didapatkan formula untuk menghitung peluang dari dua kejadian yang terjadi secara bersamaan yang berasal dari **ruang sampel yang sama**.
+
+Diketahui sebelumnya bahwa
+
+$$
+\begin{align*}
+P(A|B) &= \frac{P(A \cap B)}{P(B)} \\
+P(A \cap B) &= P(A|B) \cdot P(B)
+\end{align*}
+$$
+
+Dengan demikian, kita dapatkan formula untuk menghitung peluang dari dua kejadian yang terjadi secara bersamaan:
+
+<Callout type='info'>
+$$
+\begin{equation}
+P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A)
+\end{equation}
+$$
+</Callout>
+
+<Callout type='warning'>
+Jika kedua kejadian $A$ dan $B$ independen, maka $P(A \cap B) = P(A) \cdot P(B)$.
+</Callout>
+
+### Study Case: Two Bags of Balls
+
+- One bag contains 4 white balls and 3 black balls, and the other contains 3 white balls and 5 black balls.
+- One ball is drawn from the first bag and placed unseen in the second bag.
+- A ball is then drawn from the second bag. What is the probability that it is white?
+
+Solusi:
+
+$$
+38/63
+$$
+
+## Theorems of Conditional Probability
+
+### Theorem 1
+
+Jika dalam suatu eksperimen, kejadian $A_1, A_2, \ldots, A_n$ adalah kejadian yang mungkin terjadi, maka
+
+$$
+\begin{align*}
+P&(A_1 \cap A_2 \cap \ldots \cap A_n) =\\
+&P(A_1) \cdot P(A_2|A_1) \cdot P(A_3|A_1 \cap A_2) \cdot \ldots \cdot P(A_n|A_1 \cap A_2 \cap \ldots \cap A_{n-1})
+\end{align*}
+$$
+
+### Theorem 2
+
+Jika kejadian $A_1, A_2, \ldots, A_n$ adalah kejadian yang saling independent, maka
+
+$$
+P(A_1 \cap A_2 \cap \ldots \cap A_n) = P(A_1) \cdot P(A_2) \cdot \ldots \cdot P(A_n)
+$$
+
+### Theorem 3
+
+Sekumpulan kejadian $A_1, A_2, \ldots, A_n$ adalah saling independent jika untuk setiap **subset** dari kejadian $A_{i_1}, A_{i_2}, \ldots, A_{i_k}$, $k \leq n$ berlaku
+
+$$
+P(A_{i_1} \cap A_{i_2} \cap \ldots \cap A_{i_k}) = P(A_{i_1}) \cdot P(A_{i_2}) \cdot \ldots \cdot P(A_{i_k})
+$$

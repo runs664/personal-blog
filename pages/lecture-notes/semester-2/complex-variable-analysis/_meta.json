@@ -1,5 +1,11 @@
 {
     "l01" : {
         "title" : "Complex Number"
+    },
+    "l02" : {
+        "title" : "Roots of Complex Number"
+    },
+    "l03" : {
+        "title" : "Function of Complex Number"
     }
 }

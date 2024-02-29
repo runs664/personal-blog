@@ -1,0 +1,338 @@
+import { Callout } from 'nextra/components';
+
+# Eigenvalues and Eigenvectors #1
+
+Persamaan linear $A\pmb{x} = \mathbf{b}$ adalah persamaan umum untuk permasalahan yang monoton. Eigenvalues dan eigenvectors adalah konsep yang sangat penting dalam permasalahan dinamis. Solusi dari $d\mathbf{u}/dt = A\mathbf{u}$ tidak dapat dicari dengan eliminasi.
+
+Contoh lain adalah menghitung pangkat dari matriks $A, A^2, A^3, \ldots$. Dengan menggunakan eigenvalues dan eigenvectors, kita dapat menemukan solusi dari $A^k$ dengan mudah.
+
+$$
+A = \begin{bmatrix}
+.8 & .3 \\
+.2 & .7
+\end{bmatrix}
+
+\ \cdots \
+
+A^{100} = \begin{bmatrix}
+.6000 & .6000 \\
+.4000 & .4000
+\end{bmatrix}
+$$
+
+Matriks $A^{100}$ dapat dihitung dengan mudah dengan menggunakan eigenvalues dan eigenvectors, bukan dengan menghitung $A^{100}$ secara langsung.
+
+## Eigenvectors
+
+Hampir seluruh vektor berganti arah ketika dikalikan dengan matriks $A$. Namun, **ada beberapa vektor yang tidak berganti arah, yaitu vektor yang searah dengan vektor hasil kali matriks $A$. Vektor ini disebut dengan eigenvectors**. Kalikan eigenvector dengan $A$ maka vektor $A\pmb{x}$ adalah $\lambda$ kali $\pmb{x}$.
+
+<Callout type="info">
+Bentuk persamaan umumnya adalah $A\pmb{x} = \lambda\pmb{x}$, dimana $\lambda$ adalah eigenvalue dari matriks $A$.
+</Callout>
+
+Eigenvalue $\lambda$ memberitahu bahwa vektor spesial $x$ itu berubah jika dikalikan dengan $A$. Perhatikan bahwa Eigenvalue $\lambda$ juga bisa bernilai nol. $Ax = 0x$ berarti bahwa eigenvector $x$ berada di nullspace. 
+
+## Computing Eigenvalues and Eigenvectors
+
+Persamaan $A\pmb{x} = \lambda\pmb{x}$ dapat ditulis ulang menjadi $(A - \lambda I)\pmb{x} = 0$. Berikut adalah langkah derivasinya:
+
+$$
+\begin{align*}
+A\pmb{x} &= \lambda\pmb{x} \\
+A\pmb{x} - \lambda\pmb{x} &= 0 \\
+(A - \lambda I)\pmb{x} &= 0
+\end{align*}
+$$
+
+Contoh untuk matriks $A$:
+
+$$
+A = \begin{bmatrix}
+.8 & .3 \\
+.2 & .7
+\end{bmatrix}
+$$
+
+Langkah-langkahnya adalah sebagai berikut:
+
+1. Hitung determinan dari $A - \lambda I$.
+
+$$
+\begin{align*}
+A - \lambda I &= \begin{bmatrix}
+.8 - \lambda & .3 \\
+.2 & .7 - \lambda
+\end{bmatrix} \\
+&= (.8 - \lambda)(.7 - \lambda) - .3 \cdot .2 \\
+&= \lambda^2 - 1.5\lambda + .5
+\end{align*}
+$$
+
+2. Hitung eigenvalues dengan mencari akar dari persamaan kuadrat.
+
+$$
+\begin{align*}
+\lambda^2 - 1.5\lambda + .5 &= 0 \\
+\lambda &= \frac{1.5 \pm \sqrt{1.5^2 - 4 \cdot 1 \cdot .5}}{2 \cdot 1} \\
+&= \frac{1.5 \pm \sqrt{2.25 - 2}}{2} \\
+&= \frac{1.5 \pm \sqrt{.25}}{2} \\
+&= \frac{1.5 \pm .5}{2} \\
+&= 1 \ \text{atau} \ 0.5
+\end{align*}
+$$
+
+3. Hitung eigenvectors dengan menggunakan eigenvalues yang sudah didapat.
+
+untuk $\lambda = 1$:
+
+$$
+\begin{align*}
+(A - \lambda I)\pmb{x_1} &= 0\\
+(A - I)\pmb{x_1} &= 0\\
+\begin{bmatrix}
+.8 - 1 & .3 \\
+.2 & .7 - 1
+\end{bmatrix}\pmb{x_1} &= 0\\
+\begin{bmatrix}
+-.2 & .3 \\
+.2 & -.3
+\end{bmatrix}\pmb{x_1} &= 0\\
+x_1 &= \begin{bmatrix}
+.6\\
+.4
+\end{bmatrix}
+\end{align*}
+$$
+
+untuk $\lambda = 0.5$:
+
+$$
+\begin{align*}
+(A - \lambda I)\pmb{x_2} &= 0\\
+(A - .5I)\pmb{x_2} &= 0\\
+\begin{bmatrix}
+.8 - .5 & .3 \\
+.2 & .7 - .5
+\end{bmatrix}\pmb{x_2} &= 0\\
+\begin{bmatrix}
+.3 & .3 \\
+.2 & .2
+\end{bmatrix}\pmb{x_2} &= 0\\
+x_2 &= \begin{bmatrix}
+1\\
+-1
+\end{bmatrix}
+\end{align*}
+$$
+
+<Callout type='info'>
+Jika $A$ di pangkatkan, eigenvektornya tidak berubah. Hanya eigenvaluenya yang ikut dipangkatkan.
+</Callout>
+
+Maka $A^{100}$ dapat dicari dengan memisahkan kolom dari matriks $A$ menjadi $x_i$ dan dikalikan dengan $\lambda_i^{100}$.
+
+$$
+\begin{align*}
+A^{100}\begin{bmatrix}
+.8\\
+.2
+\end{bmatrix} &= 1^{100}x_1 + .5^{100}x_2\\
+&= \begin{bmatrix}
+.6000\\
+.4000
+\end{bmatrix} + \begin{bmatrix}
+\text{very small}\\
+(\to 0)
+\end{bmatrix}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+A^{100}\begin{bmatrix}
+.3\\
+.7
+\end{bmatrix} &= 1^{100}x_1 + .5^{100}x_2\\
+&= \begin{bmatrix}
+.6000\\
+.4000
+\end{bmatrix} + \begin{bmatrix}
+\text{very small}\\
+(\to 0)
+\end{bmatrix}
+\end{align*}
+$$
+
+Sehingga $A^{100}$ adalah:
+
+$$
+A^{100} = \begin{bmatrix}
+.6000 & .6000 \\
+.4000 & .4000
+\end{bmatrix}
+$$
+
+Matriks ini disebut pula dengan *markov matrix*, yaitu matriks yang kolom-kolomnya jumlahnya adalah 1.
+
+## Eigenvalues of a Projection Matrices
+
+Anggaplah $\lambda$ sebagai eigenvalue dari matriks proyeksi $P$ untuk eigenvector $\pmb{v}$. Gunakan fakta bahwa $P^2 = P$, maka:
+
+$$
+\begin{align*}
+P\pmb{v} &= \lambda\pmb{v} \\
+P^2\pmb{v} &= \lambda P\pmb{v} \\
+\text{karena } v &\neq 0\\
+\lambda^2 &= \lambda\\
+\lambda^2 - \lambda &= 0\\
+\lambda(\lambda - 1) &= 0\\
+\lambda &= 0 \ \text{atau} \ 1
+\end{align*}
+$$
+
+1. Setiap kolom dari $P$ memiliki jumlah 1, maka $\lambda = 1$ adalah eigenvalue.
+2. $P$ singular, maka $\lambda = 0$ adalah eigenvalue.
+3. $P$ simetris, maka eigenvector dari $\lambda = 1$ adalah orthogonal dengan eigenvector dari $\lambda = 0$.
+
+## Eigenvalue of a Reflection Matrix
+
+Matriks refleksi adalah $2P - I$. Jika $P\pmb{x} = \lambda\pmb{x}$, maka $2P\pmb{x} = 2\lambda\pmb{x}$. Nilai eigenvaluenya menjadi berlipat ganda. Jika dikurangi oleh $I\pmb{x} = \pmb{x}$, menjadi $(2P - I)\pmb{x} = (2\lambda - 1)\pmb{x}$. **Jika sebuah matriks digeser sebesar $I$, maka setiap $\lambda$ bergeser sebanyak $1$**. Eigenvector tidak berubah.
+
+<Callout type='info'>
+Dalam sebuah refleksi, suatu vektor bisa saja berbalik arahnya namun dengan besar yang sama. Sehingga eigenvalue dari refleksi adalah $\lambda = 1$ dan $\lambda = -1$.
+</Callout>
+
+## The Equation for the Eigenvalues
+
+Menggunakan determinan dan aljabar linear, persamaan kunci untuk mencari eigenvalues adalah $A\pmb{x} = \lambda\pmb{x}$. Pindahkan $\lambda\pmb{x}$ ke sisi kiri, maka menjadi $(A - \lambda I)\pmb{x} = 0$. Jika $\pmb{x}$ bukan nol, maka matriks $A - \lambda I$ harus singular. Maka, determinan dari $A - \lambda I$ haruslah nol.
+
+<Callout type='info'>
+**Eigenvalues** : Skalar $\lambda$ sebagai eigenvalue dari $A$ jika dan hanya jika $A - \lambda I$ adalah singular (ada vektor yang tereduksi spannya).
+
+$$
+\begin{equation}
+\det(A - \lambda I) = 0
+\end{equation}
+$$
+</Callout>
+
+Persamaan tersebut disebut dengan *characteristic equation* dari matriks $A$. Persamaan ini adalah persamaan kuadrat yang memiliki akar-akar yang merupakan eigenvalues dari matriks $A$. Jika $A$ berukuran $n \times n$, persamaan tersebut memiliki derajat $n$ pula. Sehingga $A$ memiliki $n$ eigenvalues (dapat berulang!).
+
+<Callout type='info'>
+Untuk setiap eigenvector $\lambda$, selesaikan $(A - \lambda I)\pmb{x} = 0$ atau $A\pmb{x} = \lambda\pmb{x}$ untuk mencari eigenvector $\pmb{x}$.
+</Callout>
+
+Contoh:
+
+Untuk matriks $A = \begin{bmatrix}1 & 2 \\ 2 & 4\end{bmatrix}$ adalah matriks singular. Tentukan $\lambda$ dan $\pmb{x}$!
+
+Kurangi $\lambda$ dari diagonal utama:
+
+$$
+\begin{align*}
+A - \lambda I &= \begin{bmatrix}
+1 - \lambda & 2 \\
+2 & 4 - \lambda
+\end{bmatrix}
+\end{align*}
+$$
+
+Hitung determinannya:
+
+$$
+\begin{align*}
+\det\begin{bmatrix}
+1 - \lambda & 2 \\
+2 & 4 - \lambda
+\end{bmatrix} &= (1 - \lambda)(4 - \lambda) - 2 \cdot 2\\
+&= \lambda^2 - 5\lambda + 4 - 4\\
+&= \lambda^2 - 5\lambda
+\end{align*}
+$$
+
+Buat determinan menjadi nol:
+
+$$
+\begin{align*}
+\det(A - \lambda I) &= \lambda^2 - 5\lambda = 0\\
+\lambda(\lambda - 5) &= 0\\
+\lambda &= 0 \ \text{atau} \ 5
+\end{align*}
+$$
+
+Cari eigenvector untuk setiap $\lambda$:
+
+$$
+\begin{align*}
+(A - 0I)\pmb{x} &= \begin{bmatrix}
+1 & 2 \\
+2 & 4
+\end{bmatrix}\begin{bmatrix}
+y\\
+z
+\end{bmatrix} = \begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+&\rightarrow &\begin{bmatrix}
+y\\
+z
+\end{bmatrix} = \begin{bmatrix}
+2\\
+-1
+\end{bmatrix}\\
+(A - 5I)\pmb{x} &= \begin{bmatrix}
+-4 & 2\\
+2 & -1
+\end{bmatrix}\begin{bmatrix}
+y\\
+z
+\end{bmatrix} = \begin{bmatrix}
+0\\
+0
+\end{bmatrix}
+&\rightarrow &\begin{bmatrix}
+y\\
+z
+\end{bmatrix} = \begin{bmatrix}
+1\\
+2
+\end{bmatrix}
+\end{align*}
+$$
+
+Matriks $A - 0I$ serta $A - 5I$ adalah singular. Eigenvector $(2, 1)$ dan $(1, 2)$ berada di nullspace: $(A - \lambda I)\pmb{x} = 0$.
+
+### Summary
+
+Untuk menyelesaikan eigenvalue untuk matriks $n \times n$:
+
+<Callout type='info'>
+1. Hitung determinan dari $A - \lambda I$.
+2. Cari akar dari polinomial yang terbentuk.
+3. Untuk setiap eigenvalue $\lambda$, selesaikan $(A - \lambda I)\pmb{x} = 0$ atau $A\pmb{x} = \lambda\pmb{x}$ untuk mencari eigenvector $\pmb{x}$.
+</Callout>
+
+Perlu diperhatikan bahwa eliminasi baris atau pertukaran baris, akan mengubah eigenvalues. Triangular matriks $U$ memiliki eigenvalues berupa diagonal (pivot) namun bukan eigenvalue milik $A$.
+
+<Callout type='info'>
+1. $\lambda_1 + \lambda_2 + \ldots + \lambda_n = a_{11} + a_{22} + \ldots + a_{nn}$.
+2. $\lambda_1\lambda_2\ldots\lambda_n = \det(A)$.
+</Callout>
+
+## Imaginary Eigenvalues
+
+Matriks rotasi $Q = \begin{bmatrix}0 & -1\\ 1 & 0\end{bmatrix}$ tidak memiliki eigenvector yang real, eigenvaluesnya adalah $\pm i$.
+
+Saat rotasi, tidak ada vektor $Q\pmb{x}$ yang tetap berada pada arah yang sama (kecuali $\pmb{x} = 0$).
+
+## Review of the Key Ideas
+
+<Callout type='info'>
+1. $A\pmb{x} = \lambda\pmb{x}$ mengatakan bahwa vektor $\pmb{x}$ tidak berubah arahnya ketika dikalikan dengan matriks $A$.
+2. $A\pmb{x} = \lambda\pmb{x}$ juga mengatakan bahwa $\det(A - \lambda I) = 0$. Ini menentukan $n$ eigenvalues $\lambda$.
+3. Eigenvalues dari $A^k$ adalah $\lambda^k$ dengan eigenvector yang sama.
+4. Jumlah dari eigenvalues adalah jumlah dari diagonal utama dari $A$. Dengan determinan dari $A$ adalah hasil kali dari eigenvalues.
+5. Eigenvalue dari matriks proyeksi adalah $\lambda = 0$ dan $\lambda = 1$. Eigenvalue dari matriks refleksi adalah $\lambda = 1$ dan $\lambda = -1$. Serta $\lambda = \pm i$ untuk matriks rotasi.
+</Callout>
+
