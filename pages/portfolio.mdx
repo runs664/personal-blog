@@ -1,65 +1,97 @@
-import { Callout } from 'nextra/components'
-import SkillBar from '@/components/SkillBar.js'
-import Project from '@/components/Project.js'
+import Hero from '../components/Hero'
+import { Tabs, Callout, Steps } from 'nextra/components'
 
-# Hi, im Harun!
+{/* # ~An Introduction to Linear Algebra~ */}
 
-## About
+{/* <Hero/> */}
 
-This is a portfolio of my work. I am an Information Engineering undergraduate student in Gadjah Mada University with a passion for building things and working with data. I have brief experience in web development, data engineering, and machine learning. I am always looking for new opportunities to learn, grow, and collaborate with others.
-
-## Experience
-
+<div className="text-[5vh]">
 $$
-4+9-392131=?
+\text{Kenalin, aku Harun}
 $$
-
-This is a portfolio of my work. I am an Information Technology undergraduate student in Gadjah Mada University with a passion for building things and working with data. I have brief experience in web development, data engineering, and machine learning. I am always looking for new opportunities to learn and grow and collaborate with others.
-
-## Skills
-
-<SkillBar skill="Python" level={90} />
-
-## Projects
-
-<div className="grid grid-cols-1 md:grid-cols-2 gap-[3%]">
-<Project
-    title="Website KPU KMTETI 2023"
-    description="Platform pemilu internal himpunan mahasiswa departemen teknik elektro dan teknologi informasi UGM"
-    status="Finished"
-    link="https://github.com"
-    image="/assets/dm/l10_1.png"
-/>
-
-<Project
-    title="Beanmaster"
-    description="Website project perlombaan internal DTETI FT UGM"
-    status="Finished"
-    link="https://github.com"
-    image="/assets/dm/l10_1.png"
-/>
-<Project
-    title="Personal Page"
-    description="Website personal yang berisi portofolio serta catatan kuliah"
-    status="Ongoing"
-    link="https://github.com"
-    image="/assets/dm/l10_1.png"
-/>
-<Project
-    title="Website National Electrical Power System Competition 2024"
-    description="Website perlombaan nasional yang diselenggarakan oleh DTETI FT UGM"
-    status="Ongoing"
-    link="https://github.com"
-    image="/assets/dm/l10_1.png"
-/>
 </div>
 
-## Contact
+<Steps>
+### Nama
 
-This is a portfolio of my work. I am an Information Engineering undergraduate student in Gadjah Mada University with a passion for building things and working with data. I have brief experience in web development, data engineering, and machine learning. I am always looking for new opportunities to learn and grow and collaborate with others.
+<Tabs items={['Nama Lengkap', 'Nama Panggilan', 'Boleh Dipanggil dengan']}>
+  <Tabs.Tab>Harun</Tabs.Tab>
+  <Tabs.Tab>Harun</Tabs.Tab>
+  <Tabs.Tab>Harun</Tabs.Tab>
+</Tabs>
 
-{/* <div className='border-[3px] overflow-hidden m-auto max-w-[736px]'>
-<iframe scrolling="no" src="https://gco.iarc.fr/today/en/dataviz/bars" className='border-[0] ml-[-185px] h-[1200px] mt-[-500px] w-[926px]'>
-</iframe>
-</div> */}
+<Callout type="info">
+$\text{Fun Fact}$
 
+Namaku, "Harun", membuatku susah masuk Singapura wkwkwk.
+</Callout>
+
+### Pendidikan
+Aku adalah warga lokal Jogjakarta dan saat ini menempuh pendidikan S1 di UGM dengan jurusan Teknologi Informasi.
+
+
+### Hobi
+1. Main game
+2. Suka nulis math equations dengan $\LaTeX$
+3. Ngerjain soal koding prodi lain.
+</Steps>
+
+<br/>
+<div className="text-[5vh]">
+$$
+\text{Kehidupan Profesional}
+$$
+</div>
+
+<Callout type='info'>
+www.linkedin.com/in/runs664
+</Callout>
+
+<Steps>
+### Content
+
+Banyak menulis dalam bentuk web (semacam [lecture notes](lecture-notes/semester-2/complex-variable-analysis/l04#cauchy-riemann-equations)) karena lumayan malas untuk buka catatan yang tidak tersentralisasi.
+
+### Fields of Interest
+
+1. Data Engineering
+2. Web Development
+3. Machine Learning + math behind it
+
+### Way to Communicate
+
+1. Mengajak berpikir bersama
+2. Menyampaikan data dengan grafis
+
+### Current Audience
+
+1. Pemuda Tersesat
+2. Teman-teman rasional
+
+### In Order To
+
+Menerapkan ilmu yang telah dipelajari, mempelajari ilmu baru, serta mencari koneksi.
+</Steps>
+
+<br/>
+<div className="text-[5vh]">
+$$
+\text{Inovasi Pionir } 2024
+$$
+</div>
+
+Karena aku mendaftar dalam divisi IT, pembahasan akan berfokus ke arah tersebut.
+
+<Steps>
+### Aksesibilitas
+
+**I18n**: Untuk taraf internasional, sebaiknya situs pionir menggunakan berbagai bahasa (Indonesia dan Inggris sebagai dasarnya).
+
+**Dark Mode**: Sebagai opsi tambahan untuk kenyamanan pengguna.
+
+### Informasi
+
+**Where I Should be Tomorrow?**: Informasi mengenai kegiatan yang akan dilakukan pionir dan akses menuju tempatnya secara mendetail.
+</Steps>
+
+Adapun selain itu, saran dari saya untuk kegiatan dalam pionir adalah task delegation yang jelas sehingga meminimalisasi agenda rapat secara luring.

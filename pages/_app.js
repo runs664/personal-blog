@@ -9,7 +9,7 @@ const cantarell = Cantarell({
     subsets: ['latin']
 })
 
-const cmuRoman = localFont({src: '../public/font/cmunrm.ttf', variable: '--cmu-roman'});
+const cmuRoman = localFont({src: [{path: '../public/font/cmunrm.ttf', weight: '400'}], variable: '--cmu-roman'});
 
 export default function MyApp({ Component, pageProps }) {
     return (

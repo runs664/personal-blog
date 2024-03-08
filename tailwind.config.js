@@ -17,6 +17,9 @@ module.exports = {
         "green-100": "#486255",
         "green-200": "#86B6A6",
       },
+      fontFamily: {
+        roman: ['var(--cmu-roman)']
+      },
     },
   },
   plugins: [],

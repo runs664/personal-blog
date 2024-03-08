@@ -1,0 +1,209 @@
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Continuity and Derivative
+
+|Nama|Harun|
+|---|---|
+|NIM|23/514148/TK/56466|
+|Kelas|B|
+
+## Continuity
+
+Sebuah fungsi $f$ dikatakan kontinu pada suatu titik $z_0$ jika:
+
+$$
+\lim_{z \to z_0} f(z) = f(z_0)
+$$
+
+yang memiliki kesamaan dengan definisi:
+
+$$
+|f(z) - f(z_0)| < \varepsilon \quad \text{untuk } |z - z_0| < \partial
+$$
+
+maka $f$ kontinu pada $z_0$.
+
+Contoh:
+
+$f(z) = z/(z^2 + 1)$
+
+- $f$ tidak kontinu pada $\pm j$ karena f($\pm j$) tidak terdefinisi
+- $f$ kontinu pada $1$ karena:
+    - $f(1) = 1/2$
+    - $\displaystyle\lim_{z \to 1} f(z) = 1/2$
+
+Contoh:
+
+$f(z) = \begin{cases} \displaystyle\frac{z^2 + 3zi - 2}{z+i}, & z \neq -i \\ 2i, & z = -i \end{cases}$
+
+$f$ tidak kontinu pada $-i$ karena 
+- $$
+    \begin{align*}
+    \lim_{z \to -i} f(z) &= \lim_{z \to -i} \frac{z^2 + 3zi - 2}{z+i} \\
+    &= \lim_{z \to -i} \frac{(z+i)(z+2i)}{z+i} \\
+    &= \lim_{z \to -i} z+2i \\
+    &= -i+2i = i
+    \end{align*}
+    $$
+- $f(-i) = 2i$
+
+Sehingga, karena $\lim_{z \to -i} f(z) \neq f(-i)$, maka $f$ tidak kontinu pada $z=-i$.
+
+<Callout type='info'>
+$\text{Remarks}$
+- $f$ dikatakan kontinu dalam region $R$ jika $f$ kontinu pada setiap titik dalam $R$.
+- Jika $f$ dan $g$ kontinu dalam suatu titik, maka $f+g$, $f-g$, $fg$, $f/g, \ g \neq 0$, dan $f \circ g$ juga kontinu dalam titik tersebut.
+- $f(z) = u(x,y) + iv(x,y)$ kontinu pada $z_0 = x_0 + iy_0$ jika dan hanya jika $u$ dan $v$ kontinu pada $(x_0, y_0)$.
+</Callout>
+
+## Derivative
+
+Derivatif dari fungsi $f$ pada titik $z$ didefinisikan oleh limit sebagai:
+
+$$
+f'(z) = \frac{df}{dz} = \lim_{\partial z \to 0} \frac{f(z + \partial z) - f(z)}{\partial z}
+$$
+
+Jika limit tersebut ada, maka $f$ dikatakan memiliki turunan pada titik $z$.
+
+<Callout type='warning'>
+$\partial z$ adalah suatu bilangan kompleks, sehingga limitnya akan **selalu sama jika didekati dari arah manapun untuk $\partial z \to 0$**. $f$ dikatakan *differentiable* pada $z$ jika limit tersebut ada.
+</Callout>
+
+Contoh:
+
+Carilah turunan dari $f(z) = z^3$.
+
+$$
+\begin{align*}
+f'(z) &= \lim_{\partial z \to 0} \frac{(z + \partial z)^3 - z^3}{\partial z} \\
+&= \lim_{\partial z \to 0} \frac{z^3 + 3z^2\partial z + 3z(\partial z)^2 + (\partial z)^3 - z^3}{\partial z} \\
+&= \lim_{\partial z \to 0} 3z^2 + 3z\partial z + (\partial z)^2 \\
+&= 3z^2
+\end{align*}
+$$
+
+Sehingga, $f$ *differentiable* pada setiap titik dan turunannya adalah $f'(z) = 3z^2$.
+
+Contoh:
+
+Carilah turunan dari $f(z) = \overline{z}$.
+
+$$
+\begin{align*}
+f'(z) &= \lim_{\partial z \to 0} \frac{\overline{z} + \overline{\partial z} - \overline{z}}{\partial z} \\
+&= \lim_{\partial z \to 0} \frac{\overline{\partial z}}{\partial z}
+\end{align*}
+$$
+
+tetapi $\lim_{\partial z \to 0} \overline{\partial z}/\partial z$ tidak ada, sehingga $f$ tidak *differentiable* pada setiap titik.
+
+Contoh:
+
+$f(z) = |z|^2$
+
+$$
+\begin{align*}
+f'(z) &= \lim_{\partial z \to 0} \frac{|z + \partial z|^2 - |z|^2}{\partial z} \\
+&= \lim_{\partial z \to 0} \frac{(z + \partial z)(\overline{z} + \overline{\partial z}) - |z|^2}{\partial z} \\
+&= \overline{z} + \overline{\partial z} + z\frac{\overline{\partial z}}{\partial z}\\
+&= \begin{cases} \overline{z} + \partial z + z, \quad \partial z = \partial x + 0i\\
+\overline{z} - \partial z - z, \quad \partial z = 0 + \partial y i \end{cases}
+\end{align*}
+$$
+
+maka, jika $\lim$ dari $f(z)$ ada, maka:
+
+$$
+\overline{z} + 0 + z = \overline{z} - 0 - z, \quad \implies \quad z = 0
+$$
+
+$\therefore f$ *differentiable* pada $z = 0$ dan $f'(z) = 0$.
+
+**catatan:** $f(z) = |z|^2 = u(x, y) + iv(x, y)$ dimana
+
+$$
+u(x, y) = x^2 + y^2, \quad v(x, y) = 0
+$$
+
+- $f$ kontinu dimanapun karena $u(x, y)$ dan $v(x, y)$ kontinu dimanapun.
+- tetapi $f$ tidak *differentiable* dimanapun karena $f'(z) = 0$ hanya pada $z = 0$.
+
+sehingga, untuk setiap $f$ kita dapat menyimpulkan:
+
+<Callout type='info'>
+Kontinuitas **TIDAK** menjamin *differentiability*. Akan tetapi adanya derivatif berimplikasi akan adanya kontinuitas:
+
+$$
+\lim_{z\to z_0} \left[f(z) - f(z_0)\right] = \lim_{z\to z_0} \left[f'(z)(z - z_0)\right] = 0
+$$
+
+sehingga, jika $f$ *differentiable* pada $z_0$, maka $f$ kontinu pada $z_0$.
+</Callout>
+
+### Differentiation Formulas
+
+- $\displaystyle\frac{dc}{dz} = 0$ dan $\displaystyle\frac{d}{dz}[cf(z)] = cf'(z)$ dimana $c$ adalah konstanta.
+- $\displaystyle\frac{d}{dz}[z^n] = nz^{n-1}$ dimana $n$ adalah bilangan bulat positif.
+- $\displaystyle\frac{d}{dz}[f(z) + g(z)] = f'(z) + g'(z)$
+- $\displaystyle\frac{d}{dz}[f(z)g(z)] = f'(z)g(z) + f(z)g'(z)$
+- jika $h(z) = g(f(z))$, maka $\displaystyle\frac{dh}{dz} = g'(f(z))f'(z)$
+
+### Cauchy-Riemann Equations
+
+Andaikan
+
+$$
+f(z) = u(x, y) + iv(x, y)
+$$
+
+dan $f'(z)$ ada ketika $z_0 = (x_0, y_0), maka
+
+- turunan pertama dari $u$ dan $v$ harus ada di (x_0, y_0)
+- turunan tersebut harus memenuhi **Cauchy-Riemann equations**:
+    $$
+    \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial z} \quad \text{di} (x_0, y_0)
+    $$
+
+dan $f'(z_0)$ dapat dituliskan sebagai:
+
+$$
+f'(z_0) = \frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} = \frac{\partial v}{\partial y} - i\frac{\partial u}{\partial y}
+$$
+
+Contoh: $f(z) = |z|^2$
+
+$$
+u(x, y) = x^2 + y^2, \quad v(x, y) = 0
+$$
+
+jika Cauchy-Riemann equations terpenuhi, maka:
+
+$$
+\begin{align*}
+\frac{\partial u}{\partial x} &= 2x, \quad \frac{\partial v}{\partial y} = 0 \\
+\frac{\partial u}{\partial y} &= 2y, \quad -\frac{\partial v}{\partial x} = 0
+\end{align*}
+$$
+
+maka, $f'(z) = 2x + 2yi$ dan $f'(z) = 0$ hanya pada $z = 0$.
+
+misalkan $z = x + iy = re^{i\theta} \neq 0$ dengan $x = r \cos \theta$ dan $y = \sin \theta$
+
+aplikasikan chain rule:
+
+$$
+\begin{align*}
+\frac{\partial u}{\partial r} = \frac{\partial u}{\partial x}\cos\theta + \frac{\partial u}{\partial y}\sin\theta \quad &\text{dan} \frac{\partial u}{\partial \theta} \quad \frac{\partial u}{\partial \theta} = -r\frac{\partial u}{\partial x}\sin\theta + r\frac{\partial u}{\partial y}\cos\theta\\
+\frac{\partial v}{\partial r} = \frac{\partial v}{\partial x}\cos\theta + \frac{\partial v}{\partial y}\sin\theta \quad &\text{dan} \quad \frac{\partial v}{\partial \theta} = -r\frac{\partial v}{\partial x}\sin\theta + r\frac{\partial v}{\partial y}\cos\theta
+\end{align*}
+$$
+
+substitusikan $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ dan $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$. Sehingga Cauchy-Riemann dalam bentuk polar adalah:
+
+$$
+\begin{align*}
+r\frac{\partial u}{\partial r} = \frac{\partial v}{\partial \theta} \quad \text{dan} \quad  \frac{\partial u}{\partial \theta} = -r\frac{\partial v}{\partial r} 
+\end{align*}
+$$
