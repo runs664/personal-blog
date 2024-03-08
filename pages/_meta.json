@@ -10,8 +10,8 @@
         }
     },
 
-    "portfolio": {
-        "title": "Portfolio",
+    "pionir": {
+        "title": "Pionir",
         "type": "page",
         "theme": {
             "breadcrumb": false,
