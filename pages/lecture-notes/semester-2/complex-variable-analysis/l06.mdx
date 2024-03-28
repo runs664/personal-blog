@@ -1,0 +1,221 @@
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Elementary Function and Complex Calculus
+
+|Nama|Harun|
+|---|---|
+|NIM|23/514148/TK/56466|
+|Kelas|B|
+
+## Elementary Function
+
+### Exponential Function
+
+Fungsi eksponen didefinisikan sebagai
+
+$$
+f(z) = e^z = e^{x + iy} = e^x(\cos y + i \sin y)
+$$
+
+dengan beberapa properti:
+
+- $f(z) = e^z$ analitik dimanapun dalam $\mathbb{C}$
+- $f'(z) = e^z$
+- $e^{z+w} = e^z e^w, \ \forall z, w \in \mathbb{C}$
+- $|e^z| = e^x$ dan $\arg(e^z) = y + 2n\pi, \ n \in \mathbb{Z}$
+- jika $z$ hanya terdiri dari komponen imajiner saja, maka $e^z$ adalah fungsi periodik
+
+berikut adalah mapping (conformal mapping) dari fungsi $f(z) = e^z$:
+
+<Image
+    src="/assets/avk/l06_1.png"
+    alt="Exponential Function"
+    width={1920}
+    height={1080}
+/>
+
+- garis horizontal menjadi sebuah garis yang menuju keluar dari titik origin
+- garis vertikal menjadi lingkaran yang berpusat di titik origin
+
+### Logarithmic Function
+
+Definisi Logarithmic adalah menyelesaikan persamaan
+
+$$
+e^w = z
+$$
+
+dengan $z \neq 0$ dan $w = \log z$
+
+jika $z = re^{i\theta}(-\pi < \theta < \pi)$ serta $w = u + iv$, maka
+
+$$
+e^u = r, \quad v = \theta + 2n\pi
+$$
+
+sehingga definisi lengkap dari fungsi logaritmik (multiple-valued) adalah
+
+$$
+\log z = \log r + i(\theta + 2n\pi), \quad n \in \mathbb{Z}
+$$
+
+jika hanya menggunakan principal value dari $\arg(z)$ saja, maka $\log z$ menjadi single-valued.
+
+Principal value dari $\log z$ adalah
+
+$$
+\log z = \log r + i \text{ Arg } z
+$$
+
+dimana $r = |z|$ dan $\text{Arg } z$ adalah principal value dari $\arg z$.
+
+catatan: jika $z$ kompleks, maka jangan menyimpulkan bahwa $\log (e^z) = z$.
+
+melainkan 
+
+$$
+\log (e^z) = \log |e^z| + i \arg(e^z) = \log e^x + i(y + 2n\pi) = x + i(y + 2n\pi)
+$$
+
+berikut adalah conformal mapping dari fungsi $f(z) = \log z$:
+
+<Image
+    src="/assets/avk/l06_2.png"
+    alt="Logarithmic Function"
+    width={1920}
+    height={1080}
+/>
+
+### Complex Component
+
+Jika $z\neq 0$ dan $c$ adalah bilangan kompleks, maka fungsi $z^c$ didefinisikan sebagai
+
+$$
+z^c = e^{c\log z}
+$$
+
+dalam bentuk principal value, didefinisikan pula sebagai
+
+$$
+z^c = e^{c(\log |z| + i \text{ arg } z)}
+$$
+
+<Callout type='error'>
+Sifat aljabar biasa tidak berlaku apabila $z^c$ bersifat multiple-valued!
+
+$$
+(j^j)\cdot (j^{-j}) \neq j^0 = 1
+$$
+</Callout>
+
+catatan: kompleks dipangkatkan kompleks bisa menjadi bilangan real.
+
+### Trigonometric Function
+
+dengan Euler's formula, kita bisa mendefinisikan fungsi trigonometri dalam bentuk eksponen
+
+$$
+e^{ix} = \cos x + i \sin x
+$$
+
+bisa dituliskan sebagai
+
+$$
+\sin x = \frac{e^{ix} - e^{-ix}}{2i}, \quad \cos x = \frac{e^{ix} + e^{-ix}}{2}
+$$
+
+### Hyperbolic Function
+
+fungsi hiperbolik sinus, cosinus, didefinisikan sebagai
+
+$$
+\sinh x = \frac{e^x - e^{-x}}{2}, \quad \cosh x = \frac{e^x + e^{-x}}{2}
+$$
+
+dengan properti:
+
+- $\sinh z$ dan $\cosh z$ adalah fungsi analitik dimanapun dalam $\mathbb{C}$
+- $\frac{d}{dz} \sinh z = \cosh z$ dan $\frac{d}{dz} \cosh z = \sinh z$
+
+## Derivatives of Functions
+
+sebuah persamaan
+
+$$
+w(t) = u(t) + iv(t)
+$$
+
+dengan $u(t)$ dan $v(t)$ adalah fungsi real dari $t$, maka turunan dari $w(t)$ adalah
+
+$$
+\frac{dw}{dt} = \frac{du}{dt} + i\frac{dv}{dt}
+$$
+
+<Callout type='error'>
+**mean-value theorem** tidak berlaku untuk fungsi kompleks!
+</Callout>
+
+## Definite Integral of Functions
+
+sebuah integral dari fungsi kompleks
+
+$$
+w(t) = u(t) + iv(t)
+$$
+
+dalam interval $a \leq t \leq b$ adalah
+
+$$
+\int_a^b w(t) dt = \int_a^b u(t) dt + i \int_a^b v(t) dt
+$$
+
+dengan properti integral:
+
+- $\int_a^b w(t) dt = \int_a^c w(t) dt + \int_c^b w(t) dt$
+- $\int_a^b c w(t) dt = c \int_a^b w(t) dt$
+- $\int_b^a w(t) dt = -\int_a^b w(t) dt$
+
+<Callout type='info'>
+**Fundamental Theorem of Calculus** berlaku untuk fungsi kompleks
+
+anggap
+
+$$
+W(t) = U(t) + iV(t) \quad \text{dan} \quad w(t) = u(t) + iv(t)
+$$
+
+kontinu pada interval $a \leq t \leq b$, maka
+
+$$
+\int_a^b w(t) dt = U(b) - U(a) + i(V(b) - V(a))
+$$
+
+sehingga
+
+$$
+\int_a^b w(t) dt = W(b) - W(a)
+$$
+</Callout>
+
+contoh: hitunglah 
+
+$$
+\int_0^{\pi/6} e^{i2t} dt
+$$
+
+karena
+
+$$
+\frac{d}{dt} \left(\frac{e^{i2t}}{2i}\right) = e^{i2t}
+$$
+
+maka
+
+$$
+\begin{align*}
+\int_0^{\pi/6} e^{i2t} dt &= \frac{e^{i2\pi/6}}{2i} - \frac{e^{i2\cdot 0}}{2i} \\
+&= \frac{e^{i\pi/3}}{2i} - \frac{1}{2i} \\
+&= \frac{\sqrt{3}}{4} + \frac{i}{4}
+\end{align*}
+$$

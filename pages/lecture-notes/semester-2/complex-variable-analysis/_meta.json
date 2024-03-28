@@ -10,5 +10,11 @@
     },
     "l04" : {
         "title" : "Continuity and Differentiability"
+    },
+    "l05" : {
+        "title" : "Analytic Function"
+    },
+    "l06" : {
+        "title" : "Elementary Function and Complex Calculus"
     }
 }

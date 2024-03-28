@@ -1,0 +1,150 @@
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Analytic Function
+
+|Nama|Harun|
+|---|---|
+|NIM|23/514148/TK/56466|
+|Kelas|B|
+
+## Definition
+
+$f$ dikatakan **analitik** di $z_0$ jika $f$ memiliki turunan di $z_0$ dan seluruh poin dalam neighborhood $z_0$.
+
+- analitik disebut juga dengan regular dan holomorphic.
+- $f$ analitik dalam domain $D$ jika $f$ memiliki turunan di setiap poin dalam $D$.
+- jika $f$ analitik di $z_0$ maka $z_0$ dikatakan poin regular di $f$.
+- jika $f$ tidak analitik di $z_0$ tetapi analitik di setiap poin dalam neighborhood $z_0$ maka $z_0$ dikatakan singular point di $f$.
+- sebuah fungsi analitik di setiap poin dalam domainnya disebut *entire*.
+
+anggap $f(z) = u(x, y) + iv(x, y)$ terdefinisi dalam domain $D$
+
+### Theorem
+
+<Callout type='info'>
+$f(z)$ analitik di $D$ jika dan hanya jika $f(z)$ memenuhi:
+1. $u(x, y)$ dan $v(x, y)$ memiliki turunan pertama parsial yang kontinu.
+2. Memenuhi persamaan Cauchy-Riemann.
+</Callout>
+
+Contoh
+
+1. $f(z) = z$ adalah analitik di setiap poin dalam $\mathbb{C}$.
+2. $f(z) = \bar{z}$ tidak analitik di setiap poin dalam $\mathbb{C}$ karena
+    $$
+    \frac{\partial u}{\partial x} = 1 \neq -1 = \frac{\partial v}{\partial y}
+    $$
+3. $f(z) = e^z = z^x \cos x + ie^x \sin y$ adalah analitik di setiap poin dalam $\mathbb{C}$.
+    $$
+    \frac{\partial u}{\partial x} = e^x \cos y = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -e^x \sin y = -\frac{\partial v}{\partial x}
+    $$
+4. $f(z) = (z + 1)(z^2 + 1)$ adalah analitik di setiap poin dalam $\mathbb{C}$.
+
+## Theorems of Analytic Function
+
+anggap $f$ adalah analytic function di titik manapun dalam $D$.
+
+<Callout type="info">
+1. Jika $f'(z) = 0$ dimanapun dalam $D$ maka $f(z) = 0$ haruslah konstan di $D$.
+2. Jika $f$ adalah *real valued* $\forall z \in D$ maka $f$ haruslah konstan di $D$.
+</Callout>
+
+Sebuah fungsi $f(z) = u(x, y) + iv(x, y)$ dan konjugatnya $\bar{f}(z) = u(x, y) - iv(x, y)$ adalah analitik di $D$. Maka $f(z)$ harus konstan di $D$:
+
+$$
+\begin{align*}
+f(z) = u(x, y) + iv(x, y) \ \quad \text{analitik, maka} \ \quad \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \ \quad \text{dan} \ \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}\\
+\bar{f}(z) = u(x, y) - iv(x, y) \ \quad \text{analitik, maka} \ \quad \frac{\partial u}{\partial x} = -\frac{\partial v}{\partial y} \ \quad \text{dan} \ \quad \frac{\partial u}{\partial y} = \frac{\partial v}{\partial x}
+\end{align*}
+$$
+
+Dari kedua persamaan diatas, kita dapatkan:
+
+$$
+u_x = 0 \quad \text{dan} \quad v_x = 0
+$$
+
+sehingga
+
+$$
+f'(z) = u_x + iv_x = 0
+$$
+
+Sebuah fungsi $f$ analitik dalam region $D$, dan modulusnya $|f(z)|$ konstan di $D$, maka $f(z)$ haruslah konstan di $D$.
+
+$$
+|f(z)| = c, \quad \forall z \in D
+$$
+
+dimana $c$ adalah konstanta real.
+
+jika $c = 0$ maka $f(z) = 0$ di $D$.
+
+jika $c \neq 0$ maka:
+
+$$
+f(z)\overline{f(z)} = c^2 \rightarrow \overline f(z) = \frac{c^2}{f(z)}, \quad \forall z \neq 0 \in D
+$$
+
+## Harmonic Function
+
+Sebuah fungsi $u(x, y)$ adalah **harmonic** di $D$ jika $u(x, y)$ memiliki turunan kedua parsial yang kontinu dan memenuhi persamaan Laplace:
+
+$$
+\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
+$$
+
+### Theorem
+
+<Callout type="info">
+Jika $f(z) = u(x, y) + iv(x, y)$ adalah analitik di $D$ maka $u(x, y)$ dan $v(x, y)$ adalah harmonic di $D$.
+</Callout>
+
+contoh: $f(z) = e^{-y} \sin x - ie^{-y} \cos x$
+
+- $f$ entire karena
+    $$
+    \frac{\partial u}{\partial x} = e^{-y} \cos x = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -e^{-y} \sin x = -\frac{\partial v}{\partial x}
+    $$
+
+- $f$ harmonic karena
+    $$
+    \frac{\partial^2 u}{\partial x^2} = -e^{-y} \sin x
+    $$
+    dan
+    $$
+    \frac{\partial^2 u}{\partial y^2} = e^{-y} \sin x
+    $$
+    sehingga
+    $$
+    \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = -e^{-y} \sin x + e^{-y} \sin x = 0
+    $$
+
+## Harmonic Conjugate
+
+$v$ dikatakan **harmonic conjugate** dari $u$ jika
+1. $u$ dan $v$ adalah harmonic di $D$.
+2. turunan pertama $u$ dan $v$ memenuhi persamaan Cauchy-Riemann.
+
+contoh: $f(z) = z^2$
+- karena $f$ entire, maka $u$ dan $v$ adalah harmonic di $D$.
+- karena $f$ analitik, maka $u$ dan $v$ memenuhi persamaan Cauchy-Riemann.
+
+sehingga $v$ adalah harmonic conjugate dari $u$.
+
+### Theorem
+
+<Callout type="info">
+$f(z) = u(x, y) + iv(x, y)$ adalah analitik di $D$ jika dan hanya jika $v(x, y)$ adalah harmonic conjugate dari $u(x, y)$ di $D$.
+</Callout>
+
+contoh: $f = 2xy + i(x^2 - y^2)$
+
+- $f$ tidak analitik kecuali saat $z = 0$ karena
+    $$
+    \frac{\partial u}{\partial x} = 2y \neq -2y = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = 2x \neq 2x = -\frac{\partial v}{\partial x}
+    $$
+    sehingga $f$ tidak memenuhi persamaan Cauchy-Riemann.
+
+sehingga $f$ tidak analitik di $D$.
