@@ -1,0 +1,141 @@
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Contour and Antiderivatives
+
+|Nama|Harun|
+|---|---|
+|NIM|23/514148/TK/56466|
+|Kelas|B|
+
+## Contour
+
+### Arcs
+
+Arc adalah sebuah himpunan poin $z = (x, y)$ dalam sebuah bidang kompleks yang memenuhi:
+
+$$
+x = x(t), \quad y = y(t), \quad \text{atau} \quad z(t) = x(t) + iy(t)
+$$
+
+dimana $x(t)$ dan $y(t)$ adalah fungsi-fungsi kontinu dari $t$ dalam interval tertentu $a \leq t \leq b$.
+
+- arc disebut simpel atau *Jordan Arc* jika fungsi $z(t)$ adalah satu-satu pada interval $a \leq t \leq b$, atau $z(t) \neq z(s)$ untuk $t \neq s$.
+- arc disebut tertutup jika $z(a) = z(b)$ untuk $a, b$ adalah batas interval $t$.
+- arc disebut simpel tertutup apabila fungsi $z(t)$ adalah satu-satu pada interval $a \leq t \leq b$ dan $z(a) = z(b)$.
+
+<Callout type='info'>
+Kurva tertutup **berorientasi positif** jika arahnya berlawanan dengan arah jarum jam.
+</Callout>
+
+### Contour
+
+Arc dapat diturunkan apabila komponen $x'(t)$ dan $y'(t)$ dari persamaan:
+
+$$
+z'(t) = x'(t) + iy'(t)
+$$
+
+adalah kontinu pada interval $a \leq t \leq b$.
+
+arc $z = z(t) \quad a \leq t \leq b$ disebut **smooth** jika
+
+- $z'(t)$ kontinu pada $a \leq t \leq b$
+- dan $z'(t) \neq 0$ untuk $a \leq t \leq b$.
+
+gabungan dari sejumlah arc yang smooth disebut **contour**.
+
+### Contour Integral
+
+Jika $f(z)$ adalah fungsi yang kontinu pada contour $C$ yang smooth, maka integral dari $f(z)$ sepanjang $C$ didefinisikan sebagai:
+
+$$
+\int_C f(z) \, dz = \int_a^b f(z(t))z'(t) \, dt
+$$
+
+sebagai integral garis atau kontur dari $f$ sepanjang $C$ didefinisikan oleh parameter $t$.
+
+jika $C$ adalah kontur tertutup, maka integral dari $f(z)$ sepanjang $C$ didefinisikan sebagai:
+
+$$
+\oint_C f(z) \, dz = \int_C f(z) \, dz
+$$
+
+## Antiderivatives
+
+### Independence of Path
+
+dengan asumsi bahwa:
+
+- $D$ adalah domain sehingga $f:D \to \mathbb{C}$ adalah fungsi yang kontinu
+- $C$ adalah kontur di $D$ yang dimulai dari $z_0$ dan berakhir di $z_1$
+
+dikatakan bahwa $f(z)$ memiliki antiderivatif di $D$ jika untuk setiap kontur $C$ di $D$ yang berakhir di $z_1$ dan $z_2$ maka:
+
+$$
+F'(z) = \frac{d}{dz}F(z) = f(z)
+$$
+
+<Callout type='info'>
+**Theorem**:
+
+jika $f$ memiliki antiderivasi $F$ di $D$, maka integral dari $f$ sepanjang $C$ didefinisikan oleh:
+
+$$
+\int_C f(z) \, dz = F(z_1) - F(z_0)
+$$
+</Callout>
+
+## Cauchy-Goursat Theorem
+
+jika $D$ adalah domain terbatas dimana batas $C$ adalah smooth, maka
+
+<Callout type='info'>
+**Theorem**:
+
+jika $f(z)$ analitik dan $f'(z)$ kontinu di $D$ dan $C$, maka:
+
+$$
+\oint_C f(z) \, dz = 0
+$$
+</Callout>
+
+## Green's Theorem
+
+jika $P(x, y)$ dan $Q(x, y)$ memiliki turunan parsial yang kontinu di $D$ dan $C$ adalah kontur yang smooth di $D$, maka:
+
+<Callout type='info'>
+**Theorem**:
+
+$$
+\oint_C P \, dx + Q \, dy = \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dx \, dy
+$$
+</Callout>
+
+jika sebuah kontur $C$ melingkupi seluruh kontur $c_1, c_2, \ldots, c_n$ dimana $c_1, c_2, \ldots, c_n$ adalah kontur simpel tertutup berlwanan arah dari $C$, maka:
+
+$$
+\int_C f(z) \, dz = \sum_{k=1}^n \int_{c_k} f(z) \, dz
+$$
+
+### Upperbound for Contour Integrals
+
+jika $|f(z)| \leq M$ untuk setiap $z$ di $C$ dan panjang $C$ adalah $L$, maka:
+
+$$
+\left| \int_C f(z) \, dz \right| \leq ML
+$$
+
+## Derivatives of Analytic Functions
+
+jika $D$ adalah domain yang tersambung dan $z_0$ adalah interior poin dari $D$, maka:
+
+<Callout type='info'>
+**Theorem**:
+
+jika $f(z)$ adalah analitik di $D$, maka $f'(z)$ adalah analitik di $D$.
+
+$$
+f^{(n)}(z) = \frac{n!}{2\pi i} \oint_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, d\zeta
+$$
+</Callout>

@@ -1,0 +1,320 @@
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Partial Fraction and Cauchy Integrals
+
+|Nama|Harun|
+|---|---|
+|NIM|23/514148/TK/56466|
+|Kelas|B|
+
+## Partial Fraction
+
+Kita dapat mencari koefisien $r_i$ sedemikian sehingga
+
+$$
+\begin{align*}
+\hat{u}(s) &= \frac{n(s)}{d(s)} = \frac{n(s)}{(s-p_1)(s-p_2)\cdots(s-p_n)} \\
+&= \frac{r_1}{s-p_1} + \frac{r_2}{s-p_2} + \cdots + \frac{r_n}{s-p_n}
+\end{align*}
+$$
+
+yang disebut **partial fraction expansion** untuk beberapa kasus berikut:
+
+1. $d(s)$ memiliki akar seluruhnya real berbeda.
+2. $d(s)$ memiliki akar seluruhnya real namun ada yang berulang.
+3. $d(s)$ memiliki akar kompleks berulang.
+
+### Real, Non-repeated Roots
+
+Misalkan sebuah fungsi rasional $\hat{y}(s)$ memiliki bentuk
+
+$$
+\hat{y}(s) = \frac{n(s)}{(s-p_1)(s-p_2)\cdots(s-p_n)}
+$$
+
+dengan $p_1, p_2, \ldots, p_n$ adalah akar-akar berbeda dari $d(s)$. Maka, kita dapat menuliskan $\hat{y}(s)$ sebagai
+
+<Callout type='info'>
+**THEOREM**
+
+$$
+\hat{y}(s) = \frac{r_1}{s-p_1} + \frac{r_2}{s-p_2} + \cdots + \frac{r_n}{s-p_n}
+$$
+
+dengan $r_i$ adalah konstanta real.
+</Callout>
+
+dengan langkah:
+
+<Callout type='warning'>
+- Terdapat $n$ persamaan yang harus diselesaikan untuk mencari $r_i$.
+- Untuk mencari $r_i$, kita dapat menyelesaikan untuk $s = p_i$.
+
+$$
+\begin{equation}
+r_i = \hat{y}(s)(s-p_i)\Big|_{s=p_i}
+\end{equation}
+$$
+</Callout>
+
+Contoh:
+
+$$
+f(x) = \frac{2x + 6}{x^2 + 3x + 2}
+$$
+
+pisahkan menjadi 2 pecahan berbeda (polinomial berderajat 2):
+
+$$
+f(x) = \frac{2x + 6}{(x+1)(x+2)} = \frac{A}{x+1} + \frac{B}{x+2}
+$$
+
+cari nilai $A$:
+
+$$
+A = \frac{2x + 6}{x+2}\Big|_{x=-1} = \frac{2(-1) + 6}{-1+2} = 4
+$$
+
+cari nilai $B$:
+
+$$
+B = \frac{2x + 6}{x+1}\Big|_{x=-2} = \frac{2(-2) + 6}{-2+1} = -2
+$$
+
+sehingga, $f(x)$ dapat dituliskan sebagai
+
+$$
+f(x) = \frac{4}{x+1} - \frac{2}{x+2}
+$$
+
+Namun,
+
+### Real, **Repeated** Roots
+
+Misalkan sebuah fungsi rasional $\hat{y}(s)$ memiliki bentuk
+
+$$
+\hat{y}(s) = \frac{n(s)}{(s-p_1)^q(s-p_2)\cdots(s-p_n)}
+$$
+
+dengan $p_1, p_2, \ldots, p_n$ adalah akar-akar berbeda dari $d(s)$ dan $q$ adalah pangkat akar yang berulang. Maka, kita **tidak dapat** menggunakan metode sebelumnya. Sebagai gantinya, kita dapat menuliskan $\hat{y}(s)$ sebagai:
+
+<Callout type='info'>
+$$
+\begin{align*}
+\hat{y}(s) &= \frac{r_1}{s-p_1} + \frac{r_2}{(s-p_1)^2} + \cdots + \frac{r_q}{(s-p_1)^q} + \frac{r_{q+1}}{s-p_2} + \cdots + \frac{r_n}{s-p_n} \\
+&= \left(\frac{r_{11}}{s-p_1} + \frac{r_{12}}{(s-p_1)^2} + \cdots + \frac{r_{1q}}{(s-p_1)^q}\right) + \left(\frac{r_{q+1}}{s-p_2} + \cdots + \frac{r_n}{s-p_n}\right)
+\end{align*}
+$$
+
+dengan $r_{ij}$ real-valued.
+</Callout>
+
+contoh untuk $\displaystyle \frac{(s + 3)^2}{(s + 2)^3 (s + 1)^2}$, kita dapat menuliskannya sebagai
+
+$$
+\frac{r_{11}}{s+2} + \frac{r_{12}}{(s+2)^2} + \frac{r_{13}}{(s+2)^3} + \frac{r_{21}}{s+1} + \frac{r_{22}}{(s+1)^2}
+$$
+
+kita dapat suatu masalah dengan lebih banyak koefisien yang dicari.
+
+Langkah pertama: selesaikan seperti sebelumnya jika $p_i$ tidak berulang ($q$ = 1)
+
+Langkah kedua: selesaikan untuk $r_{ij}$ jika $p_i$ berulang ($q$ > 1) dengan mengalikannya dengan $(s-p_i)^{q}$. Lalu evaluasi untuk nilai $s = p_i$.
+
+$$
+r_{1q} = \hat{y}(s)(s-p_1)^{q}\Big|_{s=p_1}
+$$
+
+Untuk mencari koefisien yang lain, kita dapat menggunakan turunan:
+
+$$
+\frac{d}{ds} \ (\hat{y}(s)(s - p_1)^q)\big|_{s=p_1} \ = \ r_{1,(q - 1)}
+$$
+
+dengan ekspansi
+
+<Callout type='info'>
+$$
+r_{1,j} = \frac{1}{(q - j - 1)!} \ \frac{d^{q - j - 1}}{ds^{q - j - 1}} \ (\hat{y}(s)(s - p_1)^q)\big|_{s=p_1}
+$$
+</Callout>
+
+contoh sederhana $\displaystyle \frac{x + 3}{(x + 2)^2 (x + 1)}$, kita dapat menuliskannya sebagai
+
+$$
+f(x) = \frac{r_{11}}{x+2} + \frac{r_{12}}{(x+2)^2} + \frac{r_2}{x+1}
+$$
+
+cari nilai $r_{2}$:
+
+$$
+r_{2} = \frac{x + 3}{(x+2)^2}\Big|_{x=-1} = \frac{-1 + 3}{(-1+2)^2} = 2
+$$
+
+cari nilai $r_{12}$:
+
+$$
+r_{12} = \frac{x + 3}{x+1}\Big|_{x=-2} = \frac{-2 + 3}{(-2+1)} = -1
+$$
+
+lalu lakukan diferensiasi untuk menghitung $r_{11}$:
+
+$$
+\begin{align*}
+r_{11} &= \frac{d}{dx} \left(\frac{x + 3}{x+1}\right)\Big|_{x=-2} \\
+&= \left(\frac{1}{x+1} - \frac{s+3}{(s+1)^2}\right) \Big|_{x=-2} \\
+&= -2
+\end{align*}
+$$
+
+sehingga kita memiliki $f(x)$ sebagai
+
+$$
+f(x) = \frac{-2}{x+2} + \frac{-1}{(x+2)^2} + \frac{2}{x+1}
+$$
+
+### Complex Roots
+
+Misalkan sebuah fungsi rasional $\hat{y}(s)$ memiliki bentuk
+
+$$
+\hat{y}(s) = \frac{3}{s(s^2 + 2s + 5)}
+$$
+
+memiliki akar $s = 0$, $s = -1 + 2i$, dan $s = -1 - 2i$. Perhatikan bahwa:
+
+- Akar kompleks selalu berpasangan konjugat.
+- Simple partial fractions dapat digunakan namun penyelesaiannya sangat kompleks.
+
+Contoh:
+
+$$
+f(x) = \frac{2(x + 2)}{(s + 1)(s^2 + 4)} = \underbrace{\frac{k_1s + k_2}{s^2 + 4}}_{\text{complex}} + \underbrace{\frac{r_1}{s + 1}}_{\operatorname{Re}}
+$$
+
+cari koefisien dari $r_1$:
+
+$$
+r_1 = \frac{2(s + 2)}{s^2 + 4}\Big|_{s=-1} = \frac{2(-1 + 2)}{(-1)^2 + 4} = \frac{2}{5}
+$$
+
+kalikan dengan $(s^2 + 4)(s + 1)$:
+
+$$
+2(s + 2) = (s + 1)(k_1s + k_2) + r_1(s^2 + 4)
+$$
+
+ekspansi dan masukkan nilai $r_1 = 2/5$:
+
+$$
+2s + 4 = (k_1 + 2/5)s^2 + (k_2 + k_1)s + k_2 + 8/5
+$$
+
+menyamakan koefisien LHS dan RHS:
+
+- $s^2$: $k_1 + 2/5 = 0 \Rightarrow k_1 = -2/5$
+- $s$: $k_2 + k_1 = 2 \Rightarrow k_2 = 2 + 2/5 = 12/5$
+
+sehingga, $f(x)$ dapat dituliskan sebagai
+
+$$
+f(x) = \frac{-2s + 12}{s^2 + 4} + \frac{2}{5(s + 1)}
+$$
+
+
+
+### Contoh lain
+
+$$
+f(x) = \frac{x + 3}{(x + 5)(x^2 + 4x + 5)} = \frac{r_1}{x + 5} + \frac{k_1x + k_2}{x^2 + 4x + 5}
+$$
+
+cari nilai $r_1$:
+
+$$
+r_1 = \frac{x + 3}{x^2 + 4x + 5}\Big|_{x=-5} = \frac{-5 + 3}{(-5)^2 + 4(-5) + 5} = \frac{-2}{10} = -\frac{1}{5}
+$$
+
+kalikan dengan $(x^2 + 4x + 5)(x + 5)$:
+
+$$
+x + 3 = (k_1x + k_2)(x + 5) + r_1(x^2 + 4x + 5)
+$$
+
+ekspansi dan masukkan nilai $r_1 = -1/5$:
+
+$$
+x + 3 = (k_1x + k_2)(x + 5) - \frac{1}{5}(x^2 + 4x + 5)
+$$
+
+menyamakan koefisien LHS dan RHS:
+
+- $x^2$: $k_1 = 1/5$
+- $x$: $5k_2 - 1 = 3 \Rightarrow k_2 = 4/5$
+
+sehingga, $f(x)$ dapat dituliskan sebagai
+
+$$
+f(x) = \frac{-1}{5(x + 5)} + \frac{x+4}{5(x^2 + 4x + 5)}
+$$
+
+$\therefore$ ini adalah penggunaan *denominator quadratic form*.
+
+## Tambahan
+
+## Cauchy-Goursat Theorem
+
+jika $D$ adalah domain terbatas dimana batas $C$ adalah smooth, maka
+
+<Callout type='info'>
+**Theorem**:
+
+jika $f(z)$ analitik dan $f'(z)$ kontinu di $D$ dan $C$, maka:
+
+$$
+\oint_C f(z) \, dz = 0
+$$
+</Callout>
+
+## Green's Theorem
+
+jika $P(x, y)$ dan $Q(x, y)$ memiliki turunan parsial yang kontinu di $D$ dan $C$ adalah kontur yang smooth di $D$, maka:
+
+<Callout type='info'>
+**Theorem**:
+
+$$
+\oint_C P \, dx + Q \, dy = \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dx \, dy
+$$
+</Callout>
+
+jika sebuah kontur $C$ melingkupi seluruh kontur $c_1, c_2, \ldots, c_n$ dimana $c_1, c_2, \ldots, c_n$ adalah kontur simpel tertutup berlwanan arah dari $C$, maka:
+
+$$
+\int_C f(z) \, dz = \sum_{k=1}^n \int_{c_k} f(z) \, dz
+$$
+
+### Upperbound for Contour Integrals
+
+jika $|f(z)| \leq M$ untuk setiap $z$ di $C$ dan panjang $C$ adalah $L$, maka:
+
+$$
+\left| \int_C f(z) \, dz \right| \leq ML
+$$
+
+## Derivatives of Analytic Functions
+
+jika $D$ adalah domain yang tersambung dan $z_0$ adalah interior poin dari $D$, maka:
+
+<Callout type='info'>
+**Theorem**:
+
+jika $f(z)$ adalah analitik di $D$, maka $f'(z)$ adalah analitik di $D$.
+
+$$
+f^{(n)}(z) = \frac{n!}{2\pi i} \oint_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} \, d\zeta
+$$
+</Callout>
+

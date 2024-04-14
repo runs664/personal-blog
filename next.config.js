@@ -26,4 +26,4 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 }
 
-module.exports = withNextra(withPWA(nextConfig))
+module.exports = withNextra(nextConfig)

@@ -1,0 +1,271 @@
+import { Callout } from 'nextra/components';
+
+# Diagonalizing a Matrix
+
+<Callout type='info'>
+1. Kolom dari $AX = X\Lambda$ adalah $Ax_k = \lambda_k x_k$ dimana $\Lambda$ adalah matriks diagonal eigenvalue.
+2. Eigenvector independen sejumlah $n$ dalam $X$ dapat mendiagonalisasi $A$ $\boxed{A = X\Lambda X^{-1}}$.
+3. Eigenvector matrix $X$ juga mendiagonalisasi seluruh pangkat dari $A^k$ $\boxed{A^k = X\Lambda^k X^{-1}}$.
+4. Selesaikan $u_{k+1} = Au_k$ dengan $u_k = A^k u_0 = X\Lambda^k X^{-1} u_0 = \boxed{c_1 \lambda_1^k x_1 + c_2 \lambda_2^k x_2 + \cdots + c_n \lambda_n^k x_n}$
+5. Jika **tidak ada eigenvalue** yang berulang, maka $A$ dapat didiagonalisasi serta diinvers menjadi $A = X\Lambda X^{-1}$.
+    
+    Jika **ada eigenvalue** yang berulang, maka $A$ bisa jadi memiliki sedikit eigenvector independen, sehingga $X^{-1}$ tidak selalu ada.
+
+6. Setiap matriks $C = B^{-1}AB$ **memiliki eigenvalues yang sama** dengan $A$.
+</Callout>
+
+## Diagonalization
+
+<Callout type='warning'>
+Jika ada sebuah $n \times n$ matrix $A$ yang memiliki tepat $n$ independet eigenvector $x_1, \ldots, x_n$ yang dimasukkan dalam kolom dari matrix $X$, maka $A$ dapat didekomposisi menjadi $A = X\Lambda X^{-1}$ dimana $\Lambda$ adalah matriks diagonal dari eigenvalues $\lambda_1, \ldots, \lambda_n$ dari $A$.
+
+$$
+A = X\Lambda X^{-1} = \begin{bmatrix} x_1 & x_2 & \cdots & x_n \end{bmatrix} \begin{bmatrix} \lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n \end{bmatrix} \begin{bmatrix} x_1 & x_2 & \cdots & x_n \end{bmatrix}^{-1}
+$$
+
+Didefinisikan pula bahwa $X^{-1}AX$ adalah matrix eigenvalue $\Lambda$:
+
+$$
+X^{-1}AX = \Lambda = \begin{bmatrix} \lambda_1 & 0 & \cdots & 0 \\ 0 & \lambda_2 & \cdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & \lambda_n \end{bmatrix}
+$$
+</Callout>
+
+**Contoh**
+
+Untuk matriks $A = \begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix}$, kita dapat mencari eigenvalue terlebih dahulu:
+
+$$
+\begin{vmatrix} 1 - \lambda & 5 \\ 0 & 6 - \lambda \end{vmatrix} = 0 \implies (1 - \lambda)(6 - \lambda) = 0 \implies \lambda = 1, 6
+$$
+
+Kemudian, kita cari eigenvector dari masing-masing eigenvalue:
+
+1. Untuk $\lambda = 1$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 - 1 & 5 \\ 0 & 6 - 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} 0 & 5 \\ 0 & 5 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\text{(write in term of nullspaces)} &\rightarrow \text{rref}(A-I)\\
+&= \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}\\
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} x_1 \\ 0 \end{bmatrix} = x_1 \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+\end{align*}
+$$
+
+2. Untuk $\lambda = 6$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 - 6 & 5 \\ 0 & 6 - 6 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} -5 & 5 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\text{(write in term of nullspaces)} &\rightarrow \text{rref}(A-6I) \\
+&= \begin{bmatrix} 1 & -1 \\ 0 & 0 \end{bmatrix}\\
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} x_2 \\ x_2 \end{bmatrix} = x_2 \begin{bmatrix} 1 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+Sehingga kita dapat menuliskan matriks $X$:
+
+$$
+X = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+$$
+
+Kemudian, selesaikan $X^{-1}AX$:
+
+$$
+\begin{align*}
+X^{-1}AX &= \begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \\
+&= \begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 11 \\ 0 & 6 \end{bmatrix} \\
+\Lambda &= \begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix} = \begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}
+\end{align*}
+$$
+
+Jika diperhatikan, untuk $A^2$ kita dapat menuliskan:
+
+$$
+A^2 = X\Lambda X^{-1} X\Lambda X^{-1} = X\Lambda^2 X^{-1}
+$$
+
+Dimana $X^{-1}X = I$ sehingga dalam bentuk umum:
+
+### Form of $A^k$
+
+<Callout type='info'>
+$$
+A^k = X\Lambda^k X^{-1}
+$$
+</Callout>
+
+## Why is $AX = X\Lambda$?
+
+Ingat bahwa matriks $A$ dibentuk dari kolom-kolom eigenvector yang dikalikan dengan skalar eigenvalue $[\lambda x_1, \lambda x_2, \ldots, \lambda x_n]$:
+
+$$ 
+AX = A \left[ \begin{array}{ccc}  &  &  \\ x_1 & \cdots & x_n \\  &  &  \end{array} \right] = \left[ \begin{array}{ccc}  &  &  \\ \lambda_1 x_1 & \cdots & \lambda_n x_n \\  &  &  \end{array} \right]
+$$
+
+Dengan memisahkan matriks didapatkan:
+
+$$
+\underbrace{\left[ \begin{array}{ccc}  &  &  \\ \lambda_1 x_1 & \cdots & \lambda_n x_n \\  &  &  \end{array} \right]}_{AX} = \underbrace{\left[ \begin{array}{ccc}  &  &  \\ x_1 & \cdots & x_n \\  &  &  \end{array} \right]}_X \underbrace{\left[ \begin{array}{ccc} \lambda &  &  \\  & \ddots &  \\  &  & \lambda \end{array} \right]}_\Lambda
+$$
+
+Sehingga dapat lebih jauh dituliskan:
+
+<Callout type='info'>
+$$
+AX = X\Lambda \implies \boxed{A = X\Lambda X^{-1}} \ \text{atau} \ \boxed{\Lambda = X^{-1}AX}
+$$
+</Callout>
+
+### Solving $A^k$
+
+Contoh untuk matriks $A = \begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix}^k$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix}^k &= \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 6 \end{bmatrix}^k \begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix}\\
+&= \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 6^k \end{bmatrix} \begin{bmatrix} 1 & -1 \\ 0 & 1 \end{bmatrix}\\
+A^k &= \begin{bmatrix} 1 & 6^k-1 \\ 0 & 6^k \end{bmatrix}
+\end{align*}
+$$
+
+dengan $k = 1 \rightarrow A$, $k = 0 \rightarrow I$.
+
+## Remarks
+
+1. Seluruh matriks yang memiliki eigenvalue unik dapat didiagonalisasi.
+2. Eigenvector dapat dikalikan dengan konstanta nonzero apapun.
+3. Urutan eigenvector di $X$ sesuai dengan urutan eigenvalue di $\Lambda$. Sehingga apabila ingin $A$ dibalik, maka $X$ juga harus dibalik.
+
+    $$
+    \begin{bmatrix} 0 & 1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} 1 & 5 \\ 0 & 6 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 6 & 0 \\ 0 & 1 \end{bmatrix}
+    $$
+
+4. Jika $A$ memiliki eigenvalue yang berulang, maka $A$ mungkin tidak dapat didiagonalisasi. Namun perlu diingat bahwa tidak ada kaitan antara invertibilitas dan diagonalisitas.
+    - Invertibilitas ditentukan oleh eigenvalues (ada atau tidaknya nol).
+    - Diagonalisasi ditentukan oleh eigenvectors (ada atau tidaknya eigenvector independen yang cukup).
+
+<Callout type='info'>
+**$X$ unik dari setiap $\lambda$**
+
+Eigenvector $x_1, \ldots, x_n$ memiliki skalar konstanta berbeda yang unik berupa eigenvalues yang saling independen. Sehingga **setiap $n \times n$ matrix $A$ yang memiliki $n$ eigenvector independen pasti bisa didiagonalisasi**.
+</Callout>
+
+### Continue: Matrix Power
+
+Setiap nilai yang dipangkatkan dengan limit tak hingga $\lim k \to \infty \ n^k$ akan menghasilkan nilai yang konvergen ke nilai nol apabila $|n| < 1$.
+
+sehingga
+
+<Callout type='info'>
+$A^k$ adalah matriks nol apabila seluruh eigenvalues dari $A$ memiliki nilai $|\lambda| < 1$.
+</Callout>
+
+## Study Case: Fibonacci Sequence
+
+Misalkan kita memiliki persamaan rekurensi $u_{k+1} = u_k + u_{k-1}$ dengan $u_0 = 0$ dan $u_1 = 1$. Dengan menggunakan matriks, kita dapat menuliskan:
+
+$$
+\begin{bmatrix} u_{k+1} \\ u_k \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} u_k \\ u_{k-1} \end{bmatrix}
+$$
+
+Cari eigenvalues dari matriks $A = \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}$:
+
+$$
+\begin{vmatrix} 1 - \lambda & 1 \\ 1 & -\lambda \end{vmatrix} = 0 \implies (1 - \lambda)(-\lambda) - 1 = 0 \implies \lambda^2 - \lambda - 1 = 0
+$$
+
+Dengan menggunakan rumus kuadrat, kita dapatkan $\lambda = \displaystyle\frac{1 \pm \sqrt{5}}{2}$.
+
+Kemudian, cari eigenvector dari masing-masing eigenvalues:
+
+1. Untuk $\lambda = \displaystyle\frac{1 + \sqrt{5}}{2}$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 - \displaystyle\frac{1 + \sqrt{5}}{2} & 1 \\ 1 & -\displaystyle\frac{1 + \sqrt{5}}{2} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\text{(write in term of nullspaces)} &\rightarrow \text{gauss}\\
+\begin{bmatrix} 1 & \frac{1 + \sqrt{5}}{2} \\ 0 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+x_1 &= - \frac{1 + \sqrt{5}}{2}x_2 \\
+x_2 &= x_2\\
+\text{(general solutions)} \\
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= x_2 \begin{bmatrix} - \frac{1 + \sqrt{5}}{2} \\ 1 \end{bmatrix} \\
+\text{(nullspace)} &\rightarrow \text{eigenvector} \\
+x_1 &= \begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+2. Untuk $\lambda = \displaystyle\frac{1 - \sqrt{5}}{2}$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 - \displaystyle\frac{1 - \sqrt{5}}{2} & 1 \\ 1 & -\displaystyle\frac{1 - \sqrt{5}}{2} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\text{(write in term of nullspaces)} &\rightarrow \text{gauss}\\
+\begin{bmatrix} 1 & \frac{1 - \sqrt{5}}{2} \\ 0 & 0 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+x_1 &= - \frac{1 - \sqrt{5}}{2}x_2 \\
+x_2 &= x_2\\
+\text{(general solutions)} \\
+\begin{bmatrix} x_1 \\ x_2 \end{bmatrix} &= x_2 \begin{bmatrix} - \frac{1 - \sqrt{5}}{2} \\ 1 \end{bmatrix} \\
+\text{(nullspace)} &\rightarrow \text{eigenvector} \\
+x_2 &= \begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}
+\end{align*}
+$$
+
+Didapatkan langkah untuk mencari kombinasi eigenvectors yang menghasilkan $u_0 = [1, 0]$:
+
+$$
+\begin{align*}
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} &= c_1 \begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}\\
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} &= \frac{1}{\lambda_1 - \lambda_2} \begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix} - \frac{1}{\lambda_1 - \lambda_2} \begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}\\
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} &= \frac{1}{\lambda_1 - \lambda_2} \begin{bmatrix} \lambda_1 - \lambda_2 \\ \lambda_1 \end{bmatrix}\\
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} &= \frac{1}{\lambda_1 - \lambda_2} \left(\begin{bmatrix} \lambda_1 \\ 1 \end{bmatrix} - \begin{bmatrix} \lambda_2 \\ 1 \end{bmatrix}\right)\\
+\therefore u_0 &= \frac{x_1 - x_2}{\lambda_1 - \lambda_2}
+\end{align*}
+$$
+
+Kemudian $u_{100}$ dapat dihitung dengan:
+
+$$
+\begin{align*}
+u_{100} &= \frac{(\lambda_1)^{100}x_1 - (\lambda_2)^{100}x_2}{\lambda_1 - \lambda_2}\\
+(\lambda_1 - \lambda_2) &= \sqrt{5}\\
+(\lambda_2)^{100} &\approx 0\\
+u_{100} &\approx \frac{1}{\sqrt{5}}\left(\frac{1 + \sqrt{5}}{2}\right)^{100}
+\end{align*}
+$$
+
+## Matrix Powers $A^k$
+
+<Callout type='info'>
+Langkah untuk mencari $A^k$:
+
+1. Tulis $u_0$ sebagai kombinasi linear dari eigenvectors $c_1x_1 + c_2x_2 + \ldots + c_nx_n$ dengan $c = X^{-1}u_0$.
+2. Kalikan setiap eigenvector $x_i$ dengan $\lambda_i^k$. Nilai $\Lambda^k X^{-1}u_0$ sudah diperoleh.
+3. Tambahkan setiap hasil perkalian $c_i\lambda_i^kx_i$ untuk mencari $u_k = A^ku_0$. Ini adalah $X\Lambda^kX^{-1}u_0$.
+
+Sehingga solusi utama dari $u_k = A^ku_0$ adalah:
+
+$$
+u_k = c_1\lambda_1^kx_1 + c_2\lambda_2^kx_2 + \ldots + c_n\lambda_n^kx_n
+$$
+</Callout>
+
+### Faster Fibonacci
+
+Contoh untuk matriks $A = \begin{bmatrix} 1 & 2 \\ 1 & 0 \end{bmatrix}$:
+
+memiliki $\lambda_1 = 2$ dan $x_1 = \begin{bmatrix} 2 \\ 1 \end{bmatrix}$, serta $\lambda_2 = -1$ dan $x_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$.
+
+Sehingga $u_{100}$ dapat dihitung dengan:
+
+Langkah 1:
+
+$$
+\begin{align*}
+u_0 &= c_1x_1 + c_2x_2\\
+\text{dengan } \begin{bmatrix}2 & 1 \\ 1 & -1 \end{bmatrix}^{-1} \begin{bmatrix} 1 \\ 0 \end{bmatrix} &= \frac{1}{3}\\
+\begin{bmatrix} 0 \\ 1 \end{bmatrix} &= c_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} 1 \\ -1 \end{bmatrix}\\
+\begin{bmatrix} 0 \\ 1 \end{bmatrix} &= \begin{bmatrix} 2c_1 + c_2 \\ c_1 - c_2 \end{bmatrix}
+\end{align*}
+$$

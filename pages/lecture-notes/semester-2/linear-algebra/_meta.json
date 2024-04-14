@@ -1,5 +1,11 @@
 {
     "l01" : {
         "title" : "Introduction and Determinants"
+    },
+    "l02" : {
+        "title" : "Eigenvalues and Eigenvectors"
+    },
+    "l03" : {
+        "title" : "Diagonalization"
     }
 }
